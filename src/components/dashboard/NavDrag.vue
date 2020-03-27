@@ -8,11 +8,11 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <v-icon xLarge color="white" left>mdi-school</v-icon>
       <router-link router to="/">
-        <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
+        <v-toolbar-title class="headline white--text">Tutoria</v-toolbar-title>
       </router-link>
       <v-spacer />
-      <v-row class="ml-12">
-        <v-flex xs12 sm8 md6>
+      <v-row>
+        <v-col col="6" class="d-flex justify-center align-center white--text">
           <v-text-field
             id="search"
             placeholder="Search"
@@ -22,19 +22,15 @@
             class="mt-6"
             append-icon="mdi-magnify"
           />
-        </v-flex>
+        </v-col>
+        <v-col col="6"></v-col>
       </v-row>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app >
       <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
-          <div v-if="fields.post === undefined ? true : false">
           <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" />
-          </div>
-          <div v-else>
-            <img :src=link  style="height: 100px;">
-          </div>
         </v-avatar>
         <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>
       </v-list-item-avatar>
@@ -75,7 +71,6 @@ export default {
     fields: {},
     color: "",
     texto: "",
-    link: '',
     items: [
       {
         icon: "mdi-face-profile",
@@ -122,7 +117,6 @@ export default {
              this.fields = element
             }
           });
-          this.link = `https://tutoria-backend.herokuapp.com${this.fields.post}`
         })
         .catch(err => err)
     }

@@ -1,10 +1,7 @@
 <template>
-  <v-card flat tile class="margin">
+  <v-card flat tile>
     <Nav />
-    <img src="../../assets/Banner-site-_-programacao3-01-4.png" 
-    aspect-ratio="4" 
-    class="blur"
-    />
+    <v-img src="../../assets/Banner-site-_-programacao3-01-4.png" aspect-ratio="4" class="blur"></v-img>
   </v-card>
 </template>
 
@@ -22,8 +19,4 @@ export default {
 /* .blur {
   filter: blur(8px);
 } */
-
-img {
-  width: 100%;
-}
 </style>

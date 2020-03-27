@@ -112,12 +112,7 @@
                 <v-btn large :disabled="!isEditing" @click="submitFile()">Upload</v-btn>
               </v-card-actions>
             </v-list>
-            <div v-if="fields.post === undefined ? true : false">
-              <v-img src='../../../assets/silhueta-interrogação.jpg'  height="500px"></v-img>
-            </div>
-            <div v-else>
-              <v-img :src=link  height="500px"></v-img>
-            </div>
+            <v-img src="../../../assets/silhueta-interrogação.jpg" height="500px"></v-img>
           </v-card>
         </v-col>
       </v-row>
@@ -128,6 +123,7 @@
 
 <script>
 import tutorias from '../../../service/tutorias'
+import axios from 'axios'
 export default {
   name: "DashPerfil",
   data() {
@@ -137,8 +133,6 @@ export default {
       fields: {},
       use: {},
       file: "",
-      link: '',
-      post: '',
     };
   },
   mounted() {
@@ -154,15 +148,12 @@ export default {
              this.fields = element
             }
           });
-          this.link = `https://tutoria-backend.herokuapp.com${this.fields.post}`
-        
         })
         .catch(err => err)
     },
     put() {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
-      this.fields.post = `/tmp/uploads/${this.post}`
       tutorias.updateUser(this.fields._id, this.fields)
         .then(response => {
           response;
@@ -174,14 +165,14 @@ export default {
 
       formData.append("file", this.file);
 
-      tutorias
-        .upload(formData, {
+      axios
+        .post("http://localhost:3000/users/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
         })
         .then(response => {
-          this.post = response.data.key
+          response
         })
         .catch(err => {
           err
