@@ -1,15 +1,15 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height class="my-12">
+    <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
+      <span>{{usuarios}}</span>
+      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
+    </v-snackbar>
     <v-layout class="d-flex flex-wrap justify-space-around align-center">
       <v-flex xs12 sm12 md6>
         <carrossel />
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs12 sm8 md4>
-        <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-            <span>{{usuarios}}</span>
-          <v-btn text color="white" @click="snackbar= false">Close</v-btn>
-        </v-snackbar>
         <v-toolbar flat>
           <v-spacer></v-spacer>
           <v-toolbar-title class="mx-4 blue--text">Tutoria logo</v-toolbar-title>
@@ -17,20 +17,12 @@
         </v-toolbar>
 
         <v-form>
-          <v-text-field
-            id="email"
-            label="Email"
-            name="email"
-            type="email"
-            :rules="emailRules"
-            v-model="fields.email"
-          ></v-text-field>
+          <v-text-field id="email" label="Email" name="email" type="email" v-model="fields.email"></v-text-field>
           <v-text-field
             id="password"
             label="Password"
             name="password"
             type="password"
-            :rules="passwordRules"
             v-model="fields.password"
             @keypress.enter="enviar(), clearMemory()"
           ></v-text-field>
@@ -43,8 +35,7 @@
             <v-btn text class="body-1 blue--text" router to="/register">Nao tenho conta</v-btn>
           </v-card-actions>
           <v-card-actions class="d-flex justify-center">
-            <v-btn text class="body-1 blue--text" router to="/forgot_password"
-            >Esqueci minha senha</v-btn>
+            <v-btn text class="body-1 blue--text" router to="/forgot_password">Esqueci minha senha</v-btn>
           </v-card-actions>
         </v-container>
       </v-flex>
@@ -71,18 +62,14 @@ export default {
       drawer: null,
       usuarios: "",
       snackbar: false,
-      color: "",
-      emailRules: [
-        v => !!v || "E-mail e requerido",
-        v => /.+@.+\..+/.test(v) || "E-mail tem que ser valido"
-      ],
-      passwordRules: [v => !!v || "Senha e requerido"]
+      color: ""
     };
   },
   methods: {
     enviar() {
-          tutorias.logar(this.fields)
-            .then(response => {
+      tutorias
+        .logar(this.fields)
+        .then(response => {
           let is_admin = response.data.user.is_admin;
           localStorage.setItem("user", JSON.stringify(response.data.user));
           localStorage.setItem("jwt", response.data.token);
@@ -100,14 +87,14 @@ export default {
           }
         })
         .catch(err => {
-            this.snackbar = true;
-            this.color = "red";
-            err
-            return this.usuarios = err
-        })
+          this.snackbar = true;
+          this.color = "red";
+          err;
+          return (this.usuarios = err);
+        });
     },
     clearMemory() {
-      this.fields = {}
+      this.fields = {};
     }
   }
 };
