@@ -1,9 +1,7 @@
 <template>
   <v-app-bar app color="purple darken-4" dark height="80">
-      <v-icon xLarge color="white" left>mdi-school</v-icon>
-      <router-link router to="/">
+      <v-icon xLarge color="white" router to="/" left>mdi-school</v-icon>
         <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
-      </router-link>
       <v-spacer />
       <v-row class="d-flex justify-end">
         <div class="mx-4">

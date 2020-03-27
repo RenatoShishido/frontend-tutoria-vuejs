@@ -11,8 +11,8 @@
         <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
       </router-link>
       <v-spacer />
-      <v-row>
-        <v-flex xs12 sm6 md6>
+      <v-row class="ml-12">
+        <v-flex xs12 sm8 md6>
           <v-text-field
             id="search"
             placeholder="Search"
