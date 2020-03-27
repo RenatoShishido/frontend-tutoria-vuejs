@@ -80,21 +80,21 @@
                             :value="fields.institution"
                             label="Bloco"
                             prepend-icon="mdi-castle"
-                          
+                            :rules="inputRules"
                           ></v-text-field>
                           <v-text-field
                             v-model="fields.discipline"
                             :value="fields.discipline"
                             label="Disciplina"
                             prepend-icon="mdi-folder"
-                            
+                            :rules="inputRules"
                           ></v-text-field>
                           <v-textarea
                             v-model="fields.content"
                             :value="fields.content"
                             label="Duvida"
                             prepend-icon="mdi-table-edit"
-                        
+                            :rules="inputRules"
                           ></v-textarea>
                           <v-btn
                             class="success mx-0 mt-3"
@@ -203,35 +203,32 @@ export default {
           this.projects = response;
           const user = JSON.parse(localStorage.getItem("user"));
           this.user = user;
-
         })
         .catch(err => err);
-        tutorias
+      tutorias
         .listarUsers()
         .then(response => {
           response.forEach(element => {
-            if(this.user._id === element._id)
-              this.validacaoUser = element
+            if (this.user._id === element._id) this.validacaoUser = element;
           });
-
         })
         .catch(err => err);
     },
     receberTutoria(project) {
       this.tutoria = project;
-      this.fields = this.tutoria
+      this.fields = this.tutoria;
     },
     removerDashboard() {
       tutorias
         .removerTutoria(this.tutoria._id)
         .then(response => {
-          response
+          response;
           this.snackbar = true;
           this.color = "green";
           this.texto = "Tutoria removida com sucesso!";
         })
         .catch(err => {
-          err
+          err;
           this.snackbar = true;
           this.color = "red";
           this.texto = "Falha ao remover tutoria!";
@@ -241,33 +238,36 @@ export default {
       tutorias
         .updateTutoria(this.tutoria._id, this.fields)
         .then(response => {
-          response
+          response;
           this.snackbar = true;
           this.color = "green";
           this.texto = "Tutoria alterado com sucesso!";
         })
         .catch(err => {
-          err
+          err;
           this.snackbar = true;
           this.color = "red";
           this.texto = "Falha ao alterar tutoria!";
         });
     },
     doTutoriaUpdate(project) {
-      project.status = 'Agendado'
-      tutorias.updateTutoria(project._id, project)
+      const session = JSON.parse(localStorage.getItem('user'))
+      project.status = "Agendado";
+      project.tutor = session._id
+      tutorias
+        .updateTutoria(project._id, project)
         .then(response => {
-          response
+          response;
           this.snackbar = true;
           this.color = "green";
           this.texto = "Tutoria agendada com sucesso!";
         })
         .catch(err => {
-          err
+          err;
           this.snackbar = true;
           this.color = "red";
           this.texto = "Falha no agendamento da tutoria!";
-        })
+        });
     }
   }
 };
