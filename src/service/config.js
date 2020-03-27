@@ -1,4 +1,5 @@
 import axios from 'axios'
+require('dotenv/config')
 
 const AXIOS_INSTANCE = axios.create({
   baseURL: process.env.API_URL
