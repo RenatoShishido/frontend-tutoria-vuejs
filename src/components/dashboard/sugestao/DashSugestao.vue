@@ -78,8 +78,7 @@ export default {
   },
   methods: {
     descartar() {
-      document.getElementById("email").value = this.stats;
-      document.getElementById("assunto").value = this.stats;
+      this.fields = {}
     },
     sendEmail() {
       tutorias
