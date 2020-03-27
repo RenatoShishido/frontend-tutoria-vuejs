@@ -29,7 +29,12 @@
     <v-navigation-drawer v-model="drawer" app >
       <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
+          <div v-if="fields.post === undefined ? true : false">
           <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" />
+          </div>
+          <div v-else>
+            <img :src=link  style="height: 100px;">
+          </div>
         </v-avatar>
         <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>
       </v-list-item-avatar>
@@ -70,6 +75,7 @@ export default {
     fields: {},
     color: "",
     texto: "",
+    link: '',
     items: [
       {
         icon: "mdi-face-profile",
@@ -116,6 +122,7 @@ export default {
              this.fields = element
             }
           });
+          this.link = `https://tutoria-backend.herokuapp.com${this.fields.post}`
         })
         .catch(err => err)
     }

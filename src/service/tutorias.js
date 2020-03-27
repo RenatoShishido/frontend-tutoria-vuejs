@@ -96,6 +96,15 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async upload(fields) {
+    try {
+      const response = await AXIOS_INSTANCE.post(`users/upload` , fields)
+
+      return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
 }
 
 export default TutoriaService
