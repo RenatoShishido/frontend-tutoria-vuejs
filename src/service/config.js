@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const AXIOS_INSTANCE = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'https://tutoria-backend.herokuapp.com/',
 })
 
 const AUTH_TOKEN = `Bearer ${localStorage.getItem('jwt')}`
