@@ -1,8 +1,7 @@
 import axios from 'axios'
-require('dotenv/config')
 
 const AXIOS_INSTANCE = axios.create({
-  baseURL: process.env.API_URL
+  baseURL: 'https://tutoria-backend.herokuapp.com'
 })
 
 const AUTH_TOKEN = `Bearer ${localStorage.getItem('jwt')}`
