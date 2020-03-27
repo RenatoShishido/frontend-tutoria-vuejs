@@ -1,15 +1,15 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height class="my-12">
+    <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
+        <span>{{usuarios}}</span>
+      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
+    </v-snackbar>
     <v-layout class="d-flex flex-wrap justify-space-around align-center">
-      <v-flex xs12 sm12 md6>
+      <v-flex xs12 sm12 md6 >
         <carrossel />
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs12 sm8 md4>
-        <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-            <span>{{usuarios}}</span>
-          <v-btn text color="white" @click="snackbar= false">Close</v-btn>
-        </v-snackbar>
         <v-toolbar flat>
           <v-spacer></v-spacer>
           <v-toolbar-title class="mx-4 blue--text">Tutoria logo</v-toolbar-title>

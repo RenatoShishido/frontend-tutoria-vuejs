@@ -4,54 +4,62 @@
       <span>{{texto}}</span>
       <v-btn text color="white" @click="snackbar= false">Close</v-btn>
     </v-snackbar>
+    
+    <v-flex xs12 sm12 md12>
+    <v-container class="my-12">
     <h1 class="d-flex justify-center subheading grey--text">Dashboard</h1>
-
-    <v-container class="my-5">
-      <v-layout row class="d-flex justify-center">
-        <v-btn small text color="black" class="mr-3" @click="sortBy('institution')">
+      <v-layout class="d-flex flex-wrap justify-center align-center">
+        <v-flex xs12 sm8 md4>
+        <v-btn dense text color="black" class="mb-4"  @click="sortBy('institution')">
           <v-icon left small>mdi-folder</v-icon>
           <span class="body-1">Ordenar por Bloco</span>
         </v-btn>
-        <v-btn small text color="black" @click="sortBy('discipline')">
+        </v-flex>
+        <v-flex xs12 sm8 md4>
+        <v-btn dense text color="black" class="mb-4" @click="sortBy('discipline')">
           <v-icon left small>mdi-file-document</v-icon>
           <span class="body-1">Ordenar por disciplina</span>
         </v-btn>
-        <v-btn small text color="black" class="d-flex ml-5" @click="refresh(), refreshProject()">
-          <v-icon left medium class="ml-2">mdi-refresh</v-icon>
+        </v-flex>
+        <v-flex xs12 sm8 md4 >
+        <v-btn dense text color="black" class="mb-4" @click="refresh(), refreshProject()">
+          <v-icon left medium >mdi-refresh</v-icon>
+          <span class="body-1">Refresh</span>
         </v-btn>
+        </v-flex>
       </v-layout>
 
       <v-card flat class="mb-10" v-for="project in projects" :key="project.id">
         <div v-if="project.status === 'Aguardando' ? true : false">
           <v-divider></v-divider>
           <v-layout row wrap :class="`pa-3 project ${project.status}`">
-            <v-flex xs6 sm4 md1>
+            <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Bloco</div>
               <div>{{ project.institution }}</div>
             </v-flex>
-            <v-flex xs6 sm4 md1>
+            <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Disciplina</div>
               <div>{{ project.discipline }}</div>
             </v-flex>
-            <v-flex xs12 md4>
+            <v-flex xs12 sm4 md4>
               <div class="caption grey--text">Conteudo</div>
-              <p class="text-justify mx-8">{{ project.content }}</p>
+              <div class="text-justify ">{{ project.content }}</div>
             </v-flex>
-            <v-flex xs2 sm4 md2>
+            <v-flex xs12 sm4 md2>
               <div class="caption grey--text">Data</div>
               <div>{{ project.data | moment("DD/MM/YYYY") }}</div>
             </v-flex>
-            <v-flex xs6 sm4 md2>
+            <v-flex xs12 sm4 md2>
               <div class="caption grey--text">Nome</div>
               <div>{{ project.user.nome }}</div>
             </v-flex>
-            <v-flex xs2 sm4 md1>
+            <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Status</div>
               <div>{{ project.status }}</div>
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
-            <v-flex xs2 sm4 md1 v-if="project.user._id === user._id ? true : false">
+            <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
               <v-list class="d-flex flex-row">
                 <v-list-item>
                   <v-btn
@@ -153,6 +161,7 @@
         </div>
       </v-card>
     </v-container>
+    </v-flex>
   </div>
 </template>
 

@@ -8,11 +8,11 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <v-icon xLarge color="white" left>mdi-school</v-icon>
       <router-link router to="/">
-        <v-toolbar-title class="headline white--text">Tutoria</v-toolbar-title>
+        <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
       </router-link>
       <v-spacer />
       <v-row>
-        <v-col col="6" class="d-flex justify-center align-center white--text">
+        <v-flex xs12 sm6 md6>
           <v-text-field
             id="search"
             placeholder="Search"
@@ -22,8 +22,7 @@
             class="mt-6"
             append-icon="mdi-magnify"
           />
-        </v-col>
-        <v-col col="6"></v-col>
+        </v-flex>
       </v-row>
     </v-app-bar>
 

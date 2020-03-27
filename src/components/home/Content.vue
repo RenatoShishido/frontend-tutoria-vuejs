@@ -1,16 +1,15 @@
 <template>
   <v-card>
-    <a href id="HOME"></a>
-    <v-toolbar height="600px">
-      <v-card-text v-for="content in contents" :key="content.title">
-        <v-col v-for="n in 1" :key="n.title" col="4" class="d-flex flex-column">
-          <p class="ma-2 d-flex justify-center align-center">
+      <v-card-text v-for="content in contents" :key="content.title"
+      class="d-flex justify-center"
+      >
+        <v-flex xs12 sm8 md4 >
+          <div class="d-flex headline flex-column align-center">
             <v-icon size="150px" :class="content.color" class="black--text">{{ content.icon }}</v-icon>
-          </p>
-          <p class="d-flex justify-center mt-10 body-1 text-justify">{{content.texto}}</p>
-        </v-col>
+            {{content.texto}}
+          </div>
+        </v-flex>
       </v-card-text>
-    </v-toolbar>
   </v-card>
 </template>
 
