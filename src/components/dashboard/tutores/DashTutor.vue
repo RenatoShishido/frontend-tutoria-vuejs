@@ -9,7 +9,7 @@
       transition="fade-transition"
     >
       <div class="altura">
-        <h1 class="d-flex justify-center subheading grey--text ">Dashboard</h1>
+        <h1 class="d-flex justify-center subheading grey--text ">Tutores</h1>
 
         <v-container class="d-flex justify-center">
           <v-btn small text color="black" class="mr-3" @click="sortBy('institution')">
@@ -26,7 +26,7 @@
         </v-container>
         <v-container class="d-flex flex-column justify-center">
           <v-card flat class="mb-10" v-for="project in projects" :key="project.nome">
-            <div v-if="project.status === 'Agendado' ? true : false">
+            <div v-if="project.status === 'Aguardando' ? true : false">
              <v-divider></v-divider>
               <v-layout row wrap :class="`pa-3 project ${project.status}`">
                 <v-flex xs6 sm4 md1>
@@ -53,16 +53,8 @@
                   <div class="caption grey--text">Status</div>
                   <div>{{ project.status }}</div>
                 </v-flex>
-                <div v-if="project.user._id === user._id ? true : false">
-                <v-list-item class="d-flex justify-start align-end">
-                  <FinalizarTutoria :project = project  />
-                </v-list-item>
-                </div>
-                <div v-if="project.tutor === user._id ? true : false">
-                   <v-list-item class="d-flex justify-start align-end">
-                  <Prova :project = project msg="Elaborar Prova" color="red"  />
-                   </v-list-item>
-                </div>
+
+
               </v-layout>
                <v-divider></v-divider>
             </div>
@@ -74,13 +66,10 @@
 </template>
 
 <script>
-import FinalizarTutoria from '../dialogs/FinalizarTutoria'
-import Prova from '../dialogs/Prova'
 import tutorias from "../../../service/tutorias";
 export default {
   components: {
-    FinalizarTutoria,
-    Prova,
+
   },
   data() {
     return {

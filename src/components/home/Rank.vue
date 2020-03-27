@@ -9,7 +9,7 @@
 
       <template v-slot:default="props">
         <v-row>
-          <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="4" lg="3">
+          <v-col v-for="item in props.items" :key="item.title" cols="12" sm="6" md="4" lg="3">
             <v-card>
               <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
 
@@ -32,8 +32,10 @@
                 </v-list-item>
 
                 <v-list-item>
-                  <v-list-item-content>Carga:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.carga }}</v-list-item-content>
+                  <v-list-item-content>Avaliacao:</v-list-item-content>
+                  <v-list-item-content class="mr-6">
+                    <v-rating v-model="rating"   ></v-rating>
+                  </v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
@@ -62,6 +64,7 @@
 export default {
   name: "Rank",
   data: () => ({
+    rating: 3,
     itemsPerPage: 4,
     items: [
       {

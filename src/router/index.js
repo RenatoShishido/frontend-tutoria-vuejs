@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 import ViewDashboard from '../views/View-Dashboard'
 import ViewPerfil from '../views/View-Perfil'
 import ViewTutoria from '../views/View-Tutoria'
+import ViewTutores from '../views/View-Tutores'
 import ViewCompleto from '../views/View-Completo'
 import ViewSugestao from '../views/View-Sugestao'
 import ViewHome from '../views/View-Home.vue'
+import ViewForgotPassword from '../views/View-ForgotPassword'
 import ViewRegister from '../views/View-Register.vue'
 import ViewLogin from '../views/View-Login.vue'
 import ViewChat from '../views/View-Chat.vue'
@@ -20,6 +22,11 @@ let router = new VueRouter({
         path: '/',
         name: 'View-Home',
         component: ViewHome
+      },
+      {
+        path: '/forgot_password',
+        name: 'View-FrorgotPassword',
+        component: ViewForgotPassword
       },
       {
         path: '/login',
@@ -41,6 +48,14 @@ let router = new VueRouter({
         path: '/dashboard',
         name: 'View-Dashboard',
         component: ViewDashboard,
+        meta: {
+            requiresAuth: true
+        }
+      },
+      {
+        path: '/dashboard/tutores',
+        name: 'View-DashTutores',
+        component: ViewTutores,
         meta: {
             requiresAuth: true
         }

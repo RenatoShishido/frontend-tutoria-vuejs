@@ -27,12 +27,12 @@
       </v-row>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column mt-10">
+    <v-navigation-drawer v-model="drawer" app >
+      <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
-          <img class="text-lg-center" src="https://picsum.photos/250/300?image=660" />
+          <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" />
         </v-avatar>
-        <p class="d-flex justify-center black--text subheading mt-1">User</p>
+        <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>
       </v-list-item-avatar>
       <v-spacer></v-spacer>
       <v-list-item class="d-flex justify-center mb-6">
@@ -41,8 +41,8 @@
           @projectFalied="snackbar=true, color='red', texto='Nao foi possivel cadastrar a tutoria!'"
         />
       </v-list-item>
-      <v-list dense flat>
-        <v-list-item v-for="item in items" :key="item.text" :to="item.route" link>
+      <v-list flat>
+        <v-list-item class="my-4" v-for="item in items" :key="item.text" :to="item.route" link>
           <v-list-item-action>
             <v-icon class="black--text">{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -50,24 +50,16 @@
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-subheader class="mt-4 grey--text text--darken-1">
-          <strong>CHAT</strong>
-        </v-subheader>
-        <v-list>
-          <v-list-item v-for="item in items2" :key="item.text" link>
-            <v-list-item-avatar>
-              <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt />
-            </v-list-item-avatar>
-            <v-list-item-title v-text="item.text" />
-          </v-list-item>
-        </v-list>
+
       </v-list>
     </v-navigation-drawer>
+
   </div>
 </template>
 
 <script>
 import Popup from "./Popup";
+import tutorias from '../../service/tutorias'
 export default {
   name: "NavDrag",
   components: {
@@ -76,15 +68,25 @@ export default {
   data: () => ({
     drawer: null,
     snackbar: false,
+    fields: {},
     color: "",
     texto: "",
     items: [
       {
-        icon: "mdi-youtube-subscription",
+        icon: "mdi-face-profile",
         text: "Perfil",
         route: "/dashboard/perfil"
       },
-      { icon: "mdi-plus-circle", text: "Dashboard", route: "/dashboard" },
+      {
+        icon: "mdi-face",
+        text: "Tutores",
+        route: "/dashboard/tutores"
+      },
+      {
+        icon: "mdi-plus-circle",
+        text: "Tutorias",
+        route: "/dashboard"
+      },
       {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
@@ -96,19 +98,29 @@ export default {
         route: "/dashboard/completos"
       },
       {
-        icon: "mdi-youtube-subscription",
+        icon: "mdi-email",
         text: "Enviar sugestao",
         route: "/dashboard/sugestao"
       }
     ],
-    items2: [
-      { picture: 28, text: "Joseph" },
-      { picture: 38, text: "Apple" },
-      { picture: 48, text: "Xbox Ahoy" },
-      { picture: 58, text: "Nokia" },
-      { picture: 78, text: "MKBHD" }
-    ]
-  })
+  }),
+  mounted(){
+    this.pickUser()
+  },
+  methods: {
+    pickUser(){
+      tutorias.listarUsers()
+        .then(response => {
+         const user = JSON.parse(localStorage.getItem('user'))
+          response.forEach(element => {
+            if(user._id === element._id){
+             this.fields = element
+            }
+          });
+        })
+        .catch(err => err)
+    }
+  }
 };
 </script>
 
