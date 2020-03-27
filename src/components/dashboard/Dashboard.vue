@@ -243,6 +243,7 @@ export default {
     },
     doTutoriaUpdate(project) {
       project.status = "Agendado";
+      project.tutor = this.user_id
       tutorias
         .updateTutoria(project._id, project)
         .then(response => {
