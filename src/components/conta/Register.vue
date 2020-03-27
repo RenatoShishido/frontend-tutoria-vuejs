@@ -3,8 +3,8 @@
     <v-layout align-center justify-space-around>
       <v-flex xs12 sm8 md4>
         <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-            <span>{{usuarios}}</span>
-          <v-btn text color="white"  @click="snackbar= false">Close</v-btn>
+          <span>{{usuarios}}</span>
+          <v-btn text color="white" @click="snackbar= false">Close</v-btn>
         </v-snackbar>
         <v-toolbar flat>
           <v-spacer></v-spacer>
@@ -18,7 +18,6 @@
             label="Nome"
             name="nome"
             type="nome"
-            :rules="nameRules"
             required
           ></v-text-field>
           <v-text-field
@@ -26,7 +25,6 @@
             type="email"
             id="email"
             label="Email"
-            :rules="emailRules"
             name="email"
             required
           ></v-text-field>
@@ -37,7 +35,6 @@
             label="Password"
             name="password"
             type="password"
-            :rules="passwordRules"
             required
             @keypress.enter="enviar(), clearMemory()"
           ></v-text-field>
@@ -62,48 +59,37 @@ export default {
       stats: "",
       drawer: null,
       color: "",
-      usuarios: '',
-      snackbar: false,
-      emailRules: [
-        v => !!v || "E-mail e requerido",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      nameRules: [
-        v => !!v || "Nome e requerido",
-        v => (v && v.length <= 15) || "Name must be less than 15 characters"
-      ],
-      passwordRules: [
-        v => !!v || "Senha e requerido",
-        v => (v && v.length <= 15) || "Password must be less than 15 characters"
-      ]
+      usuarios: "",
+      snackbar: false
     };
   },
   methods: {
     enviar() {
-      tutorias.registrar(this.fields)
+      tutorias
+        .registrar(this.fields)
         .then(response => {
-          response
+          response;
           this.snackbar = true;
           this.color = "green";
           setTimeout(() => {
             this.popup = false;
           }, 4000);
-          return this.usuarios = "Usuario cadastrado com sucesso";
+          return (this.usuarios = "Usuario cadastrado com sucesso");
         })
         .catch(err => {
-          err
+          err;
           if (err.response.status === 403) {
             this.snackbar = true;
             this.color = "red";
             setTimeout(() => {
               this.popup = false;
             }, 4000);
-            return this.usuarios = err.response.data;
+            return (this.usuarios = err.response.data);
           }
         });
     },
     clearMemory: function() {
-      this.fields = {}
+      this.fields = {};
     }
   }
 };

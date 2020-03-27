@@ -11,19 +11,19 @@
       <v-layout class="d-flex flex-wrap justify-center align-center">
         <v-flex xs12 sm8 md4>
         <v-btn dense text color="black" class="mb-4"  @click="sortBy('institution')">
-          <v-icon left small>mdi-folder</v-icon>
+          <v-icon left large>mdi-folder</v-icon>
           <span class="body-1">Ordenar por Bloco</span>
         </v-btn>
         </v-flex>
         <v-flex xs12 sm8 md4>
         <v-btn dense text color="black" class="mb-4" @click="sortBy('discipline')">
-          <v-icon left small>mdi-file-document</v-icon>
+          <v-icon left large>mdi-file-document</v-icon>
           <span class="body-1">Ordenar por disciplina</span>
         </v-btn>
         </v-flex>
         <v-flex xs12 sm8 md4 >
         <v-btn dense text color="black" class="mb-4" @click="refresh(), refreshProject()">
-          <v-icon left medium >mdi-refresh</v-icon>
+          <v-icon left large >mdi-refresh</v-icon>
           <span class="body-1">Refresh</span>
         </v-btn>
         </v-flex>
