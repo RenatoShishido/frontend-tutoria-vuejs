@@ -242,8 +242,9 @@ export default {
         });
     },
     doTutoriaUpdate(project) {
+      const session = JSON.parse(localStorage.getItem('user'))
       project.status = "Agendado";
-      project.tutor = this.user_id
+      project.tutor = session._id
       tutorias
         .updateTutoria(project._id, project)
         .then(response => {
