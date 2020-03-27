@@ -11,6 +11,16 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async createTutoria(fields) {
+    try {
+
+      const response = await AXIOS_INSTANCE.post('tutorias', fields)
+
+      return response.data.tutorias
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
   static async logar(fields) {
     try {
       const response = await AXIOS_INSTANCE.post('/auth/authenticate', fields)

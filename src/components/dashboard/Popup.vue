@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import tutorias from "../../service/tutorias";
 export default {
   props: {
     msg: String,
@@ -62,12 +62,8 @@ export default {
   },
   methods: {
     submit() {
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${localStorage.getItem("jwt")}`;
       this.loading = true;
-      axios
-        .post("http://localhost:3000/tutorias/", this.fields)
+      tutorias.createTutoria(this.fields)
         .then(response => {
           response
           setTimeout(() => {
@@ -87,9 +83,7 @@ export default {
         });
     },
     clearMemory() {
-      this.fields.institution = "";
-      this.fields.discipline = "";
-      this.fields.content = "";
+      this.fields = {}
     }
   }
 };
