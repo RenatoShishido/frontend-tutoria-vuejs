@@ -162,12 +162,20 @@ export default {
     put() {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
-      this.fields.post = `/tmp/uploads/${this.post}`
-      tutorias.updateUser(this.fields._id, this.fields)
-        .then(response => {
-          response;
-        })
-        .catch(err => err);
+      if(this.fields.post === undefined){
+        this.fields.post = `/tmp/uploads/${this.post}`
+        tutorias.updateUser(this.fields._id, this.fields)
+          .then(response => {
+            response;
+          })
+          .catch(err => err);
+      }else{
+        tutorias.updateUser(this.fields._id, this.fields)
+          .then(response => {
+            response;
+          })
+          .catch(err => err);
+      }
     },
     submitFile() {
       let formData = new FormData();

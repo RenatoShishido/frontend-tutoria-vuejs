@@ -98,7 +98,7 @@ class TutoriaService {
   }
   static async upload(fields) {
     try {
-      const response = await AXIOS_INSTANCE.post(`users/upload` , fields)
+      const response = await AXIOS_INSTANCE.post('users/upload' , fields)
 
       return response
     } catch (err) {
