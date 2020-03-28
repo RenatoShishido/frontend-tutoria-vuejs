@@ -32,7 +32,7 @@
             <strong>Telefone: +55 (67) 3345-7000</strong>
           </p>
       </v-flex>
-    <v-flex xs12 sm2 md2 class="d-flex justify-center">
+    <v-flex xs12 sm4 md2 >
           <v-btn v-for="icon in icons" :key="icon.icone" class="mx-4 white--text" icon>
             <a :href="icon.ref">
               <v-icon size="40px" class="white--text">{{ icon.icon }}</v-icon>

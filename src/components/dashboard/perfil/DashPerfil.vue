@@ -154,7 +154,7 @@ export default {
              this.fields = element
             }
           });
-          this.link = `https://tutoria-backend.herokuapp.com${this.fields.post}`
+          this.link = `http://tutoria-backend.herokuapp.com${this.fields.post}`
         
         })
         .catch(err => err)
@@ -162,20 +162,12 @@ export default {
     put() {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
-      if(this.fields.post === undefined){
         this.fields.post = `/tmp/uploads/${this.post}`
         tutorias.updateUser(this.fields._id, this.fields)
           .then(response => {
             response;
           })
           .catch(err => err);
-      }else{
-        tutorias.updateUser(this.fields._id, this.fields)
-          .then(response => {
-            response;
-          })
-          .catch(err => err);
-      }
     },
     submitFile() {
       let formData = new FormData();
