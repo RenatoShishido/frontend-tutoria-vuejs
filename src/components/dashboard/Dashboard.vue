@@ -80,21 +80,21 @@
                             :value="fields.institution"
                             label="Bloco"
                             prepend-icon="mdi-castle"
-                            :rules="inputRules"
+                          
                           ></v-text-field>
                           <v-text-field
                             v-model="fields.discipline"
                             :value="fields.discipline"
                             label="Disciplina"
                             prepend-icon="mdi-folder"
-                            :rules="inputRules"
+                          
                           ></v-text-field>
                           <v-textarea
                             v-model="fields.content"
                             :value="fields.content"
                             label="Duvida"
                             prepend-icon="mdi-table-edit"
-                            :rules="inputRules"
+                         
                           ></v-textarea>
                           <v-btn
                             class="success mx-0 mt-3"
@@ -146,7 +146,7 @@
             <!-- FINAL DOS BOTOES -->
             <div v-if="validacaoUser.semestre > 1 ? true : false">
               <v-list-item
-                v-if="project.user._id !== user._id ? true : false"
+                 v-if="project.user._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
               >
                 <v-btn
@@ -182,11 +182,6 @@ export default {
       texto: "",
       user: {},
       validacaoUser: {},
-      n: 0,
-      inputRules: [
-        v => !!v || "Este campo é requerido",
-        v => v.length >= 3 || "O tamanho minino de caracteres é de 3"
-      ]
     };
   },
   mounted() {
@@ -205,14 +200,7 @@ export default {
           this.user = user;
         })
         .catch(err => err);
-      tutorias
-        .listarUsers()
-        .then(response => {
-          response.forEach(element => {
-            if (this.user._id === element._id) this.validacaoUser = element;
-          });
-        })
-        .catch(err => err);
+      
     },
     receberTutoria(project) {
       this.tutoria = project;
