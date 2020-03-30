@@ -5,10 +5,10 @@
       <v-spacer />
       <v-row class="d-flex justify-end">
         <div class="mx-4">
-        <v-btn class="purple darken-4 " xLarge  router to="/login">Login</v-btn>
+        <v-btn class="purple darken-4 " text xLarge  router to="/login">Login</v-btn>
         </div>
         <div class="mx-4">
-        <v-btn  class="purple darken-4 " xLarge router to="/register">Register</v-btn>
+        <v-btn  class="purple darken-4 " text xLarge router to="/register">Register</v-btn>
         </div>
       </v-row>
     </v-app-bar>

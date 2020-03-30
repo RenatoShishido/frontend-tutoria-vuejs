@@ -1,8 +1,8 @@
 <template>
   <div class="altura">
-    <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-      <span>{{texto}}</span>
-      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
+    <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
+      <span>{{$store.state.texto}}</span>
+      <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
     </v-snackbar>
     
     <v-flex xs12 sm12 md12>
@@ -59,7 +59,7 @@
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
-            <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
+            <v-flex xs6 sm4 md1 v-if="project.user._id === $store.state.user._id ? true : false">
               <v-list class="d-flex flex-row">
                 <v-list-item>
                   <v-btn
@@ -144,9 +144,10 @@
               </v-list>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="project.user.semestre < 1 ? false : true">
+          
+            <div v-if="project.user.semestre < 1">
               <v-list-item
-                 v-if="project.user._id !== user._id ? true : false"
+                 v-if="project.user._id !== $store.state.user._id ? true : false"
                 class="d-flex justify-start align-end"
               >
                 <v-btn
@@ -177,10 +178,6 @@ export default {
       dialog: false,
       dialog1: false,
       tutoria: {},
-      snackbar: false,
-      color: "",
-      texto: "",
-      user: {},
     };
   },
   mounted() {
@@ -195,8 +192,6 @@ export default {
         .listar()
         .then(response => {
           this.projects = response;
-          const user = JSON.parse(localStorage.getItem("user"));
-          this.user = user;
         })
         .catch(err => err);
     },
@@ -209,15 +204,13 @@ export default {
         .removerTutoria(this.tutoria._id)
         .then(response => {
           response;
-          this.snackbar = true;
-          this.color = "green";
-          this.texto = "Tutoria removida com sucesso!";
+          this.$store.getters.snackbarRes
+          this.$store.state.texto = "Tutoria removida com sucesso!";
         })
         .catch(err => {
           err;
-          this.snackbar = true;
-          this.color = "red";
-          this.texto = "Falha ao remover tutoria!";
+          this.$store.getters.snackbarErr
+          this.$.store.stete.texto = "Falha ao remover tutoria!";
         });
     },
     atualizarDashoboard() {
@@ -225,34 +218,29 @@ export default {
         .updateTutoria(this.tutoria._id, this.fields)
         .then(response => {
           response;
-          this.snackbar = true;
-          this.color = "green";
-          this.texto = "Tutoria alterado com sucesso!";
+          this.$store.getters.snackbarRes
+          this.$store.state.texto = "Tutoria alterado com sucesso!";
         })
         .catch(err => {
           err;
-          this.snackbar = true;
-          this.color = "red";
-          this.texto = "Falha ao alterar tutoria!";
+          this.$store.getters.snackbarErr
+          this.$store.state.texto = "Falha ao alterar tutoria!";
         });
     },
     doTutoriaUpdate(project) {
-      const session = JSON.parse(localStorage.getItem('user'))
       project.status = "Agendado";
-      project.tutor = session._id
+      project.tutor = this.$store.state.user._id
       tutorias
         .updateTutoria(project._id, project)
         .then(response => {
           response;
-          this.snackbar = true;
-          this.color = "green";
-          this.texto = "Tutoria agendada com sucesso!";
+          this.$store.getters.snackbarRes
+          this.$store.state.texto = "Tutoria agendada com sucesso!";
         })
         .catch(err => {
           err;
-          this.snackbar = true;
-          this.color = "red";
-          this.texto = "Falha no agendamento da tutoria!";
+          this.$store.getters.snackbarErr
+          this.$store.state.texto = "Falha no agendamento da tutoria!";
         });
     }
   }

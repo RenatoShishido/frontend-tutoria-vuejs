@@ -1,8 +1,8 @@
 <template>
   <v-container fill-height class="my-12">
-    <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-      <span>{{usuarios}}</span>
-      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
+    <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
+      <span>{{$store.state.texto}}</span>
+      <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
     </v-snackbar>
     <v-layout class="d-flex flex-wrap justify-space-around align-center">
       <v-flex xs12 sm12 md6>
@@ -24,10 +24,10 @@
             name="password"
             type="password"
             v-model="fields.password"
-            @keypress.enter="enviar(), clearMemory()"
+            @keypress.enter="enviar()"
           ></v-text-field>
           <v-card-actions class="d-flex justify-start">
-            <v-btn color="blue" class="white--text" @click="enviar(), clearMemory()">Acessar</v-btn>
+            <v-btn color="blue" class="white--text" @click="enviar()">Acessar</v-btn>
           </v-card-actions>
         </v-form>
         <v-container>
@@ -54,15 +54,8 @@ export default {
   },
   data() {
     return {
-      fields: {
-        email: "",
-        password: ""
-      },
-      stats: "",
+      fields: {},
       drawer: null,
-      usuarios: "",
-      snackbar: false,
-      color: ""
     };
   },
   methods: {
@@ -85,17 +78,14 @@ export default {
               }
             }
           }
+           this.fields = {};
         })
         .catch(err => {
-          this.snackbar = true;
-          this.color = "red";
-          err;
-          return (this.usuarios = err);
+          this.$store.getters.snackbarErr
+          this.$store.state.texto = err
+          this.fields = {};
         });
     },
-    clearMemory() {
-      this.fields = {};
-    }
   }
 };
 </script>

@@ -134,10 +134,7 @@ export default {
       hasSaved: false,
       isEditing: null,
       fields: {},
-      use: {},
-      file: "",
       link: '',
-      post: '',
     };
   },
   mounted() {

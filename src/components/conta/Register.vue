@@ -2,9 +2,9 @@
   <v-container fill-height>
     <v-layout align-center justify-space-around>
       <v-flex xs12 sm8 md4>
-        <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-          <span>{{usuarios}}</span>
-          <v-btn text color="white" @click="snackbar= false">Close</v-btn>
+        <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
+          <span>{{$store.state.texto}}</span>
+          <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
         </v-snackbar>
         <v-toolbar flat>
           <v-spacer></v-spacer>
@@ -36,11 +36,11 @@
             name="password"
             type="password"
             required
-            @keypress.enter="enviar(), clearMemory()"
+            @keypress.enter="enviar()"
           ></v-text-field>
         </v-form>
         <v-card-actions class="d-flex justify-start blue--text">
-          <v-btn color="primary" class="white--text" @click="enviar(), clearMemory()">Cadastrar</v-btn>
+          <v-btn color="primary" class="white--text" @click="enviar()">Cadastrar</v-btn>
         </v-card-actions>
         <v-card-actions class="d-flex justify-center blue--text">
           <v-btn text class="body-1 blue--text" router to="/login">Tenho uma conta</v-btn>
@@ -56,11 +56,7 @@ export default {
   data() {
     return {
       fields: {},
-      stats: "",
-      drawer: null,
-      color: "",
-      usuarios: "",
-      snackbar: false
+      drawer: null
     };
   },
   methods: {
@@ -69,28 +65,17 @@ export default {
         .registrar(this.fields)
         .then(response => {
           response;
-          this.snackbar = true;
-          this.color = "green";
-          setTimeout(() => {
-            this.popup = false;
-          }, 4000);
-          return (this.usuarios = "Usuario cadastrado com sucesso");
+          this.$store.getters.snackbarRes;
+          this.$store.state.texto = "Usuario cadastrado com sucesso!";
+          this.fields = {};
         })
         .catch(err => {
           err;
-          if (err.response.status === 403) {
-            this.snackbar = true;
-            this.color = "red";
-            setTimeout(() => {
-              this.popup = false;
-            }, 4000);
-            return (this.usuarios = err.response.data);
-          }
+          this.$store.getters.snackbarErr
+          this.$store.state.texto = err
+          this.fields = {}
         });
     },
-    clearMemory: function() {
-      this.fields = {};
-    }
   }
 };
 </script>
