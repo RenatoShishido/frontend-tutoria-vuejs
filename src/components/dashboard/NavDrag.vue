@@ -29,7 +29,7 @@
     <v-navigation-drawer v-model="drawer" app >
       <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
-          <div v-if="fields.post === undefined ? true : false">
+          <div v-if="this.fields.profile === undefined">
           <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" />
           </div>
           <div v-else>
@@ -83,11 +83,6 @@ export default {
         route: "/dashboard/perfil"
       },
       {
-        icon: "mdi-face",
-        text: "Tutores",
-        route: "/dashboard/tutores"
-      },
-      {
         icon: "mdi-plus-circle",
         text: "Tutorias",
         route: "/dashboard"
@@ -96,6 +91,11 @@ export default {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
         route: "/dashboard/tutorias"
+      },
+      {
+        icon: "mdi-face",
+        text: "Tutores",
+        route: "/dashboard/tutores"
       },
       {
         icon: "mdi-marker-check",
@@ -122,7 +122,7 @@ export default {
              this.fields = element
             }
           });
-          this.link = `https://tutoria-backend.herokuapp.com${this.fields.post}`
+          this.link = this.fields.profile
         })
         .catch(err => err)
     }

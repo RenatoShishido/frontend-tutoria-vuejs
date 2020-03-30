@@ -112,7 +112,7 @@
                 <v-btn large :disabled="!isEditing" @click="submitFile()">Upload</v-btn>
               </v-card-actions>
             </v-list>
-            <div v-if="fields.post === undefined ? true : false">
+             <div v-if="this.fields.profile === undefined">
               <v-img src='../../../assets/silhueta-interrogação.jpg'  height="500px"></v-img>
             </div>
             <div v-else>
@@ -154,7 +154,7 @@ export default {
              this.fields = element
             }
           });
-          this.link = `http://tutoria-backend.herokuapp.com${this.fields.post}`
+          this.link = this.fields.profile
         
         })
         .catch(err => err)
@@ -162,30 +162,33 @@ export default {
     put() {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
-        this.fields.post = `/tmp/uploads/${this.post}`
+      if(this.file === undefined){
         tutorias.updateUser(this.fields._id, this.fields)
           .then(response => {
             response;
           })
           .catch(err => err);
-    },
-    submitFile() {
-      let formData = new FormData();
-
+      }
+      else{
+        let config = {
+        headers: {
+          'Accept': '',
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      let formData = new FormData()
       formData.append("file", this.file);
-
-      tutorias
-        .upload(formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(response => {
-          this.post = response.data.key
-        })
-        .catch(err => {
-          err
-        });
+      formData.append("nome",  this.fields.nome);
+      formData.append("email",  this.fields.email);
+      formData.append("rga",  this.fields.rga);
+      formData.append("telefone",  this.fields.telefone);
+      formData.append("semestre", this.fields.semestre);
+        tutorias.updateUser(this.fields._id,formData,config)
+          .then(response => {
+            response;
+          })
+          .catch(err => err)
+      }
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];

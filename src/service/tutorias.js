@@ -69,9 +69,10 @@ class TutoriaService {
       throw err.response.data;
     }
   }
-  static async updateUser(id, fields) {
+  static async updateUser(id, fields,config) {
     try {
-      const response = await AXIOS_INSTANCE.put(`users/update/${id}` , fields)
+      const response = await AXIOS_INSTANCE.put(`users/update/${id}`
+      , fields, config)
 
       return response
     } catch (err) {

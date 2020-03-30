@@ -144,7 +144,7 @@
               </v-list>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="validacaoUser.semestre > 1 ? true : false">
+            <div v-if="project.user.semestre > 1 ? true : false">
               <v-list-item
                  v-if="project.user._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
@@ -181,7 +181,6 @@ export default {
       color: "",
       texto: "",
       user: {},
-      validacaoUser: {},
     };
   },
   mounted() {
@@ -200,7 +199,6 @@ export default {
           this.user = user;
         })
         .catch(err => err);
-      
     },
     receberTutoria(project) {
       this.tutoria = project;
