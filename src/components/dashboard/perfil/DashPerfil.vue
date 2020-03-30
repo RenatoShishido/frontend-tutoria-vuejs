@@ -97,7 +97,7 @@
               </v-list-item>
               <v-spacer></v-spacer>
 
-              <v-card-actions class="d-flex justify-end align-center mr-10">
+              <v-card-actions class="d-flex justify-end align-center">
                 <v-btn :disabled="!isEditing" color="success" @click="put()" large>Salvar</v-btn>
                 <input
                   style="display: none;"
@@ -109,7 +109,6 @@
                 <v-btn fab large :disabled="!isEditing" text @click="$refs.file.click()">
                   <v-icon>mdi-paperclip</v-icon>
                 </v-btn>
-                <v-btn large :disabled="!isEditing" @click="submitFile()">Upload</v-btn>
               </v-card-actions>
             </v-list>
              <div v-if="this.fields.profile === undefined">

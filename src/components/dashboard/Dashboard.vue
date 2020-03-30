@@ -144,7 +144,7 @@
               </v-list>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="project.user.semestre > 1 ? true : false">
+            <div v-if="project.user.semestre < 1 ? false : true">
               <v-list-item
                  v-if="project.user._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
