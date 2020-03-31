@@ -28,11 +28,12 @@
         </v-btn>
         </v-flex>
       </v-layout>
-
+      
       <v-card flat class="mb-10" v-for="project in projects" :key="project.id">
         <div v-if="project.status === 'Aguardando' ? true : false">
           <v-divider></v-divider>
           <v-layout row wrap :class="`pa-3 project ${project.status}`">
+            
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Bloco</div>
               <div>{{ project.institution }}</div>
@@ -50,8 +51,20 @@
               <div>{{ project.data | moment("DD/MM/YYYY") }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
-              <div class="caption grey--text">Nome</div>
-              <div>{{ project.user.nome }}</div>
+              <div class="d-flex justify-center caption grey--text">Nome</div>
+              <div class="d-flex justify-center mt-6">
+              <v-avatar size="100" >
+                <div v-if="project.user.profile === undefined ? true : false">
+                  <img src="../../assets/silhueta-interrogação.jpg"  style="width: 100%; height: 100px;">
+                </div>
+                <div v-else>
+                  <img :src="project.user.profile"  style="width: 100%; height: 100px;" >
+                </div>
+              </v-avatar>
+              <div class="d-flex align-self-center mx-4">
+              {{ project.user.nome }}
+              </div>
+            </div>
             </v-flex>
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Status</div>
@@ -59,7 +72,8 @@
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
-            <v-flex xs6 sm4 md1 v-if="project.user._id === $store.state.user._id ? true : false">
+            
+            <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
               <v-list class="d-flex flex-row">
                 <v-list-item>
                   <v-btn
@@ -144,10 +158,9 @@
               </v-list>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-          
-            <div v-if="project.user.semestre < 1">
+            <div v-if="project.user.semestre <= 1 ? false: true">
               <v-list-item
-                 v-if="project.user._id !== $store.state.user._id ? true : false"
+                 v-if="project.user._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
               >
                 <v-btn
@@ -161,6 +174,7 @@
           <v-divider></v-divider>
         </div>
       </v-card>
+      <Pagination :tutorias = projects />
     </v-container>
     </v-flex>
   </div>
@@ -168,16 +182,22 @@
 
 <script>
 import tutorias from "../../service/tutorias";
+import Pagination from "./Pagination"
 
 export default {
+  components: {
+    Pagination
+  },
   data() {
     return {
       projects: {},
       fields: {},
+      user: {},
       isActive: false,
       dialog: false,
       dialog1: false,
       tutoria: {},
+      pages: [],
     };
   },
   mounted() {
@@ -192,6 +212,7 @@ export default {
         .listar()
         .then(response => {
           this.projects = response;
+          this.user = JSON.parse(localStorage.getItem('user'))
         })
         .catch(err => err);
     },
@@ -229,7 +250,7 @@ export default {
     },
     doTutoriaUpdate(project) {
       project.status = "Agendado";
-      project.tutor = this.$store.state.user._id
+      project.tutor = this.user._id
       tutorias
         .updateTutoria(project._id, project)
         .then(response => {
@@ -242,7 +263,7 @@ export default {
           this.$store.getters.snackbarErr
           this.$store.state.texto = "Falha no agendamento da tutoria!";
         });
-    }
+    },
   }
 };
 </script>

@@ -54,7 +54,7 @@
                   <div class="caption grey--text">Data</div>
                   <div>{{ project.data |  moment("DD/MM/YYYY") }}</div>
                 </v-flex>
-                <v-flex xs12 sm4 md1>
+                <v-flex xs12 sm4 md2>
                   <div class="caption grey--text">Nome</div>
                   <div>{{ project.user.nome }}</div>
                 </v-flex>

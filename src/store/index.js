@@ -7,8 +7,7 @@ export default new Vuex.Store({
   state: {
   snackbar: false,
   color: "",
-  texto: "",
-  user: localStorage.getItem('user')
+  texto: ""
   },
   getters: {
     snackbarRes: state => {

@@ -14,7 +14,6 @@
             name="email"
             type="email"
             outlined
-            :rules="emailRules"
             v-model="fields.email"
           ></v-text-field>
           <v-text-field

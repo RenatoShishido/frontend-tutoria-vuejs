@@ -6,10 +6,10 @@
         :label="`Search`"
         persistent-hint
         class="text-justify"
-        @keypress.enter="ola()"
+        @keypress.enter="ola(model)"
       >
       </v-autocomplete>
-      <v-btn icon  xLarge @click.prevent="ola()">
+      <v-btn icon  xLarge @click.prevent="ola(model)">
         <v-icon>mdi-magnify</v-icon></v-btn>
     </v-card-text>
 </template>
@@ -22,6 +22,7 @@ import tutorias from '../../service/tutorias'
         model: '',
         states: [],
         searchResults: [],
+        tutorias: {},
         options: {
           shouldSort: true,
           includeMatches: true,
@@ -43,12 +44,20 @@ import tutorias from '../../service/tutorias'
             
             this.states.push(string)
           });
-    
+
+          this.tutorias = res
         
         })
         .catch(err => err)
     },
     methods:{
+      ola(model){
+        this.tutorias.forEach(element => {
+          const string = element.institution + ' ' + element.discipline 
+          if(model == string )
+            this.searchResults.push(element) 
+        });
+      },
       //  performSearch() {
       //   this.$search(this.model, this.states, this.options)
       //     .then(results => {

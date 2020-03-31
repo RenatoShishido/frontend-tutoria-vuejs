@@ -22,10 +22,10 @@
       <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
           <div v-if="this.fields.profile === undefined">
-          <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" />
+          <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" />
           </div>
           <div v-else>
-            <img :src=link  style="height: 100px;">
+            <img :src=link  style="width: 100%; height: 100px;">
           </div>
         </v-avatar>
         <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>

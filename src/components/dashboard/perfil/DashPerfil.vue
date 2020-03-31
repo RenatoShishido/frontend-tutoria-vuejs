@@ -111,10 +111,10 @@
               </v-card-actions>
             </v-list>
              <div v-if="this.fields.profile === undefined">
-              <v-img src='../../../assets/silhueta-interrogação.jpg'  height="500px"></v-img>
+              <v-img src='../../../assets/silhueta-interrogação.jpg' height="500px" width="100%"></v-img>
             </div>
             <div v-else>
-              <v-img :src=link  height="500px"></v-img>
+              <v-img :src=link  height="500px" width="100%"></v-img>
             </div>
           </v-card>
         </v-col>
@@ -151,7 +151,12 @@ export default {
             }
           });
           const rga = this.fields.rga.substring(0,4)
-          this.semestre = this.calcularSemestre(rga)
+          if(this.fields.rga === '' || this.fields.rga === null ||
+          this.fields.rga === undefined){
+            this.semestre = ''
+          }else {
+            this.semestre = this.calcularSemestre(rga)
+          }
 
 
           this.link = this.fields.profile
