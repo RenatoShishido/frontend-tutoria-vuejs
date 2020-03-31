@@ -74,10 +74,9 @@
                 </v-list-item-action>
 
                 <v-text-field
-                  :disabled="!isEditing"
+                  :disabled="true"
                   color="white"
-                  :value="fields.semestre"
-                  v-model="fields.semestre"
+                  :value="semestre"
                   label="Semestre"
                 ></v-text-field>
               </v-list-item>
@@ -135,6 +134,7 @@ export default {
       isEditing: null,
       fields: {},
       link: '',
+      semestre: '',
     };
   },
   mounted() {
@@ -150,6 +150,10 @@ export default {
              this.fields = element
             }
           });
+          const rga = this.fields.rga.substring(0,4)
+          this.semestre = this.calcularSemestre(rga)
+
+
           this.link = this.fields.profile
         
         })
@@ -188,6 +192,22 @@ export default {
     },
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
+    },
+    calcularSemestre(rga){
+      const data = new Date()
+      const strings = data.toJSON()
+      const dataAtual = strings.split("-")
+
+      const mesAtual = dataAtual[1]
+      const anoAtual = dataAtual[0]
+
+      if(mesAtual < 6){
+        return  ((anoAtual - rga) * 2) + 1
+        
+      }else{
+      return  ((anoAtual - rga) * 2) + 2
+        
+      }
     }
   }
 };

@@ -50,7 +50,7 @@ import Carrossel from "../Carrossel.vue";
 export default {
   name: "login",
   components: {
-    Carrossel
+    Carrossel,
   },
   data() {
     return {

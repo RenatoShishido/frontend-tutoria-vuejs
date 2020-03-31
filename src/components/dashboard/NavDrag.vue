@@ -13,15 +13,7 @@
       <v-spacer />
       <v-row class="ml-12">
         <v-flex xs12 sm8 md6>
-          <v-text-field
-            id="search"
-            placeholder="Search"
-            name="search"
-            type="search"
-            outlined
-            class="mt-6"
-            append-icon="mdi-magnify"
-          />
+          <Search/>
         </v-flex>
       </v-row>
     </v-app-bar>
@@ -48,12 +40,21 @@
       <v-list flat>
         <v-list-item class="my-4" v-for="item in items" :key="item.text" :to="item.route" link>
           <v-list-item-action>
-            <v-icon class="black--text">{{ item.icon }}</v-icon>
+            <v-icon class="black--text" :class="item.color">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
+            <v-list-item-title :class="item.color">{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item @click="logout()"  v-for="n in 1" :key="n.title"  link>
+          <v-list-item-action>
+            <v-icon class="red--text" >mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="red--text">Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
 
       </v-list>
     </v-navigation-drawer>
@@ -63,11 +64,13 @@
 
 <script>
 import Popup from "./Popup";
+import Search from "../search/SearchComponent"
 import tutorias from '../../service/tutorias'
 export default {
   name: "NavDrag",
   components: {
-    Popup
+    Popup,
+    Search
   },
   data: () => ({
     drawer: null,
@@ -106,13 +109,17 @@ export default {
         icon: "mdi-email",
         text: "Enviar sugestao",
         route: "/dashboard/sugestao"
-      }
+      },
     ],
   }),
   mounted(){
     this.pickUser()
   },
   methods: {
+    logout(){
+      localStorage.setItem('user', '')
+      this.$router.push('/login')
+    },
     pickUser(){
       tutorias.listarUsers()
         .then(response => {
