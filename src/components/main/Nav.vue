@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app color="purple darken-4" dark height="80">
-      <v-icon xLarge color="white" router to="/" left>mdi-school</v-icon>
-        <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
+      <a href="/"><v-icon xLarge color="white" left >mdi-school</v-icon></a>
+        <v-toolbar-title class="headline white--text hidden-md-and-down">
+           <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 50%; height: 80px;">
+        </v-toolbar-title>
       <v-spacer />
       <v-row class="d-flex justify-end">
         <div class="mx-4">

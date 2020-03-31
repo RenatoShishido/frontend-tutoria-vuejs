@@ -3,7 +3,7 @@
     <v-footer color="purple darken-4" dark padless>
       <v-card-text class="d-flex flex-wrap flex-row justify-space-between">
         <v-flex xs12 sm4 md2 class="d-flex justify-center mb-10">
-          <h1>LOGO</h1>
+           <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 50%; height: 80px;">
         </v-flex>
        <v-flex xs12 sm2 md4 class="d-flex flex-column">
           <a
