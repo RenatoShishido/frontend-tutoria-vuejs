@@ -1,16 +1,44 @@
 <template>
-  <v-card>
-      <v-card-text v-for="content in contents" :key="content.title"
-      class="d-flex justify-center"
-      >
-        <v-flex xs12 sm8 md4 >
-          <div class="d-flex headline flex-column align-center">
-            <v-icon size="150px" :class="content.color" class="black--text">{{ content.icon }}</v-icon>
-            {{content.texto}}
-          </div>
-        </v-flex>
-      </v-card-text>
-  </v-card>
+    <v-row class="cyan accent-4">
+       <v-flex xs12 sm8 md6 class="d-flex flex-wrap justify-end px-8 align-self-center">
+         <div 
+         style="width:50%;"
+         >
+        <h2 class="display-4 font-weight-black color my-12">Objetivos Gerais</h2>
+        <v-divider class="white"></v-divider>
+        <p class="white--text headline my-12">
+          Desenvolver uma plataforma de oferta e agendamento de tutoria
+          presencial na universidade que proporcione sucesso academico por meio da aproximacao
+          e do desenvolvimento dos cademicos entre si, por meio de uma relacao de estudo conjunto.
+        </p>
+         </div>
+      </v-flex> 
+      <v-flex xs12 sm8 md6>
+        <img src="../../assets/content.png" alt="content"
+        style="width: 100%; heigth:100%;"
+        > 
+      </v-flex>
+      <v-flex xs12 sm8 md6 class="my-12">
+        <img src="../../assets/lapis.png" alt="content"
+        style="width: 100%; heigth:100%;"
+        > 
+      </v-flex>
+       <v-flex xs12 sm8 md6 class="d-flex flex-wrap justify-start px-8 align-self-center">
+         <div 
+         
+         style="width:50%;"
+         >
+        <h2 class="display-4 font-weight-black color my-12">Objetivos Especificos</h2>
+        <v-divider class="white"></v-divider>
+        <p class="white--text headline my-12">
+          Fazer uso da plataforma para tambem publicizar as informacoes concernentes
+          as ofertas de monitorias, assim como, se devidamente autorizado pelos(as)
+          professores(as) coordenadores(as), os encontros dos Grupos do Programa de
+          Educacao Tutorial - PET's e Ligas Academicas
+        </p>
+         </div>
+      </v-flex> 
+    </v-row>
 </template>
 
 <script>
@@ -18,33 +46,13 @@ export default {
   name: "Content",
   data() {
     return {
-      contents: [
-        {
-          ref: "/",
-          icon: "mdi-history",
-          texto:
-            "O objetivo do tutoria em pares e para quando pessoas estao com dificuldades",
-          color: "yellow--text"
-        },
-        {
-          ref: "/",
-          icon: "mdi-diamond",
-          texto:
-            "Contribuir entre os tutores as ações de prática de ensino, como mais uma alternativa de carreira dentro de suas respectivas áreas de estudo/atuação Colaborar e criar oportunidades para o desenvolvimento prático da ato professoral entre os acadêmicos dos cursos de licenciaturas. Propiciar uma maior interação entre os acadêmicos de mesmos cursos de diferentes semestres, assim como acadêmicos de diferentes cursos, mas que possuem uma exigências conteudistas semelhantes.",
-          color: "indigo--text"
-        },
-        {
-          ref: "/",
-          icon: "mdi-recycle",
-          texto:
-            "O objetivo do tutoria em pares e para quando pessoas estao com dificuldades",
-          color: "blue--text"
-        }
-      ]
-    };
+    }
   }
 };
 </script>
 
 <style>
+.color{
+  color: #311B92;
+}
 </style>
