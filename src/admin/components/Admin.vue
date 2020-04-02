@@ -145,7 +145,6 @@ export default {
         .listarUsers()
         .then(response => {
           this.projects = response;
-          console.log(this.projects)
           this.user = JSON.parse(localStorage.getItem('user'))
         })
         .catch(err => err);
