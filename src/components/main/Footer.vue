@@ -1,6 +1,5 @@
 <template>
-  <v-card tile>
-    <v-footer color="purple darken-4" dark padless>
+    <v-footer color="purple darken-4" dark padless >
       <v-card-text class="d-flex flex-wrap flex-row justify-space-between">
         <v-flex xs12 sm4 md2 class="d-flex justify-center mb-10">
            <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 50%; height: 80px;">
@@ -39,11 +38,8 @@
             </a>
           </v-btn>
     </v-flex>
-        
-       
       </v-card-text>
     </v-footer>
-  </v-card>
 </template>
 
 <script>

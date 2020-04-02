@@ -12,7 +12,9 @@
       <v-flex xs12 sm8 md4>
         <v-toolbar flat>
           <v-spacer></v-spacer>
-          <v-toolbar-title class="mx-4 blue--text">Tutoria logo</v-toolbar-title>
+          <v-toolbar-title class="d-flex justify-center blue--text">
+            <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 50%; height: 80px;">
+          </v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 
@@ -32,10 +34,10 @@
         </v-form>
         <v-container>
           <v-card-actions class="d-flex justify-center">
-            <v-btn text class="body-1 blue--text" router to="/register">Nao tenho conta</v-btn>
+            <a class="body-1 blue--text"  href="/register">Nao tenho conta</a>
           </v-card-actions>
           <v-card-actions class="d-flex justify-center">
-            <v-btn text class="body-1 blue--text" router to="/forgot_password">Esqueci minha senha</v-btn>
+            <a class="body-1 blue--text"  href="/forgot_password">Esqueci minha senha</a>
           </v-card-actions>
         </v-container>
       </v-flex>
@@ -63,7 +65,7 @@ export default {
       tutorias
         .logar(this.fields)
         .then(response => {
-          let is_admin = response.data.user.is_admin;
+          let admin = response.data.user.admin;
           localStorage.setItem("user", JSON.stringify(response.data.user));
           localStorage.setItem("jwt", response.data.token);
           if (localStorage.getItem("jwt") != null) {
@@ -71,7 +73,7 @@ export default {
             if (this.$route.params.nextUrl != null) {
               this.$router.push(this.$route.params.nextUrl);
             } else {
-              if (is_admin == 1) {
+              if (admin === true) {
                 this.$router.push("admin");
               } else {
                 this.$router.push("dashboard");

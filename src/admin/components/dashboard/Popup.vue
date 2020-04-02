@@ -7,7 +7,7 @@
       class="green black--text"
     >
     <v-icon left >mdi-plus-circle</v-icon>
-    Tutorias</v-btn>
+    Adicionar Tutoria</v-btn>
     <v-card>
       <v-card-title>
         <h2>{{msg}}</h2>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import tutorias from "../../service/tutorias";
+import tutorias from "../../../service/tutorias";
 export default {
   props: {
     msg: String,

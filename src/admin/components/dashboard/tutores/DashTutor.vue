@@ -1,15 +1,7 @@
 <template>
-  <v-responsive class="overflow-y-auto" max-height="1000">
-    <v-lazy
-      v-model="isActive"
-      :options="{
-          threshold: .5
-        }"
-      min-height="200"
-      transition="fade-transition"
-    >
+ 
       <div class="altura">
-        <h1 class="d-flex justify-center subheading grey--text ">Dashboard</h1>
+        <h1 class="d-flex justify-center subheading grey--text ">Tutores</h1>
 
         <v-container class="d-flex justify-center">
           <v-btn small text color="black" class="mr-3" @click="sortBy('institution')">
@@ -26,8 +18,8 @@
         </v-container>
         <v-container class="d-flex flex-column justify-center">
           <v-card flat class="mb-10" v-for="project in projects" :key="project.nome">
-            <div v-if="project.status === 'Completo' ? true : false">
-               <v-divider></v-divider>
+            <div v-if="project.status === 'Aguardando' ? true : false">
+             <v-divider></v-divider>
               <v-layout row wrap :class="`pa-3 project ${project.status}`">
                 <v-flex xs6 sm4 md1>
                   <div class="caption grey--text">Bloco</div>
@@ -42,7 +34,7 @@
                   <p class="text-justify mr-12">{{ project.content }}</p>
                 </v-flex>
                 <v-flex xs2 sm4 md2>
-                  <div class="caption grey--text">Data</div>
+                  <div class="caption grey--text">Data da Tutoria</div>
                   <div>{{ project.data |  moment("DD/MM/YYYY") }}</div>
                 </v-flex>
                 <v-flex xs6 sm4 md2>
@@ -53,24 +45,41 @@
                   <div class="caption grey--text">Status</div>
                   <div>{{ project.status }}</div>
                 </v-flex>
+
+              <div v-if="project.user.semestre > 1 ? true : false">
+              <v-list-item
+                 v-if="project.user._id !== user._id ? true : false"
+                class="d-flex justify-start align-end"
+              >
+                <v-btn
+                  class="green black--text"
+                  text
+                  @click="doTutoriaUpdate(project)"
+                >TORNAR-SE ALUNO</v-btn>
+              </v-list-item>
+            </div>
               </v-layout>
-              <v-divider></v-divider>
+               <v-divider></v-divider>
             </div>
           </v-card>
         </v-container>
       </div>
-    </v-lazy>
-  </v-responsive>
 </template>
 
 <script>
-import tutorias from "../../../service/tutorias";
+import tutorias from "../../../../service/tutorias";
 export default {
+  components: {
+
+  },
   data() {
     return {
       projects: {},
+      tutoria: {},
       nomes: {},
-      isActive: false
+      isActive: false,
+      user: {},
+      dialogs: false,
     };
   },
   mounted() {
@@ -84,15 +93,17 @@ export default {
     tutorias.listar()
       .then(response => {
         this.projects = response
+        const user = JSON.parse(localStorage.getItem("user"));
+        this.user = user;
       })
       .catch(err => err)
-    }
+    },
   }
 };
 </script>
 
 <style>
-.project.Completo {
+.project.Completada {
   border-left: 4px solid #3cd1c2;
 }
 .project.Aguardando {

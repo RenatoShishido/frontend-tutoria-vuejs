@@ -10,19 +10,14 @@
       <router-link router to="/">
         <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
       </router-link>
-      <v-spacer />
-      <v-row class="ml-12">
-        <v-flex xs12 sm8 md6>
-          <Search/>
-        </v-flex>
-      </v-row>
+      
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app >
       <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
         <v-avatar size="100" class>
           <div v-if="this.fields.profile === undefined">
-          <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" />
+            <img src="../../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" >
           </div>
           <div v-else>
             <img :src=link  style="width: 100%; height: 100px;">
@@ -54,23 +49,18 @@
             <v-list-item-title class="red--text">Logout</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
-
       </v-list>
     </v-navigation-drawer>
-
   </div>
 </template>
 
 <script>
 import Popup from "./Popup";
-import Search from "../search/SearchComponent"
-import tutorias from '../../service/tutorias'
+import tutorias from "../../../service/tutorias";
 export default {
   name: "NavDrag",
   components: {
     Popup,
-    Search
   },
   data: () => ({
     drawer: null,
@@ -82,28 +72,33 @@ export default {
     items: [
       {
         icon: "mdi-face-profile",
+        text: "Administrativa",
+        route: "/admin/administrativa"
+      },
+      {
+        icon: "mdi-face-profile",
         text: "Perfil",
-        route: "/dashboard/perfil"
+        route: "/admin/perfil"
       },
       {
         icon: "mdi-plus-circle",
         text: "Tutorias",
-        route: "/dashboard"
+        route: "/admin"
       },
       {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
-        route: "/dashboard/tutorias"
+        route: "/admin/agendados"
       },
       {
         icon: "mdi-face",
         text: "Tutores",
-        route: "/dashboard/tutores"
+        route: "/admin/tutores"
       },
       {
-        icon: "mdi-email",
-        text: "Enviar sugestao",
-        route: "/dashboard/sugestao"
+        icon: "mdi-marker-check",
+        text: "Tutorias completas",
+        route: "/admin/completo"
       },
     ],
   }),
@@ -134,4 +129,7 @@ export default {
 </script>
 
 <style>
+a{
+  text-decoration: none;
+}
 </style>

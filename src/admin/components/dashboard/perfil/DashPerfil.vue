@@ -111,7 +111,7 @@
               </v-card-actions>
             </v-list>
              <div v-if="this.fields.profile === undefined">
-              <v-img src='../../../assets/silhueta-interrogação.jpg' height="500px" width="100%"></v-img>
+              <v-img src='../../../../assets/silhueta-interrogação.jpg' height="500px" width="100%"></v-img>
             </div>
             <div v-else>
               <v-img :src=link  height="500px" width="100%"></v-img>
@@ -125,7 +125,7 @@
 
 
 <script>
-import tutorias from '../../../service/tutorias'
+import tutorias from "../../../../service/tutorias";
 export default {
   name: "DashPerfil",
   data() {

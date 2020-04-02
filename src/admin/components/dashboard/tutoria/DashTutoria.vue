@@ -29,102 +29,51 @@
         </v-flex>
       </v-layout>
       
-
-      <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
-        <a :href="`/dashboard/${project._id}`">
-        <div v-if="project.status === 'Aguardando' ? true : false">
+      <v-card flat class="mb-10 " v-for="project in projects" :key="project.id">
+        <div v-if="project.status === 'Agendado' ? true : false">
           <v-divider></v-divider>
           <v-layout row wrap :class="`pa-3 project ${project.status}`">
-            
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Bloco</div>
-              <div class="body-1 black--text">{{ project.institution }}</div>
+              <div>{{ project.institution }}</div>
             </v-flex>
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Disciplina</div>
-              <div class="body-1 black--text">{{ project.discipline }}</div>
+              <div>{{ project.discipline }}</div>
             </v-flex>
             <v-flex xs12 sm4 md4>
               <div class="caption grey--text">Conteudo</div>
-              <div class="body-1 black--text text-justify">{{ project.content }}</div>
+              <div class="text-justify ">{{ project.content }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
               <div class="caption grey--text">Data</div>
-              <div class="body-1 black--text">{{ project.data | moment("DD/MM/YYYY") }}</div>
+              <div>{{ project.data | moment("DD/MM/YYYY") }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
               <div class="d-flex justify-center caption grey--text">Nome</div>
               <div class="d-flex justify-center mt-6">
               <v-avatar size="100" >
                 <div v-if="project.user.profile === undefined ? true : false">
-                  <img src="../../assets/silhueta-interrogação.jpg"  style="width: 100%; height: 100px;">
+                  <img src="../../../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" >
                 </div>
                 <div v-else>
                   <img :src="project.user.profile"  style="width: 100%; height: 100px;" >
                 </div>
               </v-avatar>
-              <div class="body-1 black--text d-flex align-self-center mx-4">
+              <div class="d-flex align-self-center mx-4">
               {{ project.user.nome }}
               </div>
             </div>
             </v-flex>
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Status</div>
-              <div class="body-1 black--text">{{ project.status }}</div>
+              <div>{{ project.status }}</div>
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
             
-            <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
+            <v-flex xs6 sm4 md1>
               <v-list class="d-flex flex-row">
-                <v-list-item>
-                  <v-btn
-                    fab
-                    text
-                    @click="dialog1 = !dialog1 , receberTutoria(project) "
-                    class="green"
-                  >
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                  <v-row justify="center" v-if="dialog1 === true">
-                    <v-dialog v-model="dialog1" max-width="600">
-                      <v-card>
-                        <v-form class="px-5 py-8" ref="form">
-                          <h1 class="d-flex justify-center align-center">Alterar tutoria</h1>
-                          <v-text-field
-                            v-model="fields.institution"
-                            :value="fields.institution"
-                            label="Bloco"
-                            prepend-icon="mdi-castle"
-                          
-                          ></v-text-field>
-                          <v-text-field
-                            v-model="fields.discipline"
-                            :value="fields.discipline"
-                            label="Disciplina"
-                            prepend-icon="mdi-folder"
-                          
-                          ></v-text-field>
-                          <v-textarea
-                            v-model="fields.content"
-                            :value="fields.content"
-                            label="Duvida"
-                            prepend-icon="mdi-table-edit"
-                         
-                          ></v-textarea>
-                          <v-btn
-                            class="success mx-0 mt-3"
-                            text
-                            @click="dialog1 = false, atualizarDashoboard()"
-                          >Alterar</v-btn>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                          </v-card-actions>
-                        </v-form>
-                      </v-card>
-                    </v-dialog>
-                  </v-row>
-                </v-list-item>
                 <v-list-item>
                   <v-btn
                     fab
@@ -160,22 +109,16 @@
               </v-list>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="project.user.semestre <= 1 ? false: true">
-              <v-list-item
-                 v-if="project.user._id !== user._id ? true : false"
-                class="d-flex justify-start align-end "
-              >
-                <v-btn
-                  class="green black--text "
-                  text
-                  @click="doTutoriaUpdate(project)"
-                >Fazer tutoria</v-btn>
-              </v-list-item>
-            </div>
+             <v-flex xs12 sm8 md1>
+              <div>
+                <v-list-item class="d-flex justify-start align-end">
+                  <v-btn class="green black--text">ACEITAR PROPOSTA DE PROVA</v-btn>
+                </v-list-item>
+              </div>
+            </v-flex>
           </v-layout>
           <v-divider></v-divider>
         </div>
-        </a>
       </v-card>
       <Pagination :tutorias = projects />
     </v-container>
@@ -184,8 +127,8 @@
 </template>
 
 <script>
-import tutorias from "../../service/tutorias";
-import Pagination from "./Pagination"
+import tutorias from "../../../../service/tutorias";
+import Pagination from "../Pagination"
 
 export default {
   components: {
@@ -237,67 +180,18 @@ export default {
           this.$.store.stete.texto = "Falha ao remover tutoria!";
         });
     },
-    atualizarDashoboard() {
-      tutorias
-        .updateTutoria(this.tutoria._id, this.fields)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes
-          this.$store.state.texto = "Tutoria alterado com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr
-          this.$store.state.texto = "Falha ao alterar tutoria!";
-        });
-    },
-    doTutoriaUpdate(project) {
-      project.status = "Agendado";
-      project.tutor = this.user._id
-      tutorias
-        .updateTutoria(project._id, project)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes
-          this.$store.state.texto = "Tutoria agendada com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr
-          this.$store.state.texto = "Falha no agendamento da tutoria!";
-        });
-    },
   }
 };
 </script>
 
 <style>
-.project.Completada {
-  border-left: 4px solid #3cd1c2;
-  border-right: 4px solid #3cd1c2;
-}
-.project.Aguardando {
-  border-left: 4px solid orange;
-  border-right: 4px solid orange;
-}
-.project.Agendado {
+.project{
   border-left: 4px solid tomato;
   border-right: 4px solid tomato;
 }
+
 .altura {
   margin-top: 5%;
-}
-a{
-  text-decoration: none;
-  color: black;
-}
-
-.zoom:hover{
-  -moz-transform: scale(1.1);
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
-  background: whitesmoke;
-  /* background: wheat; */
 }
 
 </style>

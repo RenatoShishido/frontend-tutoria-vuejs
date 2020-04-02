@@ -89,6 +89,15 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async removeUser(id) {
+    try {
+      const response = await AXIOS_INSTANCE.delete(`users/remove/${id}`)
+
+      return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
   static async removerTutoria(id) {
     try {
       const response = await AXIOS_INSTANCE.delete(`tutorias/${id}`)
@@ -107,9 +116,9 @@ class TutoriaService {
       throw err.response.data;
     }
   }
-  static async upload(fields) {
+  static async updateAdmin(id) {
     try {
-      const response = await AXIOS_INSTANCE.post('users/upload' , fields)
+      const response = await AXIOS_INSTANCE.put(`users/admin/${id}`)
 
       return response
     } catch (err) {

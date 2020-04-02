@@ -43,7 +43,7 @@
           <v-btn color="primary" class="white--text" @click="enviar()">Cadastrar</v-btn>
         </v-card-actions>
         <v-card-actions class="d-flex justify-center blue--text">
-          <v-btn text class="body-1 blue--text" router to="/login">Tenho uma conta</v-btn>
+          <a class="body-1 blue--text"  href="/login">Tenho uma conta</a>
         </v-card-actions>
       </v-flex>
     </v-layout>
