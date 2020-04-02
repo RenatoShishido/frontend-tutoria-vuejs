@@ -79,7 +79,8 @@ let router = new VueRouter({
         name: 'View-Admin',
         component: () => import('../admin/pages/Tutorias'),
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            is_admin: true
         }
       },
       {
@@ -87,7 +88,8 @@ let router = new VueRouter({
         name: 'View-Administrativa',
         component: () => import('../admin/pages/Administrativa'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          is_admin: true
       }
       },
       {
@@ -95,7 +97,8 @@ let router = new VueRouter({
         name: 'View-Perfil',
         component: () => import('../admin/pages/Perfil'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          is_admin: true
       }
       },
       {
@@ -103,7 +106,8 @@ let router = new VueRouter({
         name: 'View-Tutorias',
         component: () => import('../admin/pages/Agendados'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          is_admin: true
       }
       },
       {
@@ -111,7 +115,8 @@ let router = new VueRouter({
         name: 'View-tutores',
         component: () => import('../admin/pages/Tutores'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          is_admin: true
       }
       },
       {
@@ -119,7 +124,8 @@ let router = new VueRouter({
         name: 'View-tutores',
         component: () => import('../admin/pages/Completo'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          is_admin: true
       }
       },
   ]
@@ -137,7 +143,7 @@ router.beforeEach((to, from, next) => {
       } else {
           let user = JSON.parse(localStorage.getItem('user'))
           if(to.matched.some(record => record.meta.is_admin)) {
-              if(user.is_admin == 1){
+              if(user.admin){
                 next()
 
               }
