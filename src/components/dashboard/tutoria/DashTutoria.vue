@@ -30,7 +30,7 @@
 
     
     <v-container class="d-flex flex-column justify-center">
-      <v-card flat class="mb-10 card" v-for="project in projects" :key="project.nome">
+      <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.nome">
         <div v-if="project.status === 'Agendado' ? true : false">
           <v-divider></v-divider>
           <v-layout row wrap :class="`pa-3 project ${project.status} ` ">
@@ -76,6 +76,15 @@
           <v-divider></v-divider>
         </div>
       </v-card>
+       <div class="text-center">
+      <a @click="refresh(page)">
+      <v-pagination
+        v-model="page"
+        :value="page"
+        :length="paginas"
+      ></v-pagination>
+    </a>
+  </div>
     </v-container>
   </div>
 </template>
@@ -91,6 +100,8 @@ export default {
   },
   data() {
     return {
+      page: 1,
+      paginas: '',
       projects: {},
       tutoria: {},
       nomes: {},
@@ -103,16 +114,23 @@ export default {
     this.refresh();
   },
   methods: {
+    calcularNumeroPagina(totalPages){
+      const numeroPaginas = totalPages / 10
+      this.paginas = Math.ceil(numeroPaginas)
+    },
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     },
-    refresh() {
+    refresh(page) {
+      this.page = page
+      this.$router.push(`/dashboard/tutorias/pagina/${page}`)
       tutorias
-        .listar()
+        .paginationAgendado(this.page)
         .then(response => {
-          this.projects = response;
-          const user = JSON.parse(localStorage.getItem("user"));
-          this.user = user;
+          this.projects = response.data.data;
+          this.calcularNumeroPagina(response.data.count)
+          this.user = JSON.parse(localStorage.getItem('user'))
+
         })
         .catch(err => err);
     }
@@ -136,7 +154,13 @@ export default {
 .altura {
   margin-top: 5%;
 }
-.card:hover {
-  background: #616161;
+
+.zoom:hover{
+  -moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+  background: whitesmoke;
+  /* background: wheat; */
 }
+
 </style>

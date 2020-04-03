@@ -76,7 +76,7 @@ export default {
               if (admin === true) {
                 this.$router.push("admin");
               } else {
-                this.$router.push("dashboard");
+                this.$router.push("dashboard/pagina/1");
               }
             }
           }

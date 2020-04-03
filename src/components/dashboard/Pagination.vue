@@ -26,39 +26,18 @@ export default {
     },
     created(){
       tutorias
-        .listar()
-        .then(response => {
-          response.forEach(element => {
-            if(element.status !== 'Agendado')
-              this.projects.push(element) 
-          });
-          this.pagination()
-          this.calcularNumeroPagina()
-        })
-        .catch(err => err);
+      .paginationTutoria(this.page)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      
+       
 
     },
     methods: {
-      ajax(){
-        tutorias
-        .listarPage(this.page)
-        .then(response => {
-          response.forEach(element => {
-            if(element.status !== 'Agendado')
-              this.projects.push(element) 
-          });
-        })
-        .catch(err => err);
-      },
-      navigate() {
-       this.ajax()
-      },
-      pagination() {
-      this.pages = [];
-      for (var i = 1; i < this.projects.length + 1; i++) {
-        this.pages.push(i);
-      } 
-    },
     // previousPage() {
     //   if (this.data.current_page > 1) {
     //     this.ajax(this.data.current_page - 1);

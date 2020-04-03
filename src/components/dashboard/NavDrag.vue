@@ -38,6 +38,17 @@
         />
       </v-list-item>
       <v-list flat>
+       
+         <v-list-item   v-for="n in 1" :key="n.title"  link
+         router :to="`/dashboard/perfil/${id}`" >
+          <v-list-item-action>
+            <v-icon class="black--text" >mdi-face-profile</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="black--text">Perfil</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
         <v-list-item class="my-4" v-for="item in items" :key="item.text" :to="item.route" link>
           <v-list-item-action>
             <v-icon class="black--text" :class="item.color">{{ item.icon }}</v-icon>
@@ -79,21 +90,17 @@ export default {
     color: "",
     texto: "",
     link: '',
+    id: '',
     items: [
-      {
-        icon: "mdi-face-profile",
-        text: "Perfil",
-        route: "/dashboard/perfil"
-      },
       {
         icon: "mdi-plus-circle",
         text: "Tutorias",
-        route: "/dashboard"
+        route: `/dashboard/pagina/${1}`
       },
       {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
-        route: "/dashboard/tutorias"
+        route: `/dashboard/tutorias/pagina/${1}`
       },
       {
         icon: "mdi-face",
@@ -119,9 +126,10 @@ export default {
     pickUser(){
       tutorias.listarUsers()
         .then(response => {
-         const user = JSON.parse(localStorage.getItem('user'))
+         this.user = JSON.parse(localStorage.getItem('user'))
+         this.id = this.user._id
           response.forEach(element => {
-            if(user._id === element._id){
+            if(this.user._id === element._id){
              this.fields = element
             }
           });

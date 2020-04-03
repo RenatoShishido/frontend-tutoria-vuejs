@@ -34,7 +34,7 @@ let router = new VueRouter({
         }
       },
       {
-        path: '/dashboard',
+        path: '/dashboard/pagina/:page',
         name: 'View-Dashboard',
         component: () => import('../views/View-Dashboard'),
         meta: {
@@ -50,7 +50,7 @@ let router = new VueRouter({
         }
       },
       {
-        path: '/dashboard/perfil',
+        path: '/dashboard/perfil/:id',
         name: 'View-Perfil',
         component: () => import('../views/View-Perfil'),
         meta: {
@@ -58,7 +58,7 @@ let router = new VueRouter({
         }
       },
       {
-        path: '/dashboard/tutorias',
+        path: '/dashboard/tutorias/pagina/:page',
         name: 'View-Tutoria',
         component: () => import('../views/View-Tutoria'),
         meta: {
@@ -94,7 +94,7 @@ let router = new VueRouter({
       },
       {
         path: '/admin/perfil',
-        name: 'View-Perfil',
+        name: 'View-adminPerfil',
         component: () => import('../admin/pages/Perfil'),
         meta: {
           requiresAuth: true,
@@ -103,7 +103,7 @@ let router = new VueRouter({
       },
       {
         path: '/admin/agendados',
-        name: 'View-Tutorias',
+        name: 'View-agendados',
         component: () => import('../admin/pages/Agendados'),
         meta: {
           requiresAuth: true,
@@ -121,7 +121,7 @@ let router = new VueRouter({
       },
       {
         path: '/admin/completo',
-        name: 'View-tutores',
+        name: 'View-completo',
         component: () => import('../admin/pages/Completo'),
         meta: {
           requiresAuth: true,

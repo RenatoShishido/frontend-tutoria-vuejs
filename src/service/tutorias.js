@@ -79,6 +79,16 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async listarPerfil(id) {
+    try {
+
+      const response = await AXIOS_INSTANCE.get(`users/perfil/${id}`)
+
+      return response.data.user
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
   static async updateUser(id, fields,config) {
     try {
       const response = await AXIOS_INSTANCE.put(`users/update/${id}`
@@ -119,6 +129,24 @@ class TutoriaService {
   static async updateAdmin(id) {
     try {
       const response = await AXIOS_INSTANCE.put(`users/admin/${id}`)
+
+      return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+  static async paginationTutoria(pagina){
+    try {
+      const response = await AXIOS_INSTANCE.get(`tutorias/pagination/${pagina}`)
+
+      return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+  static async paginationAgendado(pagina){
+    try {
+      const response = await AXIOS_INSTANCE.get(`tutorias/agendado/${pagina}`)
 
       return response
     } catch (err) {
