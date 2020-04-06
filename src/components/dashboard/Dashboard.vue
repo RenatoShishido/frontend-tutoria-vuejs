@@ -30,7 +30,7 @@
         </v-layout>
 
         <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
-       
+
             <v-divider></v-divider>
             <v-layout row wrap :class="`d-flex flex-wrap pa-3 project ${project.status}`">
               <v-flex xs12 sm4 md1>
@@ -82,99 +82,23 @@
 
               <!-- BOTOES DO DASHBOARD -->
 
-              <v-flex xs6 sm6 md2 lg2 xl1  v-if="project.user._id === user._id ? true : false">
+              <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
                 <v-list class="d-flex flex-row">
                   <v-list-item>
-                    <v-btn
-                      fab
-                      text
-                      @click="dialog1 = !dialog1 , receberTutoria(project) "
-                      class="green"
-                    >
-                      <v-icon>mdi-pencil</v-icon>
-                    </v-btn>
-                    <v-row justify="center" v-if="dialog1 === true">
-                      <v-dialog v-model="dialog1" max-width="600">
-                        <v-card>
-                          <v-form class="px-5 py-8" ref="form">
-                            <h1 class="d-flex justify-center align-center">Alterar tutoria</h1>
-                            <v-text-field
-                              v-model="fields.institution"
-                              :value="fields.institution"
-                              label="Bloco"
-                              prepend-icon="mdi-castle"
-                            ></v-text-field>
-                            <v-text-field
-                              v-model="fields.discipline"
-                              :value="fields.discipline"
-                              label="Disciplina"
-                              prepend-icon="mdi-folder"
-                            ></v-text-field>
-                            <v-textarea
-                              v-model="fields.content"
-                              :value="fields.content"
-                              label="Duvida"
-                              prepend-icon="mdi-table-edit"
-                            ></v-textarea>
-                            <v-btn
-                              class="success mx-0 mt-3"
-                              text
-                              @click="dialog1 = false, atualizarDashoboard()"
-                            >Alterar</v-btn>
-                            <v-card-actions>
-                              <v-spacer></v-spacer>
-                            </v-card-actions>
-                          </v-form>
-                        </v-card>
-                      </v-dialog>
-                    </v-row>
+                    <btnAlterarTutoria :fields = "project" />
                   </v-list-item>
                   <v-list-item>
-                    <v-btn
-                      fab
-                      text
-                      @click="dialog = !dialog , receberTutoria(project) "
-                      class="error"
-                    >
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                    <v-row justify="center" v-if="dialog === true">
-                      <v-dialog v-model="dialog" persistent max-width="500">
-                        <v-card>
-                          <v-card-title
-                            class="headline"
-                          >Voce tem certeza que deseja deletar esta tutoria?</v-card-title>
-                          <v-card-text>
-                            Caso dejese deletar esta tutoria, esteje ciente que estes dados serao apagados da base
-                            dados da nossa plataforma, e voce nao podera consultar novamente esta tutoria!!.
-                          </v-card-text>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="red darken-1" text @click="dialog = false">Discordar</v-btn>
-                            <v-btn
-                              color="green darken-1"
-                              text
-                              @click="dialog = false, removerDashboard()"
-                            >Aceito</v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                    </v-row>
+                   <btnDeletarTutoria :fields = "project"/>
                   </v-list-item>
                 </v-list>
               </v-flex>
               <!-- FINAL DOS BOTOES -->
-  
               <div v-if="project.user.semestre <= 1 ? false: true">
                 <v-list-item
                   v-if="project.user._id !== user._id ? true : false"
                   class="d-flex justify-start align-end"
                 >
-                  <v-btn
-                    class="green black--text"
-                    text
-                    @click="doTutoriaUpdate(project)"
-                  >Fazer tutoria</v-btn>
+                  <botaoFazerTutoria :tutoria="project" />
                 </v-list-item>
               </div>
             </v-layout>
@@ -192,8 +116,16 @@
 
 <script>
 import tutorias from "../../service/tutorias";
+import botaoFazerTutoria from "../dashboard/botoes/botaoFazerTutoria";
+import btnAlterarTutoria from "../dashboard/botoes/btnAlterarTutoria";
+import btnDeletarTutoria from "../dashboard/botoes/btnDeletarTutoria";
 
 export default {
+  components: {
+    btnAlterarTutoria,
+    botaoFazerTutoria,
+    btnDeletarTutoria
+  },
   data() {
     return {
       page: 1,
@@ -202,8 +134,6 @@ export default {
       fields: {},
       user: {},
       isActive: false,
-      dialog: false,
-      dialog1: false,
       tutoria: {},
       pages: []
     };
@@ -230,57 +160,9 @@ export default {
           this.user = JSON.parse(localStorage.getItem("user"));
         })
         .catch(err => err);
-      
+
       this.$router.push(`/dashboard/pagina/${this.page}`);
     },
-    receberTutoria(project) {
-      this.tutoria = project;
-      this.fields = this.tutoria;
-    },
-    removerDashboard() {
-      tutorias
-        .removerTutoria(this.tutoria._id)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes;
-          this.$store.state.texto = "Tutoria removida com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr;
-          this.$.store.stete.texto = "Falha ao remover tutoria!";
-        });
-    },
-    atualizarDashoboard() {
-      tutorias
-        .updateTutoria(this.tutoria._id, this.fields)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes;
-          this.$store.state.texto = "Tutoria alterado com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr;
-          this.$store.state.texto = "Falha ao alterar tutoria!";
-        });
-    },
-    doTutoriaUpdate(project) {
-      project.status = "Agendado";
-      project.tutor = this.user._id;
-      tutorias
-        .updateTutoria(project._id, project)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes;
-          this.$store.state.texto = "Tutoria agendada com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr;
-          this.$store.state.texto = "Falha no agendamento da tutoria!";
-        });
-    }
   }
 };
 </script>

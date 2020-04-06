@@ -1,7 +1,15 @@
-<template></template>
+<template>
+    <ResetPassword/>
+</template>
 
 <script>
-export default {};
+import ResetPassword from "../../components/auth/ResetPassword";
+export default {
+components: {
+    ResetPassword
+}
+
+};
 </script>
 
 <style>
