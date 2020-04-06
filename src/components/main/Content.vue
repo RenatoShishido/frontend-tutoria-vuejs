@@ -1,6 +1,11 @@
 <template>
-    <v-row class="cyan accent-4">
-      <v-flex xs12 sm12 md12>
+  <v-row class="cyan accent-4">
+    <v-flex xs12 sm12 md12 lg12 xl12>
+      <img src="../../assets/SOSTUTORIA.png" 
+      alt="IMAGE NOT A FOUND"
+      class="imagem">
+      </v-flex>
+      <v-flex xs12 sm12 md12 lg12 xl12>
       <v-divider class="black my-3"></v-divider> 
       </v-flex>
        <v-flex xs12 sm6 md6 class="d-flex flex-wrap justify-center px-8 align-self-center">
@@ -65,5 +70,9 @@ export default {
 <style>
 .color{
   color: #311B92;
+}
+.imagem {
+  background-size: 100%;
+  width: 100%;
 }
 </style>

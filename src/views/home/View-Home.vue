@@ -1,20 +1,20 @@
 <template>
   <v-app>
-    <Header />
+    <Nav/>
+    <v-content>
     <Content />
+    </v-content>
   </v-app>
 </template>
 
 
-
-
 <script>
-import Header from "../components/main/Header";
-import Content from "../components/home/Content";
+import Nav from '../../components/main/Nav'
+import Content from "../../components/main/Content";
 export default {
   name: "View-Home",
   components: {
-    Header,
+    Nav,
     Content,
   },
   data: () => ({})

@@ -1,5 +1,5 @@
 <template>
-  <div class="altura">
+  <v-content>
     <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
       <span>{{$store.state.texto}}</span>
       <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
@@ -44,7 +44,7 @@
         </v-card>
       </v-flex>
     </v-container>
-  </div>
+  </v-content>
 </template>
 
 <script>

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ForgotPassword from '../components/conta/ForgotPassword'
-import Nav from '../components/main/Nav'
+import ForgotPassword from '../../components/auth/ForgotPassword'
+import Nav from '../../components/main/Nav'
 export default {
   components: {
     ForgotPassword,

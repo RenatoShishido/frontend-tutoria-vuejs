@@ -1,5 +1,5 @@
 <template>
-  <div class="altura">
+  <v-content>
     <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
       <span>{{$store.state.texto}}</span>
       <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
@@ -30,9 +30,9 @@
         </v-layout>
 
         <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
-          <div v-if="project.status === 'Aguardando' ? true : false">
+       
             <v-divider></v-divider>
-            <v-layout row wrap :class="`pa-3 project ${project.status}`">
+            <v-layout row wrap :class="`d-flex flex-wrap pa-3 project ${project.status}`">
               <v-flex xs12 sm4 md1>
                 <div class="caption grey--text">Bloco</div>
                 <div class="body-1 black--text">{{ project.institution }}</div>
@@ -82,7 +82,7 @@
 
               <!-- BOTOES DO DASHBOARD -->
 
-              <v-flex xs6 sm4 md1 v-if="project.user._id === user._id ? true : false">
+              <v-flex xs6 sm6 md2 lg2 xl1  v-if="project.user._id === user._id ? true : false">
                 <v-list class="d-flex flex-row">
                   <v-list-item>
                     <v-btn
@@ -164,6 +164,7 @@
                 </v-list>
               </v-flex>
               <!-- FINAL DOS BOTOES -->
+  
               <div v-if="project.user.semestre <= 1 ? false: true">
                 <v-list-item
                   v-if="project.user._id !== user._id ? true : false"
@@ -178,16 +179,15 @@
               </div>
             </v-layout>
             <v-divider></v-divider>
-          </div>
         </v-card>
         <div class="text-center">
-          <a @click="refresh(page)">
+          <a @click="refresh()">
             <v-pagination v-model="page" :value="page" :length="paginas"></v-pagination>
           </a>
         </div>
       </v-container>
     </v-flex>
-  </div>
+  </v-content>
 </template>
 
 <script>
@@ -197,7 +197,7 @@ export default {
   data() {
     return {
       page: 1,
-      paginas: "",
+      paginas: 0,
       projects: {},
       fields: {},
       user: {},
@@ -209,13 +209,11 @@ export default {
     };
   },
   mounted() {
-    this.refresh();
+    this.$nextTick(function () {
+       this.refresh();
+  })
   },
   methods: {
-    navigate(page) {
-      this.page = page;
-      this.$router.push(`/dashboard/pagina/${page}`);
-    },
     calcularNumeroPagina(totalPages) {
       const numeroPaginas = totalPages / 10;
       this.paginas = Math.ceil(numeroPaginas);
@@ -223,7 +221,7 @@ export default {
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     },
-    refresh(page) {
+    refresh() {
       tutorias
         .paginationTutoria(this.page)
         .then(response => {
@@ -232,8 +230,8 @@ export default {
           this.user = JSON.parse(localStorage.getItem("user"));
         })
         .catch(err => err);
-      this.page = page;
-      this.$router.push(`/dashboard/pagina/${page}`);
+      
+      this.$router.push(`/dashboard/pagina/${this.page}`);
     },
     receberTutoria(project) {
       this.tutoria = project;
@@ -299,9 +297,6 @@ export default {
 .project.Agendado {
   border-left: 4px solid tomato;
   border-right: 4px solid tomato;
-}
-.altura {
-  margin-top: 5%;
 }
 a {
   text-decoration: none;

@@ -47,7 +47,7 @@
 
 
 <script>
-import tutorias from "../../service/tutorias";
+import tutorias from "../../service/auth";
 import Carrossel from "../Carrossel.vue";
 export default {
   name: "login",
@@ -74,6 +74,7 @@ export default {
               this.$router.push(this.$route.params.nextUrl);
             } else {
               if (admin === true) {
+                location.reload()
                 this.$router.push("admin");
               } else {
                 this.$router.push("dashboard/pagina/1");
@@ -88,7 +89,7 @@ export default {
           this.fields = {};
         });
     },
-  }
+  },
 };
 </script>
 

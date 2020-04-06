@@ -50,7 +50,7 @@
   </v-container>
 </template>
 <script>
-import tutorias from "../../service/tutorias";
+import tutorias from "../../service/auth";
 export default {
   name: "Register",
   data() {

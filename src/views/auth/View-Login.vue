@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Login from "../components/conta/Login";
-import Nav from "../components/main/Nav";
+import Login from "../../components/auth/Login";
+import Nav from "../../components/main/Nav";
 export default {
   name: "View-Login",
   components: {

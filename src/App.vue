@@ -1,9 +1,7 @@
 <template>
   <v-app>
-    <div class="app">
-      <router-view />
-      <Footer />
-    </div>
+    <router-view />
+    <Footer />
   </v-app>
 </template>
 

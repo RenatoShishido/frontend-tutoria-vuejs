@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Register from "../components/conta/Register";
-import Nav from "../components/main/Nav";
+import Register from "../../components/auth/Register";
+import Nav from "../../components/main/Nav";
 export default {
   name: "View-Register",
   components: {

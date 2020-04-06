@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <NavDrag />
-    <DashTutores />
+    <DashTutoria />
   </v-app>
 </template>
 
 <script>
-import NavDrag from "../components/dashboard/NavDrag";
-import DashTutores from "../components/dashboard/tutores/DashTutor";
+import NavDrag from "../../components/dashboard/NavDrag";
+import DashTutoria from "../../components/dashboard/tutoria/DashTutoria";
 export default {
   name: "View-Tutoria",
   components: {
     NavDrag,
-    DashTutores
+    DashTutoria
   },
   data() {
     return {};

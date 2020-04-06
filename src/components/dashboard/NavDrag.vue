@@ -2,7 +2,7 @@
   <div>
     <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
       <span>{{texto}}</span>
-      <v-btn text color="white" flat @click="snackbar= false">Close</v-btn>
+      <v-btn text color="white"  @click="snackbar= false">Close</v-btn>
     </v-snackbar>
     <v-app-bar app color="purple darken-4" dark height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
@@ -95,12 +95,12 @@ export default {
       {
         icon: "mdi-plus-circle",
         text: "Tutorias",
-        route: `/dashboard/pagina/${1}`
+        route: `/dashboard/pagina/1`
       },
       {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
-        route: `/dashboard/tutorias/pagina/${1}`
+        route: `/dashboard/tutorias/pagina/1`
       },
       {
         icon: "mdi-face",
