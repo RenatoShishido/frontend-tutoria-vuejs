@@ -71,7 +71,7 @@ export default {
         this.$router.push(`/dashboard/tutorias/search/${searchResult.item._id}`)
         setTimeout(() => {
           location.reload()
-        }, 200)
+        }, 1000)
       })
       .catch(err => err)
     },
