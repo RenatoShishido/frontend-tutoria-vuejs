@@ -73,12 +73,12 @@ export default {
               this.$router.push("admin");
                setTimeout(()=> {
                 location.reload()
-              }, 200)
+              }, 1000)
             } else {
               this.$router.push("dashboard/pagina/1");
               setTimeout(()=> {
                 location.reload()
-              }, 200)
+              }, 1000)
               
             }
           }
