@@ -122,7 +122,7 @@ export default {
       nomes: {},
       isActive: false,
       user: {},
-      dialogs: false
+      dialogs: false,
     };
   },
   mounted() {
@@ -141,7 +141,7 @@ export default {
         })
         .catch(err => err);
     }
-  }
+  },
 };
 </script>
 

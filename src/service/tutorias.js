@@ -138,6 +138,15 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async searchTutoria(id){
+    try {
+      const response = await AXIOS_INSTANCE.get(`tutorias/pagination/search/${id}`)
+
+      return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
   static async paginationAgendado(pagina){
     try {
       const response = await AXIOS_INSTANCE.get(`tutorias/agendado/${pagina}`)

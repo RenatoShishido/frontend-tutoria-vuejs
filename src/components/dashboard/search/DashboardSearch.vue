@@ -29,45 +29,45 @@
           </v-flex>
         </v-layout>
 
-        <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
+        <v-card flat class="mb-10 zoom">
           <v-divider></v-divider>
-          <v-layout row wrap :class="`d-flex flex-wrap pa-3 project ${project.status}`">
+          <v-layout row wrap :class="`d-flex flex-wrap pa-3 project ${projects.status}`">
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Bloco</div>
-              <div class="body-1 black--text">{{ project.institution }}</div>
+              <div class="body-1 black--text">{{ projects.institution }}</div>
             </v-flex>
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Disciplina</div>
-              <div class="body-1 black--text">{{ project.discipline }}</div>
+              <div class="body-1 black--text">{{ projects.discipline }}</div>
             </v-flex>
             <v-flex xs12 sm4 md4>
               <div class="caption grey--text">Conteudo</div>
-              <div class="body-1 black--text text-justify">{{ project.content }}</div>
+              <div class="body-1 black--text text-justify">{{ projects.content }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
               <div class="caption grey--text" link>Data</div>
-              <div class="body-1 black--text">{{ project.data | moment("DD/MM/YYYY") }}</div>
+              <div class="body-1 black--text">{{ projects.data | moment("DD/MM/YYYY") }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <a v-on="on" :href="`/dashboard/perfil/${project.user._id}`">
+                  <a v-on="on" :href="`/dashboard/perfil/${projectUser._id}`">
                     <div class="d-flex justify-center caption grey--text">Nome</div>
                     <div class="d-flex justify-center mt-6">
                       <v-avatar size="100">
-                        <div v-if="project.user.profile === undefined ? true : false">
+                        <div v-if="projectUser.profile === undefined ? true : false">
                           <img
-                            src="../../assets/silhueta-interrogação.jpg"
+                            src="../../../assets/silhueta-interrogação.jpg"
                             style="width: 100%; height: 100px;"
                           />
                         </div>
                         <div v-else>
-                          <img :src="project.user.profile" style="width: 100%; height: 100px;" />
+                          <img :src="projectUser.profile" style="width: 100%; height: 100px;" />
                         </div>
                       </v-avatar>
                       <div
                         class="body-1 black--text d-flex align-self-center mx-4"
-                      >{{ project.user.nome }}</div>
+                      >{{ projectUser.nome }}</div>
                     </div>
                   </a>
                 </template>
@@ -76,24 +76,24 @@
             </v-flex>
             <v-flex xs12 sm4 md1>
               <div class="caption grey--text">Status</div>
-              <div class="body-1 black--text">{{ project.status }}</div>
+              <div class="body-1 black--text">{{ projects.status }}</div>
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
 
-            <v-flex xs6 sm4 md6 lg2 xl1  v-if="project.user._id === user._id ? true : false">
+            <v-flex xs6 sm4 md6 lg2 xl1  v-if="projectUser._id === user._id ? true : false">
               <div class="d-flex">
-                <btnAlterarTutoria :fields="project" class="mx-4"/>
-                <btnDeletarTutoria :fields="project" />
+                <btnAlterarTutoria :fields="projects" class="mx-4"/>
+                <btnDeletarTutoria :fields="projects" />
               </div>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="project.user.semestre <= 1 ? false: true">
+            <div v-if="projectUser.semestre <= 1 ? false: true">
               <v-list-item
-                v-if="project.user._id !== user._id ? true : false"
+                v-if="projectUser._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
               >
-                <botaoFazerTutoria :tutoria="project" />
+                <botaoFazerTutoria :tutoria="projects" />
               </v-list-item>
             </div>
           </v-layout>
@@ -115,10 +115,10 @@
 </template>
 
 <script>
-import tutorias from "../../service/tutorias";
-import botaoFazerTutoria from "../dashboard/botoes/botaoFazerTutoria";
-import btnAlterarTutoria from "../dashboard/botoes/btnAlterarTutoria";
-import btnDeletarTutoria from "../dashboard/botoes/btnDeletarTutoria";
+import tutorias from "../../../service/tutorias";
+import botaoFazerTutoria from "../../dashboard/botoes/botaoFazerTutoria";
+import btnAlterarTutoria from "../../dashboard/botoes/btnAlterarTutoria";
+import btnDeletarTutoria from "../../dashboard/botoes/btnDeletarTutoria";
 
 export default {
   components: {
@@ -131,6 +131,7 @@ export default {
       page: 1,
       paginas: 0,
       projects: {},
+      projectUser: {},
       fields: {},
       user: {},
       isActive: false,
@@ -152,16 +153,16 @@ export default {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
     },
     refresh() {
+      const path = location.pathname
+      const id = path.split('/')
       tutorias
-        .paginationTutoria(this.page)
+        .searchTutoria(id[4])
         .then(response => {
           this.projects = response.data.data;
-          this.calcularNumeroPagina(response.data.count);
+          this.projectUser = this.projects.user       
           this.user = JSON.parse(localStorage.getItem("user"));
         })
         .catch(err => err);
-
-      this.$router.push(`/dashboard/pagina/${this.page}`);
     }
   }
 };

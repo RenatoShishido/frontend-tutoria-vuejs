@@ -19,7 +19,6 @@ export default {
         .updateTutoria(tutoria._id, tutoria)
         .then(response => {
           response;
-          console.log(response)
           this.$store.getters.snackbarRes
           this.$store.state.texto = "Tutoria agendada com sucesso!";
         })

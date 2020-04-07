@@ -10,13 +10,11 @@
         @focus="searchResultsVisible = true"
         @keydown.esc="searchResultsVisible = false"
         @keyup="performSearch()"
+        @keyup.enter="take(searchResult)"
       />
-      <v-btn icon fab>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
     </div>
     <div class="search seachResults" v-if="searchResults.length === 0 ? false : true">
-      <v-card class="white" hover v-for="searchResult in searchResults" :key="searchResult.id">
+      <v-card link @click="take(searchResult)" class="white" hover v-for="searchResult in searchResults" :key="searchResult.id">
         <v-card-title class="black--text">{{searchResult.item.institution}}</v-card-title>
         <v-card-subtitle class="black--text">{{searchResult.item.discipline}}</v-card-subtitle>
         <v-card-text class="black--text">{{searchResult.item.content}}</v-card-text>
@@ -66,9 +64,17 @@ export default {
         this.searchResults = results;
       });
     },
-    test() {
-      this.a++;
-    }
+    take(searchResult){
+      tutorias.searchTutoria(searchResult.item._id)
+      .then(res => {
+        res
+        this.$router.push(`/dashboard/tutorias/search/${searchResult.item._id}`)
+        setTimeout(() => {
+          location.reload()
+        }, 200)
+      })
+      .catch(err => err)
+    },
   }
 };
 </script>

@@ -66,6 +66,14 @@ let router = new VueRouter({
         }
       },
       {
+        path: '/dashboard/tutorias/search/:id',
+        name: 'View-Search',
+        component: () => import('../views/dashboard/View-Search'),
+        meta: {
+            requiresAuth: true
+        }
+      },
+      {
         path: '/dashboard/sugestao',
         name: 'View-Sugestao',
         component: () => import('../views/dashboard/View-Sugestao'),
