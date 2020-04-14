@@ -122,14 +122,13 @@ export default {
   },
   methods: {
     logout(){
-      localStorage.removeItem('user')
-      localStorage.removeItem('jwt')
-      this.$router.push('/login')
+      this.$session.destroy()
+      this.$router.push('/')
     },
     pickUser(){
       tutorias.listarUsers()
         .then(response => {
-         this.user = JSON.parse(localStorage.getItem('user'))
+         this.user = this.$session.get('user')
          this.id = this.user._id
           response.forEach(element => {
             if(this.user._id === element._id){

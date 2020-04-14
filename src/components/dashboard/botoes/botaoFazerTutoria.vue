@@ -12,7 +12,7 @@ export default {
   },
   methods: {
       doTutoriaUpdate(tutoria) {
-      const user = JSON.parse(localStorage.getItem('user'))
+      const user = this.$session.get('user');
       tutoria.status = "Agendado";
       tutoria.tutor = user._id
       tutorias

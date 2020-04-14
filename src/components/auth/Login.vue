@@ -48,6 +48,7 @@
 
 <script>
 import tutorias from "../../service/auth";
+import AXIOS_INSTANCE from "../../service/config";
 import Carrossel from "../Carrossel.vue";
 export default {
   name: "login",
@@ -65,25 +66,14 @@ export default {
       tutorias
         .logar(this.fields)
         .then(response => {
-          let admin = response.data.user.admin;
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-          localStorage.setItem("jwt", response.data.token);
-          if (localStorage.getItem("jwt") != null) {  
-            if (admin === true) {
-              this.$router.push("admin");
-               setTimeout(()=> {
-                location.reload()
-              }, 1000)
-            } else {
-              this.$router.push("dashboard/pagina/1");
-              setTimeout(()=> {
-                location.reload()
-              }, 1000)
-              
+            this.$session.start()
+            this.$session.set('jwt', response.data.token)
+            AXIOS_INSTANCE.defaults.headers.common = {
+              'Authorization': 'Bearer ' + response.data.token
             }
-          }
-
-           this.fields = {};
+            this.$session.set('user',response.data.user)
+            this.$router.push('/dashboard/pagina/1')
+            this.fields = {};
         })
         .catch(err => {
           this.$store.getters.snackbarErr

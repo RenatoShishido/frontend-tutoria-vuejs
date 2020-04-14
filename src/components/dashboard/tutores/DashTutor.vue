@@ -137,7 +137,7 @@ export default {
         .listarTutoriasOferecidas()
         .then(response => {
           this.projects = response;
-          this.user = JSON.parse(localStorage.getItem("user"));
+          this.user = this.$session.get('user')
         })
         .catch(err => err);
     }

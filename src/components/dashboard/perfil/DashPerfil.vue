@@ -11,8 +11,12 @@
                 <span class="headline white--text">{{fields.nome}}</span>
 
                 <v-spacer></v-spacer>
-
-                <v-btn fab small @click="isEditing = !isEditing">
+                <v-btn
+                v-if="user._id === userParam ? true : false"
+                fab 
+                small 
+                @click="isEditing = !isEditing"
+                >
                   <v-icon v-if="isEditing">mdi-close</v-icon>
                   <v-icon v-else>mdi-pencil</v-icon>
                 </v-btn>
@@ -150,7 +154,8 @@ export default {
       fields: {},
       link: "",
       semestre: "",
-      user: {}
+      user: {},
+      userParam: {},
     };
   },
   mounted() {
@@ -158,8 +163,9 @@ export default {
   },
   methods: {
     get() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+      this.user = this.$session.get('user')
       var params = location.pathname.split("/");
+      this.userParam = params[3]
       tutorias
         .listarPerfil(params[3])
         .then(response => {

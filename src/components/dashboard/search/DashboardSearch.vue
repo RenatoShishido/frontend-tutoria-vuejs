@@ -160,7 +160,7 @@ export default {
         .then(response => {
           this.projects = response.data.data;
           this.projectUser = this.projects.user       
-          this.user = JSON.parse(localStorage.getItem("user"));
+          this.user = this.$session.get('user')
         })
         .catch(err => err);
     }

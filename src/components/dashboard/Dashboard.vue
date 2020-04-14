@@ -157,7 +157,7 @@ export default {
         .then(response => {
           this.projects = response.data.data;
           this.calcularNumeroPagina(response.data.count);
-          this.user = JSON.parse(localStorage.getItem("user"));
+          this.user = this.$session.get('user')
         })
         .catch(err => err);
 

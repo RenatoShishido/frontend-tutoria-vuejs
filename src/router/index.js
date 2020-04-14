@@ -148,17 +148,16 @@ let router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-      if (localStorage.getItem('jwt') === null) {
+    const session = JSON.parse(sessionStorage.getItem('vue-session-key'))
+      if (session.jwt === null) {
           next({
               path: '/login',
-              params: { nextUrl: to.fullPath}
           })
       } else {
-          let user = JSON.parse(localStorage.getItem('user'))
+          let user = session.user
           if(to.matched.some(record => record.meta.is_admin)) {
               if(user.admin){
                 next()
-
               }
               else{
                 next({ name: 'userboard'})
