@@ -21,17 +21,11 @@ let router = new VueRouter({
         path: '/login',
         name: 'View-Login',
         component: () => import('../views/auth/View-Login.vue'),
-        meta: {
-            guest: false
-        }
       },
       {
         path: '/register',
         name: 'View-Register',
         component: () => import('../views/auth/View-Register.vue'),
-        meta: {
-            guest: false
-        }
       },
       {
         path: '/dashboard/pagina/:page',
@@ -147,8 +141,8 @@ let router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+  const session = JSON.parse(sessionStorage.getItem('vue-session-key'))
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    const session = JSON.parse(sessionStorage.getItem('vue-session-key'))
       if (session.jwt === null) {
           next({
               path: '/login',

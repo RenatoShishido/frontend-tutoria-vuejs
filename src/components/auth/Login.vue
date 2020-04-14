@@ -68,6 +68,7 @@ export default {
         .then(response => {
             this.$session.start()
             this.$session.set('jwt', response.data.token)
+            localStorage.setItem('token', response.data.token)
             AXIOS_INSTANCE.defaults.headers.common = {
               'Authorization': 'Bearer ' + response.data.token
             }
