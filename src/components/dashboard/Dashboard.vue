@@ -157,7 +157,6 @@ export default {
       this.$router.push(`/dashboard/pagina/${this.page}`);
     },
     deletarCampos(fields){
-    console.log(fields)
     tutorias
         .removerTutoria(fields)
         .then(response => {

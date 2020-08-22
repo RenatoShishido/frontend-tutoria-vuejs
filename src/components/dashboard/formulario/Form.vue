@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     newForm(){
-      console.log(this.employes.length)
       if(this.employes.length < 5){
         this.employes.push({
             radios: "1",
@@ -82,7 +81,6 @@ export default {
       this.employes.splice(index, 1)
     },
     enviarForm(){
-      console.log(this.employes)
     }
   }
 };
