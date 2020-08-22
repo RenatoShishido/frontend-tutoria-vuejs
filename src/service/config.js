@@ -4,8 +4,8 @@ const AXIOS_INSTANCE = axios.create({
   baseURL: process.env.VUE_APP_API_URL
 })
 
-const AUTH_TOKEN = `Bearer ${localStorage.getItem('jwt')}`
+const TOKEN = localStorage.getItem('token')
 
+AXIOS_INSTANCE.defaults.headers.common['Authorization'] = 'Bearer ' + TOKEN
 
-AXIOS_INSTANCE.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 export default AXIOS_INSTANCE

@@ -42,7 +42,7 @@
             <v-btn
               class="success mx-0 mt-3"
               text
-              @click="dialog = false, atualizarDashoboard()"
+              @click="dialog = false, atualizarDashoboard(fields)"
             >Alterar</v-btn>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -54,7 +54,6 @@
   </div>
 </template>
 <script>
-import tutorias from "../../../service/tutorias";
 export default {
   data() {
     return {
@@ -77,21 +76,11 @@ export default {
       const dateVar = new Date(year, month - 1, day, hours, minutes, "00");
       this.fields.data = dateVar;
     },
-    atualizarDashoboard() {
+    atualizarDashoboard(fields) {
       if (this.fields.oferecida) this.dateFormate();
 
-      tutorias
-        .updateTutoria(this.fields._id, this.fields)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes;
-          this.$store.state.texto = "Tutoria alterado com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr;
-          this.$store.state.texto = "Falha ao alterar tutoria!";
-        });
+      this.$emit('atualizartutoria', fields)
+      
     }
   }
 };

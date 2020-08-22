@@ -18,12 +18,6 @@
               <span class="body-1">Ordenar por disciplina</span>
             </v-btn>
           </v-flex>
-          <v-flex xs12 sm8 md4>
-            <v-btn dense text color="black" class="mb-4" @click="refresh(), refreshProject()">
-              <v-icon left large>mdi-refresh</v-icon>
-              <span class="body-1">Refresh</span>
-            </v-btn>
-          </v-flex>
         </v-layout>
 
 

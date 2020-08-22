@@ -14,7 +14,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red darken-1" text @click="dialog = false">Discordar</v-btn>
-            <v-btn color="green darken-1" text @click="dialog = false, removerDashboard()">Aceito</v-btn>
+            <v-btn color="green darken-1" text @click="dialog = false, removerDashboard(fields)">Aceito</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-import tutorias from "../../../service/tutorias";
 export default {
   data() {
     return {
@@ -33,21 +32,9 @@ export default {
     fields: {}
   },
   methods: {
-    
-    removerDashboard() {  
-
-      tutorias
-        .removerTutoria(this.fields._id)
-        .then(response => {
-          response;
-          this.$store.getters.snackbarRes;
-          this.$store.state.texto = "Tutoria removida com sucesso!";
-        })
-        .catch(err => {
-          err;
-          this.$store.getters.snackbarErr;
-          this.$.store.stete.texto = "Falha ao remover tutoria!";
-        });
+    removerDashboard(fields) { 
+      this.$emit('deletarcampo', fields._id)
+      
     }
   }
 };

@@ -95,15 +95,6 @@ let router = new VueRouter({
       }
       },
       {
-        path: '/admin/perfil',
-        name: 'View-adminPerfil',
-        component: () => import('../admin/pages/Perfil'),
-        meta: {
-          requiresAuth: true,
-          is_admin: true
-      }
-      },
-      {
         path: '/admin/agendados',
         name: 'View-agendados',
         component: () => import('../admin/pages/Agendados'),

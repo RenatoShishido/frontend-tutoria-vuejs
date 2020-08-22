@@ -63,24 +63,39 @@ export default {
   },
   methods: {
     enviar() {
-      tutorias
+      const email = this.fields.email
+      const palavra = email.split(/[.@]/gi)
+      if(palavra[2] === 'ufms' && palavra[3] === 'br' && palavra.length === 4){
+         tutorias
         .logar(this.fields)
         .then(response => {
             this.$session.start()
             this.$session.set('jwt', response.data.token)
             localStorage.setItem('token', response.data.token)
+            localStorage.setItem('usuario', JSON.stringify(response.data.user))
             AXIOS_INSTANCE.defaults.headers.common = {
               'Authorization': 'Bearer ' + response.data.token
             }
             this.$session.set('user',response.data.user)
-            this.$router.push('/dashboard/pagina/1')
-            this.fields = {};
+           if(response.data.user.admin) {
+             this.$router.push('/admin/administrativa')
+             this.fields = {};
+           }else {
+             this.$router.push('/dashboard/pagina/1')
+             this.fields = {};
+           }
         })
         .catch(err => {
           this.$store.getters.snackbarErr
           this.$store.state.texto = err
           this.fields = {};
         });
+      }else{
+        this.$store.getters.snackbarErr
+        this.$store.state.texto = 'Informe o e-mail institucional da ufms'
+        this.fields = {};
+      }
+     
     },
   },
 };

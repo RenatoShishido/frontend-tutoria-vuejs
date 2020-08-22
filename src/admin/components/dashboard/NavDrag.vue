@@ -14,19 +14,7 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app >
-      <v-list-item-avatar height="150px" width="100%" class="d-flex flex-column my-10">
-        <v-avatar size="100" class>
-          <div v-if="this.fields.profile === undefined">
-            <img src="../../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" >
-          </div>
-          <div v-else>
-            <img :src=link  style="width: 100%; height: 100px;">
-          </div>
-        </v-avatar>
-        <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>
-      </v-list-item-avatar>
-      <v-spacer></v-spacer>
-      <v-list flat>
+      <v-list flat class="my-12">
         <v-list-item class="my-4" v-for="item in items" :key="item.text" :to="item.route" link>
           <v-list-item-action>
             <v-icon class="black--text" :class="item.color">{{ item.icon }}</v-icon>
@@ -66,11 +54,6 @@ export default {
         route: "/admin/administrativa"
       },
       {
-        icon: "mdi-face-profile",
-        text: "Perfil",
-        route: "/admin/perfil"
-      },
-      {
         icon: "mdi-plus-circle",
         text: "Tutorias",
         route: "/admin"
@@ -97,9 +80,9 @@ export default {
   },
   methods: {
     logout(){
-      localStorage.removeItem('user')
-      localStorage.removeItem('jwt')
-      this.$router.push('/login')
+      this.$session.destroy()
+      localStorage.removeItem('token')
+      this.$router.push('/')
     },
     pickUser(){
       tutorias.listarUsers()
@@ -118,8 +101,4 @@ export default {
 };
 </script>
 
-<style>
-a{
-  text-decoration: none;
-}
-</style>
+

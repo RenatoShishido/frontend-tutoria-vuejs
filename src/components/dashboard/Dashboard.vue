@@ -21,12 +21,6 @@
               <span class="body-1">Ordenar por disciplina</span>
             </v-btn>
           </v-flex>
-          <v-flex xs12 sm8 md4>
-            <v-btn dense text color="black" class="mb-4" @click="refresh(), refreshProject()">
-              <v-icon left large>mdi-refresh</v-icon>
-              <span class="body-1">Refresh</span>
-            </v-btn>
-          </v-flex>
         </v-layout>
 
         <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
@@ -36,7 +30,7 @@
               <div class="caption grey--text">Bloco</div>
               <div class="body-1 black--text">{{ project.institution }}</div>
             </v-flex>
-            <v-flex xs12 sm4 md1>
+            <v-flex xs12 sm4 md1 class="mr-4">
               <div class="caption grey--text">Disciplina</div>
               <div class="body-1 black--text">{{ project.discipline }}</div>
             </v-flex>
@@ -44,14 +38,14 @@
               <div class="caption grey--text">Conteudo</div>
               <div class="body-1 black--text text-justify">{{ project.content }}</div>
             </v-flex>
-            <v-flex xs12 sm4 md2>
+            <v-flex xs12 sm4 md1 class="ml-4">
               <div class="caption grey--text" link>Data</div>
               <div class="body-1 black--text">{{ project.data | moment("DD/MM/YYYY") }}</div>
             </v-flex>
             <v-flex xs12 sm4 md2>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <a v-on="on" :href="`/dashboard/perfil/${project.user._id}`">
+                  <a v-on="on" @click="rotacionar(project)">
                     <div class="d-flex justify-center caption grey--text">Nome</div>
                     <div class="d-flex justify-center mt-6">
                       <v-avatar size="100">
@@ -83,19 +77,17 @@
 
             <v-flex xs6 sm4 md6 lg2 xl1  v-if="project.user._id === user._id ? true : false">
               <div class="d-flex">
-                <btnAlterarTutoria :fields="project" class="mx-4"/>
-                <btnDeletarTutoria :fields="project" />
+                <btnAlterarTutoria :fields="project" @atualizartutoria="atualizarCampos" class="mx-4"/>
+                <btnDeletarTutoria :fields="project" @deletarcampo="deletarCampos" />
               </div>
             </v-flex>
             <!-- FINAL DOS BOTOES -->
-            <div v-if="project.user.semestre <= 1 ? false: true">
               <v-list-item
                 v-if="project.user._id !== user._id ? true : false"
                 class="d-flex justify-start align-end"
               >
                 <botaoFazerTutoria :tutoria="project" />
               </v-list-item>
-            </div>
           </v-layout>
           <v-divider></v-divider>
         </v-card>
@@ -124,7 +116,7 @@ export default {
   components: {
     btnAlterarTutoria,
     botaoFazerTutoria,
-    btnDeletarTutoria
+    btnDeletarTutoria,
   },
   data() {
     return {
@@ -139,11 +131,12 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(function() {
-      this.refresh();
-    });
+    this.refresh();
   },
   methods: {
+    rotacionar(project){
+      this.$router.push(`/dashboard/perfil/${project.user._id}`)
+    },
     calcularNumeroPagina(totalPages) {
       const numeroPaginas = totalPages / 10;
       this.paginas = Math.ceil(numeroPaginas);
@@ -162,6 +155,36 @@ export default {
         .catch(err => err);
 
       this.$router.push(`/dashboard/pagina/${this.page}`);
+    },
+    deletarCampos(fields){
+    console.log(fields)
+    tutorias
+        .removerTutoria(fields)
+        .then(response => {
+          response;
+          this.refresh()
+          this.$store.getters.snackbarRes;
+          this.$store.state.texto = "Tutoria removida com sucesso!";
+        })
+        .catch(err => {
+          err;
+          this.$store.getters.snackbarErr;
+          this.$.store.stete.texto = "Falha ao remover tutoria!";
+        });
+  },
+  atualizarCampos(fields){
+    tutorias
+          .updateTutoria(fields._id, fields)
+          .then(response => {
+            response;
+            this.$store.getters.snackbarRes;
+            this.$store.state.texto = "Tutoria alterado com sucesso!";
+          })
+          .catch(err => {
+            err;
+            this.$store.getters.snackbarErr;
+            this.$store.state.texto = "Falha ao alterar tutoria!";
+          });
     }
   }
 };
@@ -179,10 +202,6 @@ export default {
 .project.Agendado {
   border-left: 4px solid tomato;
   border-right: 4px solid tomato;
-}
-a {
-  text-decoration: none;
-  color: black;
 }
 
 .zoom:hover {

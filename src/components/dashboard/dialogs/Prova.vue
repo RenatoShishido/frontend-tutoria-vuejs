@@ -19,28 +19,7 @@
       <v-card>
           <v-card-items>
             <div v-if="msg === 'Elaborar Prova' ? true : false" class="py-5 px-5">
-              <h1>Para fazer a prova precisara seguir estes passos</h1>
-              <p>Aqui voce ira criar a sua prova para seguindo estes passos a seguir</p>
-              <v-img src="../../../assets/thread-14228820-3195885822592301428.png" height="500px"></v-img>
-              <p>Aqui voce ira pegar o link na pagina em questao e enviar para a gente.</p>
-              <v-img src="../../../assets/google-forms-2.png" height="500px"></v-img>
-              <v-divider></v-divider>
-              <v-text-field
-                label="Iframe"
-                v-model="fields.iframe"
-                class="mt-10"
-                prepend-icon="mdi-file-document"
-            ></v-text-field>
-            <div class="d-flex justify-center">
-            <v-btn
-            color="purple black--text"
-            dark
-            xLarge
-            @click="enviarProva(project), dialog = false"
-            >
-            Enviar
-            </v-btn>
-            </div>
+              <Form/>
             </div>
             <div v-else>
               <div v-if="project.iframe === undefined ? true : false"
@@ -54,7 +33,7 @@
                 </p>
               </div>
               <div v-else>
-                <iframe :src=project.iframe width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+                <iframe  :src=project.iframe width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
               </div>
             </div>
           </v-card-items>
@@ -65,12 +44,16 @@
 
 <script>
 import tutorias from "../../../service/tutorias";
+import Form from "../formulario/Form";
 export default {
   name: "Prova",
   props: {
     msg: String,
     color: String,
     project: Array
+  },
+  components: {
+    Form,
   },
    data () {
       return {

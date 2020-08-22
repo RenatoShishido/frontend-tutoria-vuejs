@@ -1,8 +1,6 @@
 <template>
   <v-content>
     <v-flex xs12 sm12 md12>
-      <h1 class="d-flex justify-center align-center mt-12 subheading grey--text">Perfil</h1>
-
       <v-container>
         <v-row justify="center">
           <v-card>
@@ -139,6 +137,20 @@
         </v-row>
       </v-container>
     </v-flex>
+    <v-flex xs12 sm12 md12 lg12 xl12 class="mt-12 mx-12">
+    <h1 class="display-2">Avaliacoes</h1>
+    <div class="d-flex flex-row">
+     <v-avatar class="my-6">
+      <div v-if="this.fields.profile === undefined">
+      <img class="text-lg-center" src="../../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 50px;" />
+      </div>
+      <div v-else>
+        <img :src=link  style="width: 100%; height: 50px;">
+      </div>
+    </v-avatar>
+    <p class="my-6 mx-6">OLA ESTOU TENDO UMA DUVIDA E ISSO PRONTO</p>
+    </div>
+     </v-flex>
   </v-content>
 </template>
 
@@ -193,6 +205,7 @@ export default {
         tutorias.updateUser(this.fields._id, this.fields)
           .then(response => {
             response;
+            this.get()
           })
           .catch(err => err);
         }
@@ -213,6 +226,7 @@ export default {
         tutorias.updateUser(this.fields._id,formData,config)
           .then(response => {
             response;
+            this.get()
           })
           .catch(err => err)
       }
@@ -234,12 +248,16 @@ export default {
         return (anoAtual - rga) * 2 + 2;
       }
     }
-  }
+  },
+  watch: {
+    async $route(to, from) {
+      if (to.params.id) {
+        if (to.params.id != from.params.id) {
+          await this.get();
+        }
+      }
+    },
+  },
 };
 </script>
 
-<style>
-.altura {
-  margin-top: 5%;
-}
-</style>

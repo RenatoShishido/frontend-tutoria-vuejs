@@ -4,7 +4,7 @@
       <span>{{texto}}</span>
       <v-btn text color="white"  @click="snackbar= false">Close</v-btn>
     </v-snackbar>
-    <v-app-bar app color="purple darken-4" dark height="80">
+    <v-app-bar app color="#007cba" dark height="80">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <v-icon xLarge color="white" left>mdi-school</v-icon>
       <router-link router to="/">
@@ -123,6 +123,7 @@ export default {
   methods: {
     logout(){
       this.$session.destroy()
+      localStorage.removeItem('token')
       this.$router.push('/')
     },
     pickUser(){
@@ -144,5 +145,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -1,11 +1,11 @@
 <template>
   <v-container fill-height>
+  <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
+    <span>{{$store.state.texto}}</span>
+    <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
+  </v-snackbar>
     <v-layout align-center justify-space-around>
       <v-flex xs12 sm8 md4>
-        <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
-          <span>{{$store.state.texto}}</span>
-          <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
-        </v-snackbar>
         <v-toolbar flat>
           <v-spacer></v-spacer>
           <v-toolbar-title class="mx-4 blue--text">Register</v-toolbar-title>
@@ -61,6 +61,9 @@ export default {
   },
   methods: {
     enviar() {
+      const email = this.fields.email
+      const palavra = email.split(/[.@]/gi)
+      if(palavra[2] === 'ufms' && palavra[3] === 'br' && palavra.length === 4){
       tutorias
         .registrar(this.fields)
         .then(response => {
@@ -75,13 +78,13 @@ export default {
           this.$store.state.texto = err
           this.fields = {}
         });
+      }else{
+        this.$store.getters.snackbarErr
+        this.$store.state.texto = 'Utilize o e-mail institucional da ufms'
+        this.fields = {};
+      }
     },
   }
 };
 </script>
 
-<style>
-a {
-  text-decoration: none;
-}
-</style>
