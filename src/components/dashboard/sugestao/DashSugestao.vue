@@ -4,22 +4,11 @@
       <span>{{$store.state.texto}}</span>
       <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
     </v-snackbar>
-    <h1 class="d-flex justify-center subheading grey--text">Envie sua sugestao</h1>
     <v-container>
       <v-flex xs12 sm12 md12 lg12 xl12>
-        <v-card raised>
-          <input
-            class="caixa pa-4"
-            id="email"
-            placeholder="Email"
-            name="email"
-            type="email"
-            v-model="fields.email"
-          />
-          <v-divider></v-divider>
-          <input
-            append-icon="mdi-email"
-            class="caixa pa-4"
+        <v-card class="py-12 px-12">
+         <h1 class="d-flex justify-center black--text mb-5">Envie sua sugestao</h1>
+          <v-text-field
             id="assunto"
             placeholder="Assunto"
             type="text"
@@ -34,10 +23,10 @@
             v-model="fields.content"
             :options="editorOption"
           />
-          <v-list class="grey lighten-2 mt-10">
-            <v-btn @click="sendEmail()" class="mx-5" medium color="blue white--text ">Enviar</v-btn>
-            <v-btn @click="descartar()" medium color="blue  white--text">Descartar</v-btn>
-            <v-btn text fab color="white">
+          <v-list class="grey lighten-2 mt-10 px-5">
+            <v-btn @click="descartar()" medium outlined class="blue--text mr-5">Descartar</v-btn>
+            <v-btn @click="sendEmail()" medium color="blue white--text">Enviar</v-btn>
+            <v-btn text fab color="black">
               <v-icon size="30px">mdi-paperclip</v-icon>
             </v-btn>
           </v-list>
@@ -70,6 +59,8 @@ export default {
       this.fields = {};
     },
     sendEmail() {
+      const usuario = JSON.parse(localStorage.getItem('usuario'))
+      this.fields.email = usuario.email
       tutorias
         .sendEmail(this.fields)
         .then(response => {

@@ -1,5 +1,5 @@
 <template >
-    <v-card outlined class="px-12 py-12" :elevation="10">
+    <v-card outlined class="px-5" :elevation="10">
      <h1 class="d-flex justify-center blue--text py-4">Cadastramento de Tutoria</h1>
       <v-card-text>
         <v-form max-width="800px" class="px-3" ref="form">
@@ -51,7 +51,7 @@
               </v-flex>
             </v-row>
             <v-flex xs6 sm4 md4>
-              <v-btn text @click=" submit()" class="success" :loading="loading">Add Tutoria</v-btn>
+              <v-btn  @click="submit()" color="green" >Salvar tutoria</v-btn>
             </v-flex>
           </v-layout>
         </v-form>

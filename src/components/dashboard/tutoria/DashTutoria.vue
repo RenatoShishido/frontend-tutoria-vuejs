@@ -1,23 +1,19 @@
 <template>
   <v-content>
-    <h1 class="d-flex justify-center subheading grey--text">Dashboard</h1>
-
-    <v-container class="d-flex justify-center">
-      <v-layout class="d-flex flex-wrap justify-center align-center">
-        <v-flex xs12 sm8 md4>
-          <v-btn dense text color="black" @click="sortBy('institution')">
-            <v-icon left large>mdi-folder</v-icon>
-            <span class="body-1">Ordenar por Bloco</span>
-          </v-btn>
-        </v-flex>
-        <v-flex xs12 sm8 md4>
-          <v-btn dense text color="black" class @click="sortBy('discipline')">
-            <v-icon left large>mdi-file-document</v-icon>
-            <span class="body-1">Ordenar por disciplina</span>
-          </v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
+       <v-layout class="d-flex flex-wrap justify-center align-center py-5">
+          <v-flex xs12 sm8 md4>
+            <v-btn text class="mb-4" @click="sortBy('institution')">
+              <v-icon left xMedium color="blue">mdi-folder</v-icon>
+              <span class="body-1">Ordenar por Bloco</span>
+            </v-btn>
+          </v-flex>
+          <v-flex xs12 sm8 md4>
+            <v-btn text class="mb-4" @click="sortBy('discipline')">
+              <v-icon left xMedium color="blue">mdi-file-document</v-icon>
+              <span class="body-1">Ordenar por disciplina</span>
+            </v-btn>
+          </v-flex>
+        </v-layout>
 
     <v-container class="d-flex flex-column justify-center">
       <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.nome">
@@ -141,17 +137,9 @@ export default {
 </script>
 
 <style>
-.project.Completada {
-  border-left: 4px solid #3cd1c2;
-  border-right: 4px solid #3cd1c2;
-}
-.project.Aguardando {
-  border-left: 4px solid orange;
-  border-right: 4px solid orange;
-}
 .project.Agendado {
-  border-left: 4px solid tomato;
-  border-right: 4px solid tomato;
+  border-left: 4px solid green;
+  border-right: 4px solid green;
 }
 
 .zoom:hover {

@@ -7,9 +7,10 @@
 
       <v-btn
         :class="color"
+        class="white--text"
         @click.stop="dialog = true"
       >
-        <v-icon left>mdi-file-document</v-icon>{{msg}}
+        <v-icon left >mdi-file-document</v-icon>{{msg}}
       </v-btn>
 
     <v-dialog
@@ -26,7 +27,7 @@
               class="py-12 px-12"
               >
               <v-card-title class="display-1 d-flex justify-center">Prova nao Elaborada!!</v-card-title>
-                <p class="headline">Ola parece que o tutor ainda nao elaborou a sua prova
+                <p class="headline text-justify">Ola parece que o tutor ainda nao elaborou a sua prova
                   entre em contanto com ele para realizar a sua prova.
                   para que seja feito o relatorio e no final do semestre
                   obtenha as cargas horarias.

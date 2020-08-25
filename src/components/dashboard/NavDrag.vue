@@ -1,29 +1,36 @@
 <template>
-    <v-app-bar app color="#007cba" dark height="70">
+  <v-app-bar app color="#007cba" dark height="70">
     <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
       <span>{{texto}}</span>
       <v-btn text color="white" @click="snackbar= false">Close</v-btn>
     </v-snackbar>
-      <v-icon xLarge color="white" left>mdi-school</v-icon>
-      <router-link router to="/">
-        <h1 class="headline white--text hidden-md-and-down">TUTORIA EM PARES</h1>
-      </router-link>
-      <v-spacer />
-      <v-flex xs12 sm8 md6>
-        <Search />
-      </v-flex>
-      <v-spacer />
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn class="mr-5" icon v-bind="attrs" v-on="on">
-            <v-icon  dark>mdi-account-circle</v-icon>
-          </v-btn>
-        </template>
+    <v-icon xLarge color="white" left>mdi-school</v-icon>
+    <router-link router to="/">
+      <h1 class="headline white--text hidden-md-and-down">TUTORIA EM PARES</h1>
+    </router-link>
+    <v-spacer />
+    <v-flex xs12 sm8 md6>
+      <Search />
+    </v-flex>
+    <v-spacer />
+    <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn class="mr-5" icon v-bind="attrs" v-on="on">
+          <div v-if="link === undefined">
+            <v-icon dark>mdi-account-circle</v-icon>
+          </div>
+          <div v-else>
+            <v-avatar>
+              <img :src="link" alt="img indisponivel" />
+            </v-avatar>
+          </div>
+        </v-btn>
+      </template>
 
-         <v-list flat>
+      <v-list flat>
         <v-list-item v-for="n in 1" :key="n.title" link router :to="`/dashboard/perfil/${id}`">
           <v-list-item-action>
-            <v-icon class="black--text">mdi-face-profile</v-icon>
+            <v-icon class="blue--text">mdi-face-profile</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="black--text">Perfil</v-list-item-title>
@@ -32,10 +39,10 @@
 
         <v-list-item class="my-4" v-for="item in items" :key="item.text" :to="item.route" link>
           <v-list-item-action>
-            <v-icon class="black--text" :class="item.color">{{ item.icon }}</v-icon>
+            <v-icon class="blue--text">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title :class="item.color">{{ item.text }}</v-list-item-title>
+            <v-list-item-title class="black--text">{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="logout()" v-for="n in 1" :key="n.title" link>
@@ -47,8 +54,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      </v-menu>
-    </v-app-bar>
+    </v-menu>
+  </v-app-bar>
 </template>
 
 <script>

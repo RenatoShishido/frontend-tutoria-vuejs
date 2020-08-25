@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn fab text @click="dialog = !dialog" class="error">
+    <v-btn fab small @click="dialog = !dialog" class="error">
       <v-icon>mdi-delete</v-icon>
     </v-btn>
     <v-row justify="center" v-if="dialog === true">

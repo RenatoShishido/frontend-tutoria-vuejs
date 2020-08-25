@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn fab text @click="dialog = !dialog" class="green">
+    <v-btn fab small @click="dialog = !dialog" class="green">
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
 
