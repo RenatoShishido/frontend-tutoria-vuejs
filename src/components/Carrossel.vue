@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <v-carousel cycle height="400" max="100" hide-delimiter-background show-arrows-on-hover>
-      <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet :color="colors[i]" height="100%">
-          <v-row class="fill-height" align="center" justify="center">
-            <div class="display-3">{{ slide }} Slide</div>
-          </v-row>
-        </v-sheet>
-      </v-carousel-item>
-    </v-carousel>
-  </div>
+   <v-carousel>
+    <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+      reverse-transition="fade-transition"
+      transition="fade-transition"
+    ></v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
@@ -17,14 +15,40 @@ export default {
   name: "carrosel",
   data() {
     return {
-      colors: [
-        "indigo",
-        "warning",
-        "pink darken-2",
-        "red lighten-1",
-        "deep-purple accent-4"
-      ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+       items: [
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
+      slides: [
+        {
+          src: '../assets/logoctei-1024x700.jpg'
+        },
+        {
+          src: '../assets/20191031_093751.jpg'
+        },
+        {
+          src: "../assets/20191031_095752.jpg"
+        },
+        {
+          src: "../assets/IMG_20191101_082857.jpg"
+        }, 
+        {
+          src: "../assets/IMG_20191101_082859.jpg"
+        }
+      ]
     };
   }
 };

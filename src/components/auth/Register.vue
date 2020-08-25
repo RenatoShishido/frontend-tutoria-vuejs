@@ -6,18 +6,16 @@
   </v-snackbar>
     <v-layout align-center justify-space-around>
       <v-flex xs12 sm8 md4>
-        <v-toolbar flat>
-          <v-spacer></v-spacer>
-          <v-toolbar-title class="mx-4 blue--text">Register</v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-form>
+        <v-card  outlined class="px-12 py-6" :elevation="10">
+          <h2 class="d-flex justify-center blue--text mb-3">TUTORIA EM PARES</h2>
+          <h3 class="d-flex justify-center black--text mb-10">Register</h3>
           <v-text-field
             v-model="fields.nome"
             id="nome"
             label="Nome"
             name="nome"
             type="nome"
+            outlined
             required
           ></v-text-field>
           <v-text-field
@@ -26,6 +24,7 @@
             id="email"
             label="Email"
             name="email"
+            outlined
             required
           ></v-text-field>
 
@@ -36,15 +35,14 @@
             name="password"
             type="password"
             required
+            outlined
             @keypress.enter="enviar()"
           ></v-text-field>
-        </v-form>
-        <v-card-actions class="d-flex justify-start blue--text">
-          <v-btn color="primary" class="white--text" @click="enviar()">Cadastrar</v-btn>
-        </v-card-actions>
-        <v-card-actions class="d-flex justify-center blue--text">
           <a class="body-1 blue--text"  href="/login">Tenho uma conta</a>
-        </v-card-actions>
+          <v-card-actions class="d-flex justify-center mt-5">
+          <v-btn color="primary" class="white--text" @click="enviar()">Cadastrar</v-btn>  
+          </v-card-actions>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>

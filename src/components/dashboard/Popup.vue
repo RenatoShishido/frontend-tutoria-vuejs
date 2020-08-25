@@ -1,29 +1,24 @@
 <template >
-  <v-dialog max-width="700px" v-model="dialog">
-    <template v-slot:activator="{ on }">
-        <v-btn text v-on="on" @click="dialog = !dialog" class="green black--text">
-      <v-icon left>mdi-plus-circle</v-icon>Tutorias
-    </v-btn>
-    </template>
-    <v-card>
-      <v-card-title>
-        <h2>{{msg}}</h2>
-      </v-card-title>
+    <v-card outlined class="px-12 py-12" :elevation="10">
+     <h1 class="d-flex justify-center blue--text py-4">Cadastramento de Tutoria</h1>
       <v-card-text>
         <v-form max-width="800px" class="px-3" ref="form">
           <v-text-field
             v-model="fields.institution"
             label="Bloco"
+            outlined
             prepend-icon="mdi-castle"
           ></v-text-field>
           <v-text-field
             v-model="fields.discipline"
             label="Disciplina"
+            outlined
             prepend-icon="mdi-folder"
           ></v-text-field>
           <v-textarea
             v-model="fields.content"
             label="Dúvida ou Conteúdo"
+            outlined
             prepend-icon="mdi-table-edit"
            
           ></v-textarea>
@@ -47,6 +42,7 @@
                   :items="items"
                   item-text="opcao"
                   item-value="value"
+                  prepend-icon="mdi-table-edit"
                   @change="showDateTime =fields.oferecida"
                   dense
                   outlined
@@ -61,11 +57,9 @@
         </v-form>
       </v-card-text>
     </v-card>
-  </v-dialog>
 </template>
 
 <script>
-import tutorias from "../../service/tutorias";
 export default {
   props: {
     msg: String,
@@ -105,34 +99,11 @@ export default {
 
     },
     submit() {
-      this.loading = true;
-      if(this.fields.oferecida === undefined){
-        this.loading = false
-        return this.$emit('refreshProject')
-      }
-    
       if(this.fields.oferecida)
       this.dateFormate()
-
-      tutorias
-        .createTutoria(this.fields)
-        .then(response => {
-          response
-          setTimeout(() => {
-            this.loading = false;
-          }, 500);
-          this.dialog = false;
-          this.clearMemory();
-          this.$emit("projectAdded");
-          
-        })
-        .catch(err => {
-          err;
-          this.loading = false;
-          this.dialog = false;
-          this.clearMemory();
-          this.$emit("projectFalied");
-        });
+      this.$emit('adicionarTutoria', this.fields)
+      this.clearMemory()
+     
     },
     clearMemory() {
       this.fields = {};

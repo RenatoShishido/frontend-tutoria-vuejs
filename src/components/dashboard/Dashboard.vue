@@ -7,7 +7,12 @@
 
     <v-flex xs12 sm12 md12>
       <v-container>
-        <h1 class="d-flex justify-center subheading grey--text">Dashboard</h1>
+        <Popup
+          @projectAdded="snackbar=true, color='teal lighten-2', texto='Tutoria cadastrada com Sucesso!'"
+          @projectFalied="snackbar=true, color='red', texto='Nao foi possivel cadastrar a tutoria!'"
+          @refreshProject="snackbar=true, color='red', texto='Voce precisar selecionar o tipo da tutoria!'"
+          @adicionarTutoria="adicionar"
+        />
         <v-layout class="d-flex flex-wrap justify-center align-center">
           <v-flex xs12 sm8 md4>
             <v-btn dense text color="black" class="mb-4" @click="sortBy('institution')">
@@ -108,6 +113,7 @@
 
 <script>
 import tutorias from "../../service/tutorias";
+import Popup from "../dashboard/Popup"
 import botaoFazerTutoria from "../dashboard/botoes/botaoFazerTutoria";
 import btnAlterarTutoria from "../dashboard/botoes/btnAlterarTutoria";
 import btnDeletarTutoria from "../dashboard/botoes/btnDeletarTutoria";
@@ -117,6 +123,7 @@ export default {
     btnAlterarTutoria,
     botaoFazerTutoria,
     btnDeletarTutoria,
+    Popup
   },
   data() {
     return {
@@ -184,6 +191,18 @@ export default {
             this.$store.getters.snackbarErr;
             this.$store.state.texto = "Falha ao alterar tutoria!";
           });
+    },
+    adicionar(fields){
+       tutorias
+        .createTutoria(fields)
+        .then(response => {
+          response
+          this.refresh()
+          
+        })
+        .catch(err => {
+          err;
+        });
     }
   }
 };

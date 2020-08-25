@@ -1,51 +1,29 @@
 <template>
-  <div>
+    <v-app-bar app color="#007cba" dark height="70">
     <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
       <span>{{texto}}</span>
-      <v-btn text color="white"  @click="snackbar= false">Close</v-btn>
+      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
     </v-snackbar>
-    <v-app-bar app color="#007cba" dark height="80">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="white" />
       <v-icon xLarge color="white" left>mdi-school</v-icon>
       <router-link router to="/">
-        <v-toolbar-title class="headline white--text hidden-md-and-down">Tutoria</v-toolbar-title>
+        <h1 class="headline white--text hidden-md-and-down">TUTORIA EM PARES</h1>
       </router-link>
       <v-spacer />
-      <v-row class="ml-12">
-        <v-flex xs12 sm8 md6>
-          <Search/>
-        </v-flex>
-      </v-row>
-    </v-app-bar>
+      <v-flex xs12 sm8 md6>
+        <Search />
+      </v-flex>
+      <v-spacer />
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn class="mr-5" icon v-bind="attrs" v-on="on">
+            <v-icon  dark>mdi-account-circle</v-icon>
+          </v-btn>
+        </template>
 
-    <v-navigation-drawer v-model="drawer" app >
-      <div>
-      <v-list-item-avatar height="150px"  width="100%" class="d-flex flex-column my-10">
-        <v-avatar size="100" class>
-          <div v-if="this.fields.profile === undefined">
-          <img class="text-lg-center" src="../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 100px;" />
-          </div>
-          <div v-else>
-            <img :src=link  style="width: 100%; height: 100px;">
-          </div>
-        </v-avatar>
-        <p class="d-flex justify-center black--text subheading mt-1">{{fields.nome}}</p>
-      </v-list-item-avatar>
-      </div>
-      <v-spacer></v-spacer>
-      <v-list-item class="d-flex justify-center mb-6">
-        <Popup
-          @projectAdded="snackbar=true, color='teal lighten-2', texto='Tutoria cadastrada com Sucesso!'"
-          @projectFalied="snackbar=true, color='red', texto='Nao foi possivel cadastrar a tutoria!'"
-          @refreshProject="snackbar=true, color='red', texto='Voce precisar selecionar o tipo da tutoria!'"
-        />
-      </v-list-item>
-      <v-list flat>
-
-         <v-list-item   v-for="n in 1" :key="n.title"  link
-         router :to="`/dashboard/perfil/${id}`" >
+         <v-list flat>
+        <v-list-item v-for="n in 1" :key="n.title" link router :to="`/dashboard/perfil/${id}`">
           <v-list-item-action>
-            <v-icon class="black--text" >mdi-face-profile</v-icon>
+            <v-icon class="black--text">mdi-face-profile</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="black--text">Perfil</v-list-item-title>
@@ -60,31 +38,26 @@
             <v-list-item-title :class="item.color">{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="logout()"  v-for="n in 1" :key="n.title"  link>
+        <v-list-item @click="logout()" v-for="n in 1" :key="n.title" link>
           <v-list-item-action>
-            <v-icon class="red--text" >mdi-logout</v-icon>
+            <v-icon class="red--text">mdi-logout</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="red--text">Logout</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-
       </v-list>
-    </v-navigation-drawer>
-
-  </div>
+      </v-menu>
+    </v-app-bar>
 </template>
 
 <script>
-import Popup from "./Popup";
-import Search from "../search/SearchComponent"
-import tutorias from '../../service/tutorias'
+import Search from "../search/SearchComponent";
+import tutorias from "../../service/tutorias";
 export default {
   name: "NavDrag",
   components: {
-    Popup,
-    Search
+    Search,
   },
   data: () => ({
     drawer: null,
@@ -92,55 +65,56 @@ export default {
     fields: {},
     color: "",
     texto: "",
-    link: '',
-    id: '',
+    link: "",
+    id: "",
     items: [
       {
         icon: "mdi-plus-circle",
         text: "Tutorias",
-        route: `/dashboard/pagina/1`
+        route: `/dashboard/pagina/1`,
       },
       {
         icon: "mdi-clock",
         text: "Tutorias agendadas",
-        route: `/dashboard/tutorias/pagina/1`
+        route: `/dashboard/tutorias/pagina/1`,
       },
       {
         icon: "mdi-face",
         text: "Tutores",
-        route: "/dashboard/tutores"
+        route: "/dashboard/tutores",
       },
       {
         icon: "mdi-email",
         text: "Enviar sugestao",
-        route: "/dashboard/sugestao"
+        route: "/dashboard/sugestao",
       },
     ],
   }),
-  mounted(){
-    this.pickUser()
+  mounted() {
+    this.pickUser();
   },
   methods: {
-    logout(){
-      this.$session.destroy()
-      localStorage.removeItem('token')
-      this.$router.push('/')
+    logout() {
+      this.$session.destroy();
+      localStorage.removeItem("token");
+      this.$router.push("/");
     },
-    pickUser(){
-      tutorias.listarUsers()
-        .then(response => {
-         this.user = this.$session.get('user')
-         this.id = this.user._id
-          response.forEach(element => {
-            if(this.user._id === element._id){
-             this.fields = element
+    pickUser() {
+      tutorias
+        .listarUsers()
+        .then((response) => {
+          this.user = this.$session.get("user");
+          this.id = this.user._id;
+          response.forEach((element) => {
+            if (this.user._id === element._id) {
+              this.fields = element;
             }
           });
-          this.link = this.fields.profile
+          this.link = this.fields.profile;
         })
-        .catch(err => err)
-    }
-  }
+        .catch((err) => err);
+    },
+  },
 };
 </script>
 

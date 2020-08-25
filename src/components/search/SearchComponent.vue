@@ -1,18 +1,16 @@
 <template>
   <div>
-    <div class="d-flex aling-center mt-10">
       <v-text-field
-        class="black--text"
+        class=" mt-8"
         label="Search"
-        outlined
         v-model="query"
+        outlined
         @blur="searchResultsVisible = false"
         @focus="searchResultsVisible = true"
         @keydown.esc="searchResultsVisible = false"
         @keyup="performSearch()"
         @keyup.enter="take(searchResult)"
       />
-    </div>
     <div class="search seachResults" v-if="searchResults.length === 0 ? false : true">
       <v-card link @click="take(searchResult)" class="white" hover v-for="searchResult in searchResults" :key="searchResult.id">
         <v-card-title class="black--text">{{searchResult.item.institution}}</v-card-title>

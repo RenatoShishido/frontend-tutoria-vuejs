@@ -1,17 +1,14 @@
 <template>
-  <v-app-bar app color="purple darken-4" dark height="80">
-      <a href="/"><v-icon xLarge color="white" left >mdi-school</v-icon></a>
+  <v-app-bar app color="#007cba" dark height="50">
+      <a href="/" class="d-flex flex-row">
+      <v-icon xLarge color="white" left >mdi-school</v-icon>
         <v-toolbar-title class="headline white--text hidden-md-and-down">
-           <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 100%; height: 80px;">
+           TUTORIA EM PARES
         </v-toolbar-title>
+        </a>
       <v-spacer />
-      <v-row class="d-flex justify-end">
-        <div class="mx-4">
-        <v-btn class="purple darken-4 " text xLarge  router to="/login">Login</v-btn>
-        </div>
-        <div class="mx-4">
-        <v-btn  class="purple darken-4 " text xLarge router to="/register">Register</v-btn>
-        </div>
+      <v-row class="d-flex justify-end px-10">
+        <v-btn color="#007cba" class="white--text"  :elevation="10" xMedium  router to="/login">Fazer login</v-btn>
       </v-row>
     </v-app-bar>
 </template>
@@ -29,7 +26,5 @@ export default {
 </script>
 
 <style>
-a {
-  text-decoration: none;
-}
+
 </style>

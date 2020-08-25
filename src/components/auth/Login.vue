@@ -10,36 +10,25 @@
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs12 sm8 md4>
-        <v-toolbar flat>
-          <v-spacer></v-spacer>
-          <v-toolbar-title class="d-flex justify-center blue--text">
-            <img src="../../assets/logosos.png" alt="logoTutoria"  style="width: 100%; height: 80px;">
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-
-        <v-form>
-          <v-text-field id="email" label="Email" name="email" type="email" v-model="fields.email"></v-text-field>
+        <v-card outlined class="px-12 py-12" :elevation="10">
+          <h2 class="d-flex justify-center blue--text">TUTORIA EM PARES</h2>
+          <h3 class="d-flex justify-center mb-5">Fazer login</h3>
+          <v-text-field id="email" label="Email" name="email" type="email" outlined v-model="fields.email"></v-text-field>
           <v-text-field
             id="password"
             label="Password"
             name="password"
             type="password"
+            outlined
             v-model="fields.password"
             @keypress.enter="enviar()"
           ></v-text-field>
-          <v-card-actions class="d-flex justify-start">
-            <v-btn color="blue" class="white--text" @click="enviar()">Acessar</v-btn>
+          <a class="body-1 blue--text"  href="/forgot_password">Esqueci minha senha?</a>
+          <v-card-actions class="d-flex justify-space-around mt-5">
+          <v-btn color="blue" outlined class="white--text" href="/register">Criar conta</v-btn>   
+          <v-btn color="blue" class="white--text" @click="enviar()">Acessar</v-btn>  
           </v-card-actions>
-        </v-form>
-        <v-container>
-          <v-card-actions class="d-flex justify-center">
-            <a class="body-1 blue--text"  href="/register">Nao tenho conta</a>
-          </v-card-actions>
-          <v-card-actions class="d-flex justify-center">
-            <a class="body-1 blue--text"  href="/forgot_password">Esqueci minha senha</a>
-          </v-card-actions>
-        </v-container>
+      </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -63,6 +52,11 @@ export default {
   },
   methods: {
     enviar() {
+      if(this.fields.password === undefined && this.fields.email === undefined) {
+        this.$store.getters.snackbarErr
+        this.$store.state.texto = 'Informe o e-mail institucional da UFMS e a Senha'
+        this.fields = {};
+      } 
       const email = this.fields.email
       const palavra = email.split(/[.@]/gi)
       if(palavra[2] === 'ufms' && palavra[3] === 'br' && palavra.length === 4){
