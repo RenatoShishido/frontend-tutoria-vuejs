@@ -1,8 +1,8 @@
 <template>
-  <v-main>
+  <v-content>
     <v-flex class="d-flex flex-row px-5">
-      <v-flex xs12 sm6 md6 xl6 class="px-5 py-5">
-        <v-card :elevation="15" class="py-12 px-12" height="1000">
+      <v-flex xs12 sm6 md6 lg6 xl6 class="px-5 py-5">
+        <v-card :elevation="15" class="py-12 px-12" height="100%">
           <h2 class="text-wrap blue--text display-2 font-weight-black my-12">Objetivos Gerais</h2>
           <v-divider class="black"></v-divider>
           <p class="text-wrap text-justify black--text headline my-12">
@@ -18,8 +18,8 @@
           />
         </v-card>
       </v-flex>
-      <v-flex xs12 sm6 md6 xl6 class="px-5 py-5">
-        <v-card :elevation="15" class="py-12 px-12" height="1000">
+      <v-flex xs12 sm6 md6 lg6 xl6 class="px-5 py-5">
+        <v-card :elevation="15" class="py-12 px-12" height="100%">
           <img
             src="../../assets/lapis.png"
             alt="content"
@@ -37,7 +37,7 @@
         </v-card>
       </v-flex>
     </v-flex>
-  </v-main>
+  </v-content>
 </template>
 
 <script>

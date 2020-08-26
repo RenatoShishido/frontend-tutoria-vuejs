@@ -27,7 +27,7 @@
             </v-btn>
           </v-flex>
         </v-layout>
-
+      
         <v-card flat class="mb-10 zoom" v-for="project in projects" :key="project.id">
           <v-divider></v-divider>
           <v-layout row wrap :class="`d-flex flex-wrap pa-3 project ${project.status}`">
@@ -111,6 +111,7 @@
         </div>
       </v-container>
     </v-flex>
+            
   </v-content>
 </template>
 
