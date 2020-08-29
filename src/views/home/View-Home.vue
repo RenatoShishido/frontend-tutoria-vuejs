@@ -9,8 +9,8 @@
 
 
 <script>
-import Nav from '../../components/main/Nav'
-import Content from "../../components/main/Content";
+import Nav from '../../components/core/navBar'
+import Content from "../../components/content";
 export default {
   name: "View-Home",
   components: {

@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import VueFuse from 'vue-fuse'
 import VueSession from 'vue-session'
+
 Vue.use(VueSession)
 
 Vue.use(VueFuse)

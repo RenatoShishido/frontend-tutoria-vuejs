@@ -1,16 +1,12 @@
 <template>
   <v-app-bar app color="#007cba" dark height="70">
-    <v-snackbar v-model="snackbar" :timeout="4000" top :color="color">
-      <span>{{texto}}</span>
-      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
-    </v-snackbar>
     <v-icon xLarge color="white" left>mdi-school</v-icon>
     <router-link router to="/">
       <h1 class="headline white--text hidden-md-and-down">TUTORIA EM PARES</h1>
     </router-link>
     <v-spacer />
     <v-flex xs12 sm8 md6>
-      <Search />
+      <Search v-if="showSearch" />
     </v-flex>
     <v-spacer />
     <v-menu offset-y>
@@ -99,6 +95,11 @@ export default {
   }),
   mounted() {
     this.pickUser();
+  },
+  computed: {
+    showSearch() {
+      return this.$store.getters['user/GettersId'] != null
+    }
   },
   methods: {
     logout() {

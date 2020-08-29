@@ -1,21 +1,26 @@
 <template>
   <v-app>
-    <router-view />
+    <snack-bar />
+    <v-content>
+    <router-view/>
+    </v-content>
     <Footer />
   </v-app>
 </template>
 
 <script>
-import Footer from "./components/main/Footer";
+import SnackBar from './components/core/snackBar'
+import Footer from "./components/core/footer";
 export default {
   name: "App",
   components: {
-    Footer
+    Footer,
+    SnackBar,
+  },
+  mounted() {
+    this.$store.dispatch('user/loadLoggedUser')
   }
 };
 </script>
 <style>
-a{
-  text-decoration: none;
-}
 </style>

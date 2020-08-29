@@ -11,7 +11,7 @@
             e do desenvolvimento dos cademicos entre si, por meio de uma relacao de estudo conjunto.
           </p>
           <img
-            src="../../assets/content.png"
+            src="../assets/content.png"
             alt="content"
             style="width: 100%; heigth:100%;"
             class="d-flex flex-wrap"
@@ -21,7 +21,7 @@
       <v-flex xs12 sm6 md6 lg6 xl6 class="px-5 py-5">
         <v-card :elevation="15" class="py-12 px-12" height="100%">
           <img
-            src="../../assets/lapis.png"
+            src="../assets/lapis.png"
             alt="content"
             style="width: 100%; heigth:100%;"
             class="d-flex flex-wrap"
@@ -43,18 +43,16 @@
 <script>
 export default {
   name: "Content",
+  components: {
+  },
   data() {
     return {};
+  },
+  methods: {
   },
 };
 </script>
 
 <style>
-.color {
-  color: #311b92;
-}
-.imagem {
-  background-size: 100%;
-  width: 100%;
-}
+
 </style>

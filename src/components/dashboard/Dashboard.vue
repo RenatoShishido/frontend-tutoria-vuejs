@@ -1,16 +1,8 @@
 <template>
   <v-content>
-    <v-snackbar v-model="$store.state.snackbar" :timeout="4000" top :color="$store.state.color">
-      <span>{{$store.state.texto}}</span>
-      <v-btn text color="white" @click="$store.state.snackbar= false">Close</v-btn>
-    </v-snackbar>
-
     <v-flex xs12 sm12 md12>
       <v-container>
-        <Popup
-          @projectAdded="snackbar=true, color='teal lighten-2', texto='Tutoria cadastrada com Sucesso!'"
-          @projectFalied="snackbar=true, color='red', texto='Nao foi possivel cadastrar a tutoria!'"
-          @refreshProject="snackbar=true, color='red', texto='Voce precisar selecionar o tipo da tutoria!'"
+        <registerTutoria
           @adicionarTutoria="adicionar"
         />
         <v-layout class="d-flex flex-wrap justify-center align-center py-5">
@@ -117,7 +109,7 @@
 
 <script>
 import tutorias from "../../service/tutorias";
-import Popup from "../dashboard/Popup";
+import registerTutoria from "../dashboard/registerTutoria";
 import botaoFazerTutoria from "../dashboard/botoes/botaoFazerTutoria";
 import btnAlterarTutoria from "../dashboard/botoes/btnAlterarTutoria";
 import btnDeletarTutoria from "../dashboard/botoes/btnDeletarTutoria";
@@ -127,7 +119,7 @@ export default {
     btnAlterarTutoria,
     botaoFazerTutoria,
     btnDeletarTutoria,
-    Popup,
+    registerTutoria,
   },
   data() {
     return {
@@ -164,7 +156,7 @@ export default {
         .then((response) => {
           this.projects = response.data.data;
           this.calcularNumeroPagina(response.data.count);
-          this.user = this.$session.get("user");
+          this.user = this.$store.getters['user/GetUser']
         })
         .catch((err) => err);
 

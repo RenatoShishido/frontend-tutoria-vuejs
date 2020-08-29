@@ -14,7 +14,7 @@ class Auth {
     try {
       const response = await AXIOS_INSTANCE.post('/auth/authenticate', fields)
 
-      return response
+      return response.data
     } catch (err) {
       throw err.response.data;
 
@@ -25,6 +25,15 @@ class Auth {
       const response = await AXIOS_INSTANCE.post('/auth/forgot_password', fields)
 
       return response
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+  static async resetPassword(fields) {
+    try {
+      const response = await AXIOS_INSTANCE.post('/auth/reset_password', fields)
+
+      return response.data
     } catch (err) {
       throw err.response.data;
     }

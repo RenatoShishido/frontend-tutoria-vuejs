@@ -20,7 +20,7 @@
       <v-card>
           <v-card-items>
             <div v-if="msg === 'Elaborar Prova' ? true : false" class="py-5 px-5">
-              <Form/>
+             
             </div>
             <div v-else>
               <div v-if="project.iframe === undefined ? true : false"
@@ -45,7 +45,6 @@
 
 <script>
 import tutorias from "../../../service/tutorias";
-import Form from "../formulario/Form";
 export default {
   name: "Prova",
   props: {
@@ -54,7 +53,6 @@ export default {
     project: Array
   },
   components: {
-    Form,
   },
    data () {
       return {
