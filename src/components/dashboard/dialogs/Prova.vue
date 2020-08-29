@@ -2,10 +2,9 @@
   <v-row justify="center">
       <v-btn
         :class="color"
-        class="white--text"
         @click.stop="dialog = true"
       >
-        <v-icon left >mdi-file-document</v-icon>{{msg}}
+        <v-icon left>mdi-file-document</v-icon>{{msg}}
       </v-btn>
 
     <v-dialog
@@ -15,21 +14,42 @@
       <v-card>
           <v-card-items>
             <div v-if="msg === 'Elaborar Prova' ? true : false" class="py-5 px-5">
-             
+              <h1>Para fazer a prova precisara seguir estes passos</h1>
+              <p>Aqui voce ira criar a sua prova para seguindo estes passos a seguir</p>
+              <v-img src="../../../assets/thread-14228820-3195885822592301428.png" height="500px"></v-img>
+              <p>Aqui voce ira pegar o link na pagina em questao e enviar para a gente.</p>
+              <v-img src="../../../assets/google-forms-2.png" height="500px"></v-img>
+              <v-divider></v-divider>
+              <v-text-field
+                label="Iframe"
+                v-model="fields.iframe"
+                class="mt-10"
+                prepend-icon="mdi-file-document"
+            ></v-text-field>
+            <div class="d-flex justify-center">
+            <v-btn
+            color="purple black--text"
+            dark
+            xLarge
+            @click="enviarProva(project), dialog = false"
+            >
+            Enviar
+            </v-btn>
+            </div>
             </div>
             <div v-else>
               <div v-if="project.iframe === undefined ? true : false"
               class="py-12 px-12"
               >
               <v-card-title class="display-1 d-flex justify-center">Prova nao Elaborada!!</v-card-title>
-                <p class="headline text-justify">Ola parece que o tutor ainda nao elaborou a sua prova
+                <p class="headline">Ola parece que o tutor ainda nao elaborou a sua prova
                   entre em contanto com ele para realizar a sua prova.
                   para que seja feito o relatorio e no final do semestre
                   obtenha as cargas horarias.
                 </p>
               </div>
               <div v-else>
-                <iframe  :src="project.iframe" width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+                <iframe :src="project.iframe" width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
               </div>
             </div>
           </v-card-items>
@@ -47,8 +67,6 @@ export default {
     color: String,
     project: Array
   },
-  components: {
-  },
    data () {
       return {
         tutoria: {},
@@ -56,9 +74,6 @@ export default {
         includeFiles: true,
         fields: {},
         user: {},
-        snackbar: false,
-        cor: '',
-        texto: '',
       }
     },
     methods: {
@@ -68,16 +83,18 @@ export default {
       tutorias.updateTutoria(project._id, project)
         .then(response => {
           response
-          this.snackbar = true
-          this.cor = 'green'
-          this.texto = 'Prova elaborada com sucesso!!'
+           this.$store.dispatch("snackbar/show", {
+            content: "Prova elaborada com sucesso!",
+            color: "green"
+          });
           this.fields = {}
         })
         .catch(err => {
           err
-          this.snackbar = true
-          this.cor = 'red'
-          this.texto = 'Falha ao elabor a prova!!'
+           this.$store.dispatch("snackbar/show", {
+            content: "Falha ao elaborar a prova!",
+            color: "error"
+          });
           this.fields = {}
         })
       },

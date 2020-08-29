@@ -86,7 +86,7 @@
           </v-layout>
           <v-divider></v-divider>
         </v-card>
-        <div class="text-center">
+        <div class="text-center" v-if="paginas !== 0">
           <a @click="refresh(), offset()">
             <v-pagination v-model="page" :value="page" :length="paginas"></v-pagination>
           </a>
