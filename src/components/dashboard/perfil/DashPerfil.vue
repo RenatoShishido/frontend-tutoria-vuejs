@@ -10,10 +10,10 @@
 
                 <v-spacer></v-spacer>
                 <v-btn
-                v-if="user._id === userParam ? true : false"
-                fab 
-                small 
-                @click="isEditing = !isEditing"
+                  v-if="$store.getters['user/GettersId'] === userParam ? true : false"
+                  fab
+                  small
+                  @click="isEditing = !isEditing"
                 >
                   <v-icon v-if="isEditing">mdi-close</v-icon>
                   <v-icon v-else>mdi-pencil</v-icon>
@@ -126,31 +126,17 @@
               </v-flex>
             </v-list>
             <v-flex xs12 sm12 md12 lg12 xl12>
-              <div v-if="this.fields.profile === undefined">
+              <div v-if="$store.getters['user/GettersProfile'] === undefined">
                 <v-img src="../../../assets/silhueta-interrogação.jpg" height="500px" width="100%"></v-img>
               </div>
               <div v-else>
-                <v-img :src="link" height="500px" width="100%"></v-img>
+                <v-img :src="$store.getters['user/GettersProfile']" height="500px" width="100%"></v-img>
               </div>
             </v-flex>
           </v-card>
         </v-row>
       </v-container>
     </v-flex>
-    <v-flex xs12 sm12 md12 lg12 xl12 class="mt-12 mx-12">
-    <h1 class="display-2">Avaliacoes</h1>
-    <div class="d-flex flex-row">
-     <v-avatar class="my-6">
-      <div v-if="this.fields.profile === undefined">
-      <img class="text-lg-center" src="../../../assets/silhueta-interrogação.jpg" style="width: 100%; height: 50px;" />
-      </div>
-      <div v-else>
-        <img :src=link  style="width: 100%; height: 50px;">
-      </div>
-    </v-avatar>
-    <p class="my-6 mx-6">OLA ESTOU TENDO UMA DUVIDA E ISSO PRONTO</p>
-    </div>
-     </v-flex>
   </v-content>
 </template>
 
@@ -161,23 +147,19 @@ export default {
   name: "DashPerfil",
   data() {
     return {
-      hasSaved: false,
       isEditing: null,
       fields: {},
-      link: "",
       semestre: "",
-      user: {},
-      userParam: {},
+      userParam: {}
     };
   },
   mounted() {
-    this.get();
+    this.refresh();
   },
   methods: {
-    get() {
-      this.user = this.$session.get('user')
-      var params = location.pathname.split("/");
-      this.userParam = params[3]
+    refresh() {
+      const params = location.pathname.split("/");
+      this.userParam = params[3];
       tutorias
         .listarPerfil(params[3])
         .then(response => {
@@ -192,8 +174,6 @@ export default {
           } else {
             this.semestre = this.calcularSemestre(rga);
           }
-
-          this.link = this.fields.profile;
         })
         .catch(err => err);
     },
@@ -201,34 +181,35 @@ export default {
       this.isEditing = !this.isEditing;
       this.hasSaved = true;
       this.fields.semestre = this.semestre;
-            if(this.file === undefined){
-        tutorias.updateUser(this.fields._id, this.fields)
+      if (this.file === undefined) {
+        tutorias
+          .updateUser(this.fields._id, this.fields)
           .then(response => {
             response;
-            this.get()
+            this.get();
           })
           .catch(err => err);
-        }
-      else{
+      } else {
         let config = {
-        headers: {
-          'Accept': '',
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      let formData = new FormData()
-      formData.append("file", this.file);
-      formData.append("nome",  this.fields.nome);
-      formData.append("email",  this.fields.email);
-      formData.append("rga",  this.fields.rga);
-      formData.append("telefone",  this.fields.telefone);
-      formData.append("semestre", this.fields.semestre);
-        tutorias.updateUser(this.fields._id,formData,config)
+          headers: {
+            Accept: "",
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        let formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("nome", this.fields.nome);
+        formData.append("email", this.fields.email);
+        formData.append("rga", this.fields.rga);
+        formData.append("telefone", this.fields.telefone);
+        formData.append("semestre", this.fields.semestre);
+        tutorias
+          .updateUser(this.fields._id, formData, config)
           .then(response => {
             response;
-            this.get()
+            this.get();
           })
-          .catch(err => err)
+          .catch(err => err);
       }
     },
     handleFileUpload() {
@@ -253,11 +234,11 @@ export default {
     async $route(to, from) {
       if (to.params.id) {
         if (to.params.id != from.params.id) {
-          await this.get();
+          await this.refresh();
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

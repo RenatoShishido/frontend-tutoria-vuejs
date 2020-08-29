@@ -7,7 +7,11 @@ export default {
       if(loggedUser)
         commit('setLoggedUser', loggedUser)
     } catch (error) {
-      console.log(`store/user/actions->loadLoggedUser():<<${error}>>`)
+
+      throw {
+        error: error,
+        message: `store/user/actions->loadLoggedUser():<<${error}>>`
+      } 
     }
   },
   async chargeLoginUser( { commit }, payload) {
@@ -18,8 +22,10 @@ export default {
         commit("setLoggedUser", user)
       
     } catch (error) {
-      console.log(`store/user/actions->chargeLoginUser():<<${error}>>`)
-      throw error
+      throw {
+        error: error,
+        message: `store/user/actions->chargeLoginUser():<<${error}>>`
+      }
     }
   },
   async registerUser({ commit }, payload) {
@@ -28,8 +34,10 @@ export default {
        commit
 
     } catch (error) {
-      console.log(`store/user/actions->chargeLoginUser():<<${error}>>`)
-      throw error
+      throw {
+        error: error,
+        message: `store/user/actions->registerUser():<<${error}>>`
+      }
     }
   },
   async forgotPasswordUser({ commit }, payload) {
@@ -38,8 +46,10 @@ export default {
        commit
 
     } catch (error) {
-      console.log(`store/user/actions->chargeLoginUser():<<${error}>>`)
-      throw error
+      throw {
+        error: error,
+        message: `store/user/actions->forgotPasswordUser():<<${error}>>`
+      }
     }
   },
   async resetPasswordUser({ commit }, payload) {
@@ -48,8 +58,21 @@ export default {
       commit
 
    } catch (error) {
-     console.log(`store/user/actions->chargeLoginUser():<<${error}>>`)
-     throw error
+    throw {
+      error: error,
+      message: `store/user/actions->resetPasswordUser():<<${error}>>`
+    }
+   }
+  },
+  logoutUser({ commit }) {
+    try {
+      commit('loggout')
+
+   } catch (error) {
+    throw {
+      error: error,
+      message: `store/user/actions->logoutUser():<<${error}>>`
+    }
    }
   }
 }

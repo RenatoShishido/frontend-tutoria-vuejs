@@ -1,24 +1,25 @@
 <template>
   <v-app>
+    <navBar />
     <snack-bar />
-    <v-content>
-    <router-view/>
-    </v-content>
+    <router-view />
     <Footer />
   </v-app>
 </template>
 
 <script>
-import SnackBar from './components/core/snackBar'
+import navBar from "./components/core/navBar";
+import SnackBar from "./components/core/snackBar";
 import Footer from "./components/core/footer";
 export default {
   name: "App",
   components: {
     Footer,
     SnackBar,
+    navBar
   },
   mounted() {
-    this.$store.dispatch('user/loadLoggedUser')
+    this.$store.dispatch("user/loadLoggedUser");
   }
 };
 </script>

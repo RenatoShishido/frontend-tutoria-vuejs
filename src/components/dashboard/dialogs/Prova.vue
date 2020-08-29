@@ -1,10 +1,5 @@
 <template>
   <v-row justify="center">
-    <v-snackbar v-model="snackbar" :timeout="4000" top :color="cor">
-      <span>{{texto}}</span>
-      <v-btn text color="white" @click="snackbar= false">Close</v-btn>
-    </v-snackbar>
-
       <v-btn
         :class="color"
         class="white--text"
@@ -34,7 +29,7 @@
                 </p>
               </div>
               <div v-else>
-                <iframe  :src=project.iframe width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+                <iframe  :src="project.iframe" width="1000" height="1346" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
               </div>
             </div>
           </v-card-items>

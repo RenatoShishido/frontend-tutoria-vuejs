@@ -11,7 +11,7 @@ export default {
   },
   methods: {
       doTutoriaUpdate(tutoria) {
-      const user = this.$session.get('user');
+      const user = this.$store.getters['user/GetUser'];
       tutoria.status = "Agendado";
       tutoria.tutor = user._id
       this.$emit("updateTutoria", tutoria)

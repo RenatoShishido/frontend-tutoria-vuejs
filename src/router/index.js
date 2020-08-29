@@ -40,7 +40,7 @@ let router = new VueRouter({
       }
     },
     {
-      path: '/dashboard/tutores',
+      path: '/dashboard/tutores/pagina/:page',
       name: 'View-DashTutores',
       component: () => import('../views/dashboard/View-Tutores'),
       meta: {

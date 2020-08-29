@@ -1,17 +1,14 @@
 <template>
   <v-app>
-    <NavDrag />
     <DashSugestao />
   </v-app>
 </template>
 
 <script>
-import NavDrag from "../../components/dashboard/NavDrag";
-import DashSugestao from "../../components/dashboard/sugestao/DashSugestao";
+import DashSugestao from "../../components/dashboard/sugestaoDashboard";
 export default {
   name: "View-Sugestao",
   components: {
-    NavDrag,
     DashSugestao
   },
   data() {

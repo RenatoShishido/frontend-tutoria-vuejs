@@ -60,6 +60,11 @@ export default {
       try {
         await this.$store.dispatch("user/chargeLoginUser", this.fields);
 
+        this.$store.dispatch("snackbar/show", {
+          content: 'Usuario logado com sucesso!',
+          color: "green"
+        });
+
         this.$router.push('/dashboard/pagina/1')
         this.fields = {};
 
