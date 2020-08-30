@@ -3,7 +3,7 @@
     <v-container>
       <v-flex xs12 sm12 md12 lg12 xl12>
         <v-card class="py-12 px-12">
-          <h1 class="d-flex justify-center black--text mb-5">Envie sua sugestao</h1>
+          <h1 class="d-flex justify-center blue--text mb-5">Envie sua sugestao</h1>
           <v-text-field
             id="assunto"
             placeholder="Assunto"

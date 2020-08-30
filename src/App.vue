@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <navBar />
     <snack-bar />
+    <navBar />
     <router-view />
     <Footer />
   </v-app>
@@ -18,7 +18,7 @@ export default {
     SnackBar,
     navBar
   },
-  mounted() {
+  beforeCreate() {
     this.$store.dispatch("user/loadLoggedUser");
   }
 };

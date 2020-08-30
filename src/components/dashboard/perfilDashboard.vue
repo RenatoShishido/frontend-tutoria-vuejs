@@ -111,7 +111,7 @@
 
               <v-flex xs12 sm12 md12 lg12 xl12>
                 <v-card-actions class="d-flex justify-end align-center">
-                  <v-btn :disabled="!isEditing" color="success" @click="put()" large>Salvar</v-btn>
+                  <v-btn :disabled="!isEditing" color="success" @click="alterarPerfilUser()" large>Salvar</v-btn>
                   <input
                     style="display: none;"
                     type="file"
@@ -126,11 +126,11 @@
               </v-flex>
             </v-list>
             <v-flex xs12 sm12 md12 lg12 xl12>
-              <div v-if="$store.getters['user/GettersProfile'] === undefined">
-                <v-img src="../../../assets/silhueta-interrogação.jpg" height="500px" width="100%"></v-img>
+              <div v-if="fields.profile === undefined">
+                <v-img src="../../assets/silhueta-interrogação.jpg" height="500px" width="100%"></v-img>
               </div>
               <div v-else>
-                <v-img :src="$store.getters['user/GettersProfile']" height="500px" width="100%"></v-img>
+                <v-img :src="fields.profile" height="500px" width="100%"></v-img>
               </div>
             </v-flex>
           </v-card>
@@ -142,7 +142,7 @@
 
 
 <script>
-import tutorias from "../../../service/tutorias";
+import tutorias from "../../service/tutorias";
 export default {
   name: "DashPerfil",
   data() {
@@ -164,56 +164,43 @@ export default {
         .listarPerfil(params[3])
         .then(response => {
           this.fields = response;
-          const rga = this.fields.rga.substring(0, 4);
-          if (
-            this.fields.rga === "" ||
-            this.fields.rga === null ||
-            this.fields.rga === undefined
-          ) {
-            this.semestre = "";
-          } else {
-            this.semestre = this.calcularSemestre(rga);
-          }
+          this.verificarRga();
         })
         .catch(err => err);
     },
-    put() {
-      this.isEditing = !this.isEditing;
-      this.hasSaved = true;
-      this.fields.semestre = this.semestre;
-      if (this.file === undefined) {
-        tutorias
-          .updateUser(this.fields._id, this.fields)
-          .then(response => {
-            response;
-            this.get();
-          })
-          .catch(err => err);
-      } else {
-        let config = {
-          headers: {
-            Accept: "",
-            "Content-Type": "multipart/form-data"
-          }
-        };
-        let formData = new FormData();
-        formData.append("file", this.file);
-        formData.append("nome", this.fields.nome);
-        formData.append("email", this.fields.email);
-        formData.append("rga", this.fields.rga);
-        formData.append("telefone", this.fields.telefone);
-        formData.append("semestre", this.fields.semestre);
-        tutorias
-          .updateUser(this.fields._id, formData, config)
-          .then(response => {
-            response;
-            this.get();
-          })
-          .catch(err => err);
+    async alterarPerfilUser() {
+      try {
+        this.isEditing = !this.isEditing;
+        this.fields.semestre = this.semestre;
+        await this.$store.dispatch("user/alterLoggedUser", this.fields);
+
+        this.$store.dispatch("snackbar/show", {
+          content: "Perfil alterado com sucesso",
+          color: "green"
+        });
+
+        this.refresh();
+      } catch (error) {
+        this.$store.dispatch("snackbar/show", {
+          content: "Nao foi possivel alterar o Perfil",
+          color: "error"
+        });
       }
     },
     handleFileUpload() {
-      this.file = this.$refs.file.files[0];
+      this.fields.file = this.$refs.file.files[0];
+    },
+    verificarRga() {
+      const rga = this.fields.rga.substring(0, 4);
+      if (
+        this.fields.rga === "" ||
+        this.fields.rga === null ||
+        this.fields.rga === undefined
+      ) {
+        this.semestre = "";
+      } else {
+        this.semestre = this.calcularSemestre(rga);
+      }
     },
     calcularSemestre(rga) {
       const data = new Date();

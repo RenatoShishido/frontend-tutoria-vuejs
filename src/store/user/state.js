@@ -6,4 +6,6 @@ export default {
   rga: '',
   admin: '',
   data: '',
+  telefone: '',
+  
 }

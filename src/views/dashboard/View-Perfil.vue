@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DashPerfil from "../../components/dashboard/perfil/DashPerfil";
+import DashPerfil from "../../components/dashboard/perfilDashboard";
 export default {
   name: "View-Perfil",
   components: {

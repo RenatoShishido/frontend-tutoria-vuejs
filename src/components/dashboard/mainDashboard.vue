@@ -1,5 +1,5 @@
 <template>
-  <v-content app>
+  <v-content>
     <v-flex xs12 sm12 md12>
       <v-container>
         <registerTutoria @adicionarTutoria="adicionar" />

@@ -12,6 +12,13 @@ export default {
     localStorage.setItem('user-tutoria', JSON.stringify(payload))
   },
 
+  perfilLoggedUser(state, payload) {
+    state.nome = payload.nome
+    state.profile = payload.profile
+    state.rga = payload.rga
+    state.telefone = payload.telefone
+  },
+
   loggout(state) {
     state.nome = ''
     state.rga = ''
