@@ -4,8 +4,8 @@
   "theme_color": "#ffcbe4",
   "background_color": "#fa99ca",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "https://tutoria-frontend.herokuapp.com",
+  "scope": "/index.html",
+  "start_url": "/",
   "description": "Website para tutoria da UFMS",
   "orientation": "any",
   "icons": [
