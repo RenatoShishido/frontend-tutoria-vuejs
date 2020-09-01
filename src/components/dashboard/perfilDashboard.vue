@@ -21,36 +21,36 @@
               </v-card-title>
             </v-flex>
             <v-list>
-                <v-flex xs12 sm12 md12 lg12 xl12>
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-icon>mdi-face</v-icon>
-                    </v-list-item-action>
+              <v-flex xs12 sm12 md12 lg12 xl12>
+                <v-list-item>
+                  <v-list-item-action>
+                    <v-icon>mdi-face</v-icon>
+                  </v-list-item-action>
 
-                    <v-text-field
-                      :disabled="!isEditing"
-                      :value="fields.nome"
-                      v-model="fields.nome"
-                      color="white"
-                      label="Nome"
-                    ></v-text-field>
+                  <v-text-field
+                    :disabled="!isEditing"
+                    :value="fields.nome"
+                    v-model="fields.nome"
+                    color="white"
+                    label="Nome"
+                  ></v-text-field>
 
-                    <v-list-item-action>
-                      <v-icon>mdi-message-text</v-icon>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-flex>
-                <v-flex xs12 sm12 md12 lg12 xl12>
-                  <v-list-item>
-                    <v-list-item-action>
-                      <v-icon>mdi-book</v-icon>
-                    </v-list-item-action>
-                    <v-text-field :disabled="true" color="white" :value="semestre" label="Semestre"></v-text-field>
-                    <v-list-item-action>
-                      <v-icon>mdi-message-text</v-icon>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-flex>
+                  <v-list-item-action>
+                    <v-icon>mdi-message-text</v-icon>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-flex>
+              <v-flex xs12 sm12 md12 lg12 xl12>
+                <v-list-item>
+                  <v-list-item-action>
+                    <v-icon>mdi-book</v-icon>
+                  </v-list-item-action>
+                  <v-text-field :disabled="true" color="white" :value="semestre" label="Semestre"></v-text-field>
+                  <v-list-item-action>
+                    <v-icon>mdi-message-text</v-icon>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-flex>
               <v-flex xs12 sm12 md12 lg12 xl12>
                 <v-list-item>
                   <v-list-item-action>
@@ -63,26 +63,6 @@
                     v-model="fields.telefone"
                     color="white"
                     label="Whatsapp"
-                  ></v-text-field>
-
-                  <v-list-item-action>
-                    <v-icon>mdi-message-text</v-icon>
-                  </v-list-item-action>
-                </v-list-item>
-              </v-flex>
-
-              <v-flex xs12 sm12 md12 lg12 xl12>
-                <v-list-item>
-                  <v-list-item-action>
-                    <v-icon>mdi-email</v-icon>
-                  </v-list-item-action>
-
-                  <v-text-field
-                    :disabled="!isEditing"
-                    :value="fields.email"
-                    v-model="fields.email"
-                    color="white"
-                    label="Email"
                   ></v-text-field>
 
                   <v-list-item-action>
@@ -112,7 +92,12 @@
 
               <v-flex xs12 sm12 md12 lg12 xl12>
                 <v-card-actions class="d-flex justify-end align-center">
-                  <v-btn :disabled="!isEditing" color="success" @click="alterarPerfilUser()" large>Salvar</v-btn>
+                  <v-btn
+                    :disabled="!isEditing"
+                    color="success"
+                    @click="alterarPerfilUser()"
+                    large
+                  >Salvar</v-btn>
                   <input
                     style="display: none;"
                     type="file"
