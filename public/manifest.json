@@ -1,0 +1,17 @@
+{
+  "name": "Tutoria em Pares",
+  "short_name": "Pares",
+  "theme_color": "#ffcbe4",
+  "background_color": "#fa99ca",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "https://tutoria-frontend.herokuapp.com",
+  "description": "Website para tutoria da UFMS",
+  "orientation": "any",
+  "icons": [
+      {
+          "src": "https://uploaddeimagens.com.br/images/002/848/009/original/logoctei-1024x700.jpg?1598381318",
+          "sizes": "1024x1024"
+      }
+  ]
+}

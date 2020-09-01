@@ -21,8 +21,7 @@
               </v-card-title>
             </v-flex>
             <v-list>
-              <div class="d-flex flex-row">
-                <v-flex xs12 sm12 md6 lg6 xl6>
+                <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-list-item>
                     <v-list-item-action>
                       <v-icon>mdi-face</v-icon>
@@ -41,15 +40,17 @@
                     </v-list-item-action>
                   </v-list-item>
                 </v-flex>
-                <v-flex xs12 sm12 md6 lg6 xl6>
+                <v-flex xs12 sm12 md12 lg12 xl12>
                   <v-list-item>
+                    <v-list-item-action>
+                      <v-icon>mdi-book</v-icon>
+                    </v-list-item-action>
                     <v-text-field :disabled="true" color="white" :value="semestre" label="Semestre"></v-text-field>
                     <v-list-item-action>
                       <v-icon>mdi-message-text</v-icon>
                     </v-list-item-action>
                   </v-list-item>
                 </v-flex>
-              </div>
               <v-flex xs12 sm12 md12 lg12 xl12>
                 <v-list-item>
                   <v-list-item-action>

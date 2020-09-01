@@ -49,7 +49,7 @@ export default {
 
         this.$router.push('/resetPassword')
         this.$store.dispatch("snackbar/show", {
-          content: "Email enviado com sucesso!",
+          content: "Email enviado com sucesso! É necessario pegar o token no email para mudar a senha!!!",
           color: "green"
         });
       } catch (error) {
