@@ -1,8 +1,8 @@
 {
   "name": "Tutoria em Pares",
   "short_name": "Pares",
-  "theme_color": "#ffcbe4",
-  "background_color": "#fa99ca",
+  "theme_color": "#006fff",
+  "background_color": "#007cba",
   "display": "standalone",
   "scope": "/index.html",
   "start_url": "/",
