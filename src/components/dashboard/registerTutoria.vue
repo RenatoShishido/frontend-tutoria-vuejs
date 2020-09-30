@@ -29,11 +29,11 @@
           <v-card-title>Data da Tutoria</v-card-title>
           <v-layout class="mb-5" wrap>
             <v-flex xs8 sm6>
-              <v-date-picker v-model="date.day" light color="grey" flat class="mr-3 pb-4"></v-date-picker>
+              <v-date-picker v-model="date.day" light color="grey"  flat class="mr-3 pb-4"></v-date-picker>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs8 sm6>
-              <v-time-picker light color="grey" v-model="date.time" flat></v-time-picker>
+              <v-time-picker light color="grey" v-model="date.time"  flat></v-time-picker>
             </v-flex>
           </v-layout>
         </div>
