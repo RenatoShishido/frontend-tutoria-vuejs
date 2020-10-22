@@ -126,7 +126,10 @@ export default {
     },
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
-    }
+    },
+    rotacionar(project) {
+      this.$router.push(`/dashboard/perfil/${project.user._id}`);
+    },
   }
 };
 </script>

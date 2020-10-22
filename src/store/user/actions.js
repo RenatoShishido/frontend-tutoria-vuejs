@@ -38,6 +38,8 @@ export default {
 
       if (loggedUser)
         commit('setLoggedUser', loggedUser)
+      else
+        commit('loggout')
     } catch (error) {
 
       throw {
