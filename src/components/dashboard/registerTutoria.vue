@@ -99,9 +99,9 @@ export default {
       this.fields.data = dateVar;
     },
     submit() {
-      if (this.fields.oferecida) this.dateFormate();
-      this.$emit("adicionarTutoria", this.fields);
-      this.clearMemory();
+        if (this.fields.oferecida) this.dateFormate();
+        this.$emit("adicionarTutoria", this.fields);
+        this.clearMemory();
     },
     clearMemory() {
       this.fields = {};

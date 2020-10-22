@@ -68,8 +68,8 @@
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
-
             <v-flex xs6 sm4 md6 lg6 xl1 v-if="project.tutor._id === user._id ? true : false">
+              
               <div class="d-flex">
                 <btnAlterarTutoria :fields="project" class="mx-4" />
                 <btnDeletarTutoria :fields="project" />
@@ -78,7 +78,7 @@
             <!-- FINAL DOS BOTOES -->
 
             <v-list-item
-              v-if="project.tutor._id !== user._id ? false : true"
+              v-if="project.tutor._id === user._id ? false : true"
               class="d-flex justify-start align-end"
             >
               <botaoTornarAluno :tutoria="project" @tornarAluno="virarAluno" />
@@ -127,7 +127,7 @@ export default {
       window.scroll(0, 0);
     },
     rotacionar(project) {
-      this.$router.push(`/dashboard/perfil/${project.user._id}`);
+      this.$router.push(`/dashboard/perfil/${project.tutor._id}`);
     },
     calcularNumeroPagina(totalPages) {
       const numeroPaginas = totalPages / 10;
@@ -140,9 +140,9 @@ export default {
       tutorias
         .listarTutoriasOferecidas()
         .then(response => {
+          this.user = this.$store.getters["user/GetUser"];
           this.projects = response;
           this.calcularNumeroPagina(response.data.count);
-          this.user = this.$store.getters["user/GetUser"];
         })
         .catch(err => err);
 

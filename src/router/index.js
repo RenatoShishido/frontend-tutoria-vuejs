@@ -79,52 +79,6 @@ let router = new VueRouter({
         requiresAuth: true
       }
     },
-    // ROTAS ADMINISTRATIVAS //////
-    {
-      path: '/admin',
-      name: 'View-Admin',
-      component: () => import('../admin/pages/Tutorias'),
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
-    },
-    {
-      path: '/admin/administrativa',
-      name: 'View-Administrativa',
-      component: () => import('../admin/pages/Administrativa'),
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
-    },
-    {
-      path: '/admin/agendados',
-      name: 'View-agendados',
-      component: () => import('../admin/pages/Agendados'),
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
-    },
-    {
-      path: '/admin/tutores',
-      name: 'View-tutores',
-      component: () => import('../admin/pages/Tutores'),
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
-    },
-    {
-      path: '/admin/completo',
-      name: 'View-completo',
-      component: () => import('../admin/pages/Completo'),
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
-    },
     {
       path: '/reset_password',
       name: 'View-ResetPassword',
