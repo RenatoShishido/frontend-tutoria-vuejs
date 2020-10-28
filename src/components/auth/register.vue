@@ -73,7 +73,7 @@ export default {
         this.fields = {};
       } catch (error) {
         this.$store.dispatch("snackbar/show", {
-          content: error,
+          content: error.error,
           color: "error"
         });
         this.fields = {};

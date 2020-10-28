@@ -2,12 +2,11 @@ import AXIOS_INSTANCE from "./config";
 class Auth {
   static async registrar(fields) {
     try {
-      const response = await AXIOS_INSTANCE.post('auth/register', fields)
-
+      const response = await AXIOS_INSTANCE.post('/auth/register', fields)
       return response
     } catch (err) {
       throw err.response.data;
-
+      
     }
   }
   static async logar(fields) {

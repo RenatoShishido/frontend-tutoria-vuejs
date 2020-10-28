@@ -54,7 +54,7 @@ export default {
         });
       } catch (error) {
         this.$store.dispatch("snackbar/show", {
-          content: error,
+          content: error.error,
           color: "error"
         });
       }
