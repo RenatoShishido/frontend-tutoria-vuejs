@@ -39,12 +39,13 @@
           ></v-text-field>
           <a class="body-1 blue--text" href="/login">Tenho uma conta</a>
           <v-card-actions class="d-flex justify-center mt-5">
-            <v-btn
+            <!-- <v-btn
               color="primary"
               :loading="loading"
               class="white--text"
               @click="enviar()"
-            >Cadastrar</v-btn>
+            >Cadastrar</v-btn> -->
+            <privacity :loading="loading" @cadastrarUsuario="cadastrar"/>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -52,8 +53,12 @@
   </v-container>
 </template>
 <script>
+import privacity from "../dashboard/dialogs/privacity"
 export default {
   name: "Register",
+  components: {
+    privacity
+  },
   data() {
     return {
       fields: {},
@@ -61,7 +66,7 @@ export default {
     };
   },
   methods: {
-    async enviar() {
+    async cadastrar() {
       this.loading = true;
       try {
         await this.$store.dispatch('user/registerUser', this.fields)
