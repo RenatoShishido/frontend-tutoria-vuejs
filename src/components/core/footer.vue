@@ -46,6 +46,13 @@
             class="d-flex justify-left white--text body-1 mb-3"
           >Pessoas que colaboraram!</a>
           <v-divider color="blue-grey darken-3"></v-divider>
+          <h2 class="d-flex justify-left py-3 grey--text">Ajuda e Contatos</h2>
+          <p class="d-flex justify-left white--text subtitle-1 mb-3"
+          >Gmail: progrenato@gmail.com </p>
+          <v-divider color="blue-grey darken-3"></v-divider>
+          <p class="d-flex justify-left white--text subtitle-1 mb-3"
+          >Gmail: petsistemas@gmail.com </p>
+          <v-divider color="blue-grey darken-3"></v-divider>
         </div>
       </v-flex>
       <v-flex xs12 sm4 md2>

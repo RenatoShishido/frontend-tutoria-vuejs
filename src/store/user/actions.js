@@ -19,6 +19,8 @@ export default {
       formData.append("telefone", payload.telefone);
       formData.append("semestre", payload.semestre);
 
+   
+
       await service_tutoria.updateUser(payload._id, formData, config)
       commit('perfilLoggedUser', payload)
 
