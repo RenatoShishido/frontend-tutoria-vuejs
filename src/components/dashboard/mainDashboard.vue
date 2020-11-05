@@ -95,7 +95,7 @@
           <v-divider></v-divider>
         </v-card>
         <div class="text-center" v-if="paginas !== 0">
-          <a @click="refresh(), offset()">
+          <a @click="refresh()">
             <v-pagination v-model="page" :value="page" :length="paginas" bottom></v-pagination>
           </a>
         </div>
@@ -132,9 +132,6 @@ export default {
     this.refresh();
   },
   methods: {
-    offset() {
-      window.scroll(0, 0);
-    },
     rotacionar(project) {
       this.$router.push(`/dashboard/perfil/${project.user._id}`);
     },

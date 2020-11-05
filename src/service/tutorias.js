@@ -21,6 +21,28 @@ class TutoriaService {
       throw err.response.data;
     }
   }
+  static async findTutoriaAll() {
+    try {
+      const response = await AXIOS_INSTANCE.get(
+        "/tutorias/findAll"
+      );
+
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+  static async findTutoriaId(id) {
+    try {
+      const response = await AXIOS_INSTANCE.get(
+        `tutorias/${id}`
+      );
+
+      return response;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
   static async listarPage(page) {
     try {
       const response = await AXIOS_INSTANCE.get("tutorias?page=" + page);

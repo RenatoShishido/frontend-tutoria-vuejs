@@ -111,14 +111,6 @@
                 </v-card-actions>
               </v-flex>
             </v-list>
-            <v-flex xs12 sm12 md12 lg12 xl12>
-              <div v-if="fields.profile === undefined">
-                <v-img src="../../assets/silhueta-interrogação.jpg" height="500px" width="100%"></v-img>
-              </div>
-              <div v-else>
-                <v-img :src="fields.profile" height="500px" width="100%"></v-img>
-              </div>
-            </v-flex>
           </v-card>
         </v-row>
       </v-container>
@@ -203,7 +195,7 @@ export default {
       }
     }
   },
-  watch: {
+   watch: {
     async $route(to, from) {
       if (to.params.id) {
         if (to.params.id != from.params.id) {
