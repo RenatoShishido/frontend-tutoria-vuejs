@@ -16,6 +16,16 @@
             :loading="loading"
           ></v-text-field>
           <v-text-field
+            v-model="fields.rga"
+            id="rga"
+            label="RGA"
+            name="rga"
+            type="rga"
+            outlined
+            required
+            :loading="loading"
+          ></v-text-field>
+          <v-text-field
             v-model="fields.email"
             type="email"
             id="email"
@@ -39,12 +49,6 @@
           ></v-text-field>
           <a class="body-1 blue--text" href="/login">Tenho uma conta</a>
           <v-card-actions class="d-flex justify-center mt-5">
-            <!-- <v-btn
-              color="primary"
-              :loading="loading"
-              class="white--text"
-              @click="enviar()"
-            >Cadastrar</v-btn> -->
             <privacity :loading="loading" @cadastrarUsuario="cadastrar"/>
           </v-card-actions>
         </v-card>

@@ -6,10 +6,22 @@ Vue.use(VueRouter)
 
 let router = new VueRouter({
   mode: 'history',
-  routes: [{
+  routes: [
+    {
+      path: '*',
+      name: 'View-Error',
+    },
+    {
       path: '/',
       name: 'View-Home',
       component: () => import('../views/home/View-Home.vue')
+    },
+
+    // Parte da autenticacao do usuario dentro do sistema
+    {
+      path: '/reset_password',
+      name: 'View-ResetPassword',
+      component: () => import('../views/auth/View-ResetPassword'),
     },
     {
       path: '/forgot_password',
@@ -31,6 +43,8 @@ let router = new VueRouter({
       name: 'View-Register',
       component: () => import('../views/auth/View-Register.vue'),
     },
+
+    // Parte do sistema das tutorias
     {
       path: '/dashboard/pagina/:page',
       name: 'View-Dashboard',
@@ -79,11 +93,17 @@ let router = new VueRouter({
         requiresAuth: true
       }
     },
+    
+    // Rotas de administrador
     {
-      path: '/reset_password',
-      name: 'View-ResetPassword',
-      component: () => import('../views/auth/View-ResetPassword'),
-    }
+      path: '/admin/dashboard/user',
+      name: 'View-Administrador',
+      component: () => import('../views/admin/View-User'),
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
   ]
 })
 
@@ -93,8 +113,8 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const user = JSON.parse(localStorage.getItem('user-tutoria'))
     if (user) {
-      if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.admin) {
+      if (to.matched.some(record => record.meta.requiresAdmin)) {
+        if (user.user.admin) {
           next()
         } else {
           next({

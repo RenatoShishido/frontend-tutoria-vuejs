@@ -17,7 +17,6 @@ export default {
       formData.append("email", payload.email);
       formData.append("rga", payload.rga);
       formData.append("telefone", payload.telefone);
-      formData.append("semestre", payload.semestre);
 
    
 

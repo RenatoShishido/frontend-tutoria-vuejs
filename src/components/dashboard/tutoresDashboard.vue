@@ -68,12 +68,16 @@
             </v-flex>
 
             <!-- BOTOES DO DASHBOARD -->
-            <v-flex xs6 sm4 md6 lg6 xl1 v-if="project.tutor._id === user._id ? true : false">
+            <v-flex class="d-flex align-self-center ml-10" xs6 sm4 md6 lg6 xl1 v-if="project.tutor._id === user._id ? true : false">
               
-              <div class="d-flex">
-                <btnAlterarTutoria :fields="project" class="mx-4" />
-                <btnDeletarTutoria :fields="project" />
-              </div>
+
+                <btnAlterarTutoria
+                :fields="project"
+                @atualizartutoria="atualizarCampos"
+                class="px-5"
+              />
+              <btnDeletarTutoria :fields="project" @deletarcampo="deletarCampos" />
+             
             </v-flex>
             <!-- FINAL DOS BOTOES -->
 
@@ -147,6 +151,41 @@ export default {
         .catch(err => err);
 
       this.$router.push(`/dashboard/tutores/pagina/${this.page}`);
+    },
+     deletarCampos(fields) {
+      tutorias
+        .removerTutoria(fields)
+        .then(response => {
+          response;
+          this.refresh();
+          this.$store.dispatch("snackbar/show", {
+            content: "Tutoria removida com sucesso!",
+            color: "green"
+          });
+        })
+        .catch(err => {
+          this.$store.dispatch("snackbar/show", {
+            content: err,
+            color: "error"
+          });
+        });
+    },
+    atualizarCampos(fields) {
+      tutorias
+        .updateTutoria(fields._id, fields)
+        .then(response => {
+          response;
+          this.$store.dispatch("snackbar/show", {
+            content: "Tutoria alterada com sucesso!",
+            color: "green"
+          });
+        })
+        .catch(err => {
+          this.$store.dispatch("snackbar/show", {
+            content: err,
+            color: "error"
+          });
+        });
     },
     virarAluno(tutoria) {
       tutorias
