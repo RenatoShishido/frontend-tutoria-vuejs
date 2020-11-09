@@ -123,7 +123,6 @@ export default {
             });
             this.listarUsers();
           } catch (error) {
-            console.log(error.data);
             this.$store.dispatch("snackbar/show", {
               content: error,
               color: "red",
@@ -140,7 +139,6 @@ export default {
             });
             this.listarUsers();
           } catch (error) {
-            console.log(error.data);
             this.$store.dispatch("snackbar/show", {
               content: error,
               color: "red",
@@ -148,7 +146,7 @@ export default {
           }
         }
       } catch (error) {
-        console.log(error);
+        error
       }
     },
     async deletarCampos(user) {
@@ -161,7 +159,6 @@ export default {
         });
         this.listarUsers();
       } catch (error) {
-        console.log(error.data);
         this.$store.dispatch("snackbar/show", {
           content: error,
           color: "red",
@@ -172,7 +169,7 @@ export default {
       try {
         this.users = await serviceUser.listarUser();
       } catch (error) {
-        console.log(error);
+        error
       }
     },
   },
