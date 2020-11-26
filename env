@@ -1,2 +1,2 @@
 # URL DO APP
-VUE_APP_API_URL="http://localhost:3000"
+VUE_APP_API_URL="http://192.168.0.106:3000"

@@ -8,7 +8,6 @@
           <RatingValue :RateValue="RateValue" />
         </v-col>
       </v-row>
-      <qrcodeScan />
     </v-container>
     <v-container>
       <v-row>
@@ -30,7 +29,7 @@ import serviceTutoria from "../../service/tutorias";
 import DashPerfil from "../../components/dashboard/perfilDashboard";
 import TableTutoria from "../../components/table";
 import RatingValue from "../../components/rating";
-import qrcodeScan from "../../components/qrcodeScan";
+
 
 export default {
   name: "View-Perfil",
@@ -38,7 +37,6 @@ export default {
     DashPerfil,
     TableTutoria,
     RatingValue,
-    qrcodeScan,
   },
   data() {
     return {

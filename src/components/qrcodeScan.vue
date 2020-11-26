@@ -3,7 +3,11 @@
 </template>
 
 <script>
+import qrcodeService from "../service/qrcode"
 export default {
+  props: {
+    tutoria: {}
+  },
   data: function () {
     return {
       scanner: null,
@@ -20,8 +24,22 @@ export default {
       video: document.getElementById("preview"),
       scanPeriod: 5,
     });
-    self.scanner.addListener("scan", function (content) {
+    self.scanner.addListener("scan", async (content) => {
       self.scans.unshift({ date: +Date.now(), content: content });
+      const valido = {
+        data_ini: this.tutoria.data,
+        data_fim: new Date(),
+        valido: true,
+      }
+      this.tutoria.qrcode_valido = valido
+      try {
+        return await qrcodeService
+        .qrcodeUpdate(this.tutoria)
+
+      } catch (error) {
+       console.log(error);
+      }
+      
     });
     // eslint-disable-next-line no-undef
     Instascan.Camera.getCameras()

@@ -106,7 +106,7 @@ export default {
       user: {},
       admins: [
         ['Users', 'mdi-account-multiple-outline', '/admin/dashboard/user'],
-        ['Scanned Qr Code ', 'mdi-qrcode-scan'],
+        ['Scanned Qr Code ', 'mdi-qrcode-scan', '/admin/dashboard/validate'],
         ['Settings', 'mdi-cog-outline'],
       ],
       items: [

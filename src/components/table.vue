@@ -25,7 +25,7 @@
             Local
           </th>
           <th class="text-left">
-            Agendada
+            Validada
           </th>
           <th class="text-left">
             BOTOES
@@ -50,20 +50,41 @@
             {{ item.data | moment("HH:mm") }}
           </td>
           <td>{{ item.local }}</td>
-          <td>{{ item.agendada }}</td>
+          <td>{{ item.qrcode_valido !== undefined  }}</td>
           <td v-if="item.local !== undefined ? true : false">
             <div v-if="item.qrcode === undefined ? false : true">
-              <div v-if="item.tutor._id === $store.getters['user/GettersId'] ? true : false">
-                <v-btn small @click="dialog = !dialog" class="green">
-                  QRCode
-                </v-btn>
-                <v-row justify="center" v-if="dialog === true">
-                  <v-dialog v-model="dialog" max-width="250">
-                    <v-card>
+              <div
+                v-if="
+                  item.tutor._id === $store.getters['user/GettersId']
+                    ? true
+                    : false
+                "
+              >
+                <div v-if="item.qrcode_valido !== undefined ? false : true">
+                  <v-btn small @click="dialog = !dialog" class="green">
+                    QRCode
+                  </v-btn>
+                  <v-row justify="center" v-if="dialog === true">
+                    <v-dialog v-model="dialog" max-width="250">
                       <img :src="item.qrcode" alt="qrcode" />
-                    </v-card>
-                  </v-dialog>
-                </v-row>
+                    </v-dialog>
+                  </v-row>
+                </div>
+              </div>
+            </div>
+            <div v-if="item.local !== undefined ? true : false">
+              <div v-if="item.qrcode === undefined ? false : true">
+                <div
+                  v-if="
+                    item.user._id === $store.getters['user/GettersId']
+                      ? true
+                      : false
+                  "
+                >
+                  <div v-if="item.qrcode_valido !== undefined ? false : true">
+                    <QrcodeDialog :tutoria="item" />
+                  </div>
+                </div>
               </div>
             </div>
           </td>
@@ -74,7 +95,11 @@
 </template>
 
 <script>
+import QrcodeDialog from "./qrCodeDialog";
 export default {
+  components: {
+    QrcodeDialog,
+  },
   props: {
     data: Array,
   },

@@ -97,8 +97,17 @@ let router = new VueRouter({
     // Rotas de administrador
     {
       path: '/admin/dashboard/user',
-      name: 'View-Administrador',
+      name: 'View-User-Admin',
       component: () => import('../views/admin/View-User'),
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/admin/dashboard/validate',
+      name: 'View-Validate',
+      component: () => import('../views/admin/View-Validate'),
       meta: {
         requiresAuth: true,
         requiresAdmin: true
