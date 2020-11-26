@@ -37,7 +37,7 @@ export default {
         .qrcodeUpdate(this.tutoria)
 
       } catch (error) {
-       console.log(error);
+       error
       }
       
     });
@@ -49,11 +49,14 @@ export default {
           self.activeCameraId = cameras[0];
           self.scanner.start(cameras[0]);
         } else {
-          console.error("No cameras found.");
+             this.$store.dispatch("snackbar/show", {
+          content: 'Cameras nao encontrada!',
+          color: "error"
+        });
         }
       })
       .catch(function (e) {
-        console.error(e);
+        e
       });
   },
   methods: {},

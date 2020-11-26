@@ -28,14 +28,14 @@
             text
             large
             class="d-flex justify-left white--text body-1 mb-3"
-          >O que e Tutoria em Pares?</a>
+          >O que é Tutoria em Pares?</a>
           <v-divider color="blue-grey darken-3"></v-divider>
           <a
             href="#HOME"
             text
             large
             class="d-flex justify-left white--text body-1 mb-3"
-          >O que e o PET Sistemas</a>
+          >O que é o PET Sistemas</a>
           <v-divider color="blue-grey darken-3"></v-divider>
           <a href="#HOME" text large class="d-flex justify-left white--text body-1 mb-3">Blog</a>
           <v-divider color="blue-grey darken-3"></v-divider>
